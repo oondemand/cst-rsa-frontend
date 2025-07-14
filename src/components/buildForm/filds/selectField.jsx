@@ -15,17 +15,15 @@ export const SelectField = ({ options, ...props }) => {
   const { requestConfirmation } = useConfirmation();
 
   const onBlur = async (ev) => {
-    if (props?.confirmAction) {
-      const { action } = await requestConfirmation({
-        title: props.confirmAction?.title,
-        description: props?.confirmAction?.description,
-      });
+    const { action } = await requestConfirmation({
+      title: props.confirmAction?.title,
+      description: props?.confirmAction?.description,
+    });
 
-      action === "canceled" &&
-        props?.setValue(props?.accessorKey, props.initialValue);
+    action === "canceled" &&
+      props?.setValue(props?.accessorKey, props.initialValue);
 
-      return action;
-    }
+    return action;
   };
 
   return (

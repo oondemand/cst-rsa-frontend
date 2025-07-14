@@ -1,4 +1,4 @@
-import { string, z } from "zod";
+import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -12,13 +12,17 @@ import { Button, Input, Box, VStack, Text } from "@chakra-ui/react";
 import { toaster } from "../../components/ui/toaster";
 import { useEffect } from "react";
 
-const FormSchema = z.object({
-  senha: z
-    .string()
-    .min(6, { message: "A senha precisa ter no mínimo 6 caracteres" }),
-  nome: z.string().nonempty({ message: "Nome é obrigatório" }),
-  telefone: z.string(),
-});
+const FormSchema = z
+  .object({
+    novaSenha: z
+      .string()
+      .min(6, { message: "A senha precisa ter no mínimo 6 caracteres" }),
+    confirmacao: z.string().nonempty({ message: "Confirmação é obrigatória" }),
+  })
+  .refine((data) => data.confirmacao === data.novaSenha, {
+    message: "As senhas precisam ser iguais",
+    path: ["confirmacao"],
+  });
 
 export const LoginForm = () => {
   const { login } = useAuth();
@@ -41,16 +45,24 @@ export const LoginForm = () => {
   } = useForm({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      senha: "",
-      nome: "",
+      novaSenha: "",
+      confirmacao: "",
     },
   });
 
-  const { mutateAsync: onLoginMutation } = useMutation({
-    mutationFn: async ({ body, code }) =>
-      await LoginService.firstAccess({ body, code }),
-    onSuccess({ data: { usuario, token } }) {
-      login(token, usuario);
+  const { mutateAsync: LoginMutation } = useMutation({
+    mutationFn: LoginService.criarNovaSenha,
+    onSuccess({ token, usuario: user }) {
+      if (user.tipo === "prestador") {
+        toaster.create({
+          title: "Sem permissões para acessar a esteira de serviços!",
+          type: "error",
+        });
+
+        return;
+      }
+
+      login(token, user);
       localStorage.removeItem("code");
       return navigate("/");
     },
@@ -64,59 +76,41 @@ export const LoginForm = () => {
     },
   });
 
-  const onSubmit = async (values) => {
-    await onLoginMutation({ body: values, code: localStorage.getItem("code") });
-  };
-
   return (
     <Box w="full">
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(LoginMutation)}>
         <VStack spaceY="4">
           <Box w="full">
-            <Text color="brand.500">Nome</Text>
+            <Text color="brand.500">Nova Senha</Text>
             <Input
-              focusRingColor="brand.350"
-              placeholder="Seu nome"
-              {...register("nome")}
-            />
-            {errors.nome?.message && (
-              <Text fontSize="sm" color="red.500">
-                {errors.nome.message}
-              </Text>
-            )}
-          </Box>
-
-          <Box w="full">
-            <Text color="brand.500">Telefone</Text>
-            <Input
-              focusRingColor="brand.350"
-              placeholder="Seu telefone"
-              {...register("telefone")}
-            />
-            {errors.telefone?.message && (
-              <Text fontSize="sm" color="red.500">
-                {errors.telefone.message}
-              </Text>
-            )}
-          </Box>
-
-          <Box w="full">
-            <Text color="brand.500">Senha</Text>
-            <Input
-              type="password"
               focusRingColor="brand.350"
               placeholder="Sua senha"
-              {...register("senha")}
+              {...register("novaSenha")}
             />
-            {errors.senha?.message && (
+            {errors.novaSenha?.message && (
               <Text fontSize="sm" color="red.500">
-                {errors.senha.message}
+                {errors.novaSenha.message}
+              </Text>
+            )}
+          </Box>
+
+          <Box w="full">
+            <Text color="brand.500">Confirmação</Text>
+            <Input
+              focusRingColor="brand.350"
+              type="senha"
+              placeholder="Confirmação"
+              {...register("confirmacao")}
+            />
+            {errors.confirmacao?.message && (
+              <Text fontSize="sm" color="red.500">
+                {errors.confirmacao.message}
               </Text>
             )}
           </Box>
 
           <Button w="full" fontWeight="semibold" type="submit" bg="blue.500">
-            Confirmar
+            Submit
           </Button>
         </VStack>
       </form>

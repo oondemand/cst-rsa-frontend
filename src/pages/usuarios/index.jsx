@@ -28,8 +28,6 @@ export const UsuariosPage = () => {
     origem: ORIGENS.DATAGRID,
   });
 
-  console.log("DATA:", data);
-
   return (
     <>
       <Container>

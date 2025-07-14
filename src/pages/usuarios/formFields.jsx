@@ -1,21 +1,8 @@
 import { DefaultField } from "../../components/buildForm/filds/default";
 import { z } from "zod";
 import { SelectField } from "../../components/buildForm/filds/selectField";
-import { TIPOS_USUARIO } from "../../constants/maps";
-import { PhoneField } from "../../components/buildForm/filds/phoneField";
 
 export const createDynamicFormFields = () => {
-  const tiposDeUsuario = Object.entries(TIPOS_USUARIO).map(([key, value]) => ({
-    label: value.label,
-    value: key,
-  }));
-
-  const status = [
-    { label: "Ativo", value: "ativo" },
-    { label: "Inativo", value: "inativo" },
-    { label: "Pendente", value: "pendente" },
-  ];
-
   return [
     {
       accessorKey: "nome",
@@ -32,7 +19,10 @@ export const createDynamicFormFields = () => {
       render: SelectField,
       validation: z.string({ message: "Tipo é um campo obrigatório" }),
       colSpan: 2,
-      options: tiposDeUsuario,
+      options: [
+        { value: "central", label: "Central" },
+        { value: "admin", label: "Administrador" },
+      ],
     },
     {
       accessorKey: "email",
@@ -44,19 +34,15 @@ export const createDynamicFormFields = () => {
       colSpan: 2,
     },
     {
-      accessorKey: "telefone",
-      label: "Telefone",
-      render: PhoneField,
-      validation: z.string().optional(),
-      colSpan: 1,
-    },
-    {
       accessorKey: "status",
       label: "Status",
       render: SelectField,
       validation: z.string({ message: "Tipo é um campo obrigatório" }),
-      colSpan: 1,
-      options: status,
+      colSpan: 2,
+      options: [
+        { value: "ativo", label: "Ativo" },
+        { value: "inativo", label: "Inativo" },
+      ],
     },
 
     {

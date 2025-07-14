@@ -44,7 +44,7 @@ export const Ativacao = () => {
     resolver: zodResolver(schema),
     defaultValues: {
       usuario: {
-        tipo: "admin-app",
+        tipo: "admin",
       },
     },
   });
