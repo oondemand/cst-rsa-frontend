@@ -6,11 +6,14 @@ import { SelectListaCell } from "../../components/dataGrid/cells/selectLista";
 import { DateCell } from "../../components/dataGrid/cells/dateCell";
 import { TableActionsCell } from "../../components/dataGrid/cells/tableActionsCell";
 import { PessoasDialog } from "./dialog";
+
 import {
   REGIME_TRIBUTARIO_OPTIONS,
   STATUS_PESSOA_OPTIONS,
   TIPO_PESSOA_OPTIONS,
 } from "../../constants";
+
+import { LISTA_PAISES_OMIE } from "../../constants/omie";
 import { DeletePessoaAction } from "../../components/dataGrid/actions/deletePessoaButton";
 
 export const makeDynamicColumns = () => {
@@ -56,6 +59,27 @@ export const makeDynamicColumns = () => {
         filterKey: "tipo",
         filterVariant: "select",
         filterOptions: TIPO_PESSOA_OPTIONS,
+      },
+    },
+    {
+      accessorKey: "endereco.pais.codigo",
+      header: "País",
+      cell: (props) => (
+        <SelectAutoCompleteCell
+          {...props}
+          options={LISTA_PAISES_OMIE.map((e) => ({
+            value: e.cCodigo,
+            label: e.cDescricao,
+          }))}
+        />
+      ),
+      meta: {
+        filterKey: "endereco.pais.codigo",
+        filterVariant: "select",
+        filterOptions: LISTA_PAISES_OMIE.map((e) => ({
+          value: e.cCodigo,
+          label: e.cDescricao,
+        })),
       },
     },
     {
