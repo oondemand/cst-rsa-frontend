@@ -60,7 +60,6 @@ export const TableHeader = ({ table, filters, onFilterChange }) => {
                   </Flex>
 
                   {header.column.getCanFilter() &&
-                    filters &&
                     fieldMeta?.filterKey !== undefined && (
                       <Filter
                         bg="white"

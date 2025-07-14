@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: meus-apps-frontend-service
-  namespace: meus-apps
+  name: central-oondemand-frontend-service
+  namespace: central-oondemand
 spec:
   type: NodePort
   selector:
-    app: meus-apps-frontend
+    app: central-oondemand-frontend
   ports:
     - name: http
       protocol: TCP
