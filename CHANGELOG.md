@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.4 (2025-07-21)
+
+### 🔧 Chores
+
+* bump version to 0.2.3 ([a4dd823](https://github.com/oondemand/central-oondemand-frontend/commit/a4dd8234632557477e17d84ed8165e948db2f2e6))
+
 ## 0.2.2 (2025-07-04)
 
 ## 0.2.1 (2025-07-04)
