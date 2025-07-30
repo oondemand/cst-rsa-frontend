@@ -95,25 +95,24 @@ export const TicketModal = ({ open, setOpen, defaultValue, onlyReading }) => {
     enabled: open,
   });
 
-  // const { data: documentosCadastrais } = useQuery({
-  //   queryKey: [
-  //     "documentos-cadastrais",
-  //     { prestadorId: ticket?.prestador?._id },
-  //   ],
-  //   queryFn: async () =>
-  //     await DocumentosCadastraisService.listarDocumentosCadastraisPorPrestador({
-  //       prestadorId: ticket?.prestador?._id,
-  //       dataRegistro: "",
-  //     }),
-  //   staleTime: 1000 * 60 * 1, // 1 minute
-  //   enabled: open,
-  // });
+  const { data: documentosCadastrais } = useQuery({
+    queryKey: ["documentos-cadastrais", { pessoaId: ticket?.pessoa?._id }],
+    queryFn: async () =>
+      await DocumentosCadastraisService.listarPorPessoa({
+        pessoaId: ticket?.pessoa?._id,
+        dataRegistro: "",
+      }),
+    staleTime: 1000 * 60 * 1, // 1 minute
+    enabled: open,
+  });
 
   const { assistant } = useLoadAssistant(
     data?.ticket?.etapa
       ? `servicos-tomados.${data?.ticket?.etapa}`
       : "geral.servicos-tomados"
   );
+
+  console.log("Log interessante", documentosCadastrais, ticket);
 
   return (
     <DialogRoot
@@ -143,7 +142,9 @@ export const TicketModal = ({ open, setOpen, defaultValue, onlyReading }) => {
               aria-label="Abrir IA"
               cursor="pointer"
               variant="unstyled"
-              onClick={() => onOpen({ ...data }, assistant)}
+              onClick={() =>
+                onOpen({ ...ticket, ...documentosCadastrais }, assistant)
+              }
             >
               <Oondemand />
             </Box>
@@ -217,12 +218,12 @@ export const TicketModal = ({ open, setOpen, defaultValue, onlyReading }) => {
             ticket={ticket}
             updateTicketMutation={updateTicketMutation}
           /> */}
-
+          {/* 
           <InformacoesAdicionaisForm
             ticket={ticket}
             updateTicketMutation={updateTicketMutation}
             onlyReading={onlyReading}
-          />
+          /> */}
 
           <FilesForm
             onlyReading={onlyReading}
