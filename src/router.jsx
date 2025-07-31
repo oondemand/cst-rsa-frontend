@@ -25,6 +25,7 @@ import { Ativacao } from "./pages/ativacao";
 import { ServicosList } from "./pages/servicos";
 import { ImportServicosPage } from "./pages/servicos/importacao";
 import ChangelogPage from "./pages/changelog";
+import { IntegracaoPessoaCentralOmieEsteira } from "./pages/integracao/pessoa/central-omie";
 
 export const router = createBrowserRouter([
   {
@@ -60,6 +61,16 @@ export const router = createBrowserRouter([
       // { path: "/pagos", element: <TicketsPagosPage /> },
       { path: "/etapas", element: <EtapasPage /> },
       { path: "/assistentes", element: <AssistenteConfigPage /> },
+
+      {
+        path: "/integracao",
+        children: [
+          {
+            path: "/integracao/pessoa/central-omie",
+            element: <IntegracaoPessoaCentralOmieEsteira />,
+          },
+        ],
+      },
     ],
   },
 

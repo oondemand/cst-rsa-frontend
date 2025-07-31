@@ -20,3 +20,21 @@ export const REGIME_TRIBUTARIO_OPTIONS = [
   { label: "Lucro arbitrado", value: "LUCRO_ARBITRADO" },
   { label: "Imune/isento", value: "IMUNE_ISENTA" },
 ];
+
+export const INTEGRACAO_PESSOA_CENTRAL_OMIE_ETAPAS = [
+  { nome: "Requisicao", codigo: "requisicao" },
+  { nome: "Reprocessar", codigo: "reprocessar" },
+  { nome: "Processando", codigo: "processando" },
+  { nome: "Erro", codigo: "Erro" },
+  { nome: "Sucesso", codigo: "sucesso" },
+];
+
+export const INTEGRACAO_DIRECAO_MAP = {
+  CENTRAL_OMIE: "central_omie",
+  OMIE_CENTRAL: "omie_central",
+};
+
+export const INTEGRACAO_TIPO_MAP = {
+  PESSOA: "pessoa",
+  CONTA_PAGAR: "conta_pagar",
+};

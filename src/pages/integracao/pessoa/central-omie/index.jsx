@@ -1,73 +1,82 @@
-import React from "react";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation } from "swiper/modules";
+
 import "swiper/css";
 import "swiper/css/navigation";
+import "../../../../styles/swiper.css";
 
-import "../../styles/swiper.css";
-
-import { Flex, Spinner, Heading, createListCollection } from "@chakra-ui/react";
+import {
+  Flex,
+  Spinner,
+  Heading,
+  createListCollection,
+  Button,
+} from "@chakra-ui/react";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { Etapa } from "../../components/etapaCard";
-import { ServicoTomadoTicketService } from "../../service/servicoTomadoTicket";
+import { Etapa } from "../../../../components/etapaCard";
+import { IntegracaoService } from "../../../../service/integracao";
 import { Filter } from "lucide-react";
-import { DebouncedInput } from "../../components/DebouncedInput";
-import { useStateWithStorage } from "../../hooks/useStateStorage";
-import { useListEtapas } from "../../hooks/api/etapas/useListEtapas";
-import { EtapaActions } from "./etapaActions";
-import { TicketCard } from "./card";
-import { SelectTime } from "../../components/selectTime";
+import { DebouncedInput } from "../../../../components/DebouncedInput";
+import { useStateWithStorage } from "../../../../hooks/useStateStorage";
+import { SelectTime } from "../../../../components/selectTime";
+import {
+  INTEGRACAO_DIRECAO_MAP,
+  INTEGRACAO_PESSOA_CENTRAL_OMIE_ETAPAS,
+  INTEGRACAO_TIPO_MAP,
+} from "../../../../constants";
+import { Card } from "../../components/card";
 
-export const ServicosTomados = () => {
-  const { etapas, isLoading: isEtapasLoading } = useListEtapas();
-
+export const IntegracaoPessoaCentralOmieEsteira = () => {
   const [searchTerm, setSearchTerm] = useStateWithStorage(
-    "esteira_servicos_tomados_search_term"
+    "esteira_integracao_pessoa_central_omie_search_term"
   );
 
   const [time, setTime] = useStateWithStorage(
-    "esteira_servicos_tomados_time",
+    "esteira_integracao_pessoa_central_omie_time",
     1
   );
 
-  const {
-    data,
-    error: ticketsError,
-    isLoading: isTicketLoading,
-    isFetching: isTicketFetching,
-  } = useQuery({
-    queryKey: ["servicos-tomados-listar-todos-tickets", { filters: { time } }],
-    queryFn: async () =>
-      ServicoTomadoTicketService.listarTickets({ filters: { time } }),
+  const filters = {
+    direcao: INTEGRACAO_DIRECAO_MAP.CENTRAL_OMIE,
+    tipo: INTEGRACAO_TIPO_MAP.PESSOA,
+    time: time,
+  };
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: [
+      "integracao-pessoa-central-omie-listar-todos-tickets",
+      { filters },
+    ],
+    queryFn: async () => await IntegracaoService.listar({ filters }),
     placeholderData: keepPreviousData,
     staleTime: 1000 * 60 * 1, // 1 minuto
-    onSuccess: (data) => setTickets(data),
   });
 
   const filteredTickets =
     searchTerm?.toLowerCase()?.trim()?.length > 2
-      ? data?.tickets?.filter((ticket) => {
+      ? data?.results?.filter((ticket) => {
           const term = searchTerm?.toLowerCase()?.trim();
           return (
             ticket?.titulo?.toLowerCase()?.includes(term) ||
-            ticket?.pessoa?.documento
+            ticket?.payload?.pessoa?.documento
               ?.toLowerCase()
-              ?.includes(term.replace(/[^a-zA-Z0-9]/g, ""))
+              ?.includes(term.replace(/[^a-zA-Z0-9]/g, "")) ||
+            ticket?.parentId === term
           );
         })
-      : data?.tickets;
+      : data?.results;
 
   return (
     <Flex flex="1" flexDir="column" py="8" px="6" bg="#F8F9FA">
       <Flex pb="4" justifyContent="space-between">
         <Flex alignItems="center" gap="2">
           <Heading color="gray.700" fontSize="2xl">
-            Central de Serviços Tomados{" "}
+            Integração cliente/prestador central {"->"} omie
           </Heading>
-          {(isEtapasLoading || isTicketLoading || isTicketFetching) && (
-            <Spinner size="md" />
-          )}
+          <Button onClick={() => IntegracaoService.processar()}>
+            Processar
+          </Button>
+          {(isLoading || isFetching) && <Spinner size="md" />}
         </Flex>
         <Flex alignItems="center" color="gray.400" gap="3">
           <Filter size={24} />
@@ -81,7 +90,7 @@ export const ServicosTomados = () => {
             size="xs"
             w="sm"
             bg="white"
-            placeholder="Pesquise por nome, cpf, ou cnpj..."
+            placeholder="Pesquisar..."
             rounded="sm"
             _placeholder={{ color: "gray.400" }}
             placeIcon="right"
@@ -92,9 +101,9 @@ export const ServicosTomados = () => {
         </Flex>
       </Flex>
       <Flex flex="1" pb="2" itens="center" overflow="hidden">
-        {(!isEtapasLoading || !isTicketLoading) &&
+        {!isLoading &&
           filteredTickets &&
-          etapas && (
+          INTEGRACAO_PESSOA_CENTRAL_OMIE_ETAPAS && (
             <Swiper
               style={{
                 height: "100%",
@@ -107,17 +116,12 @@ export const ServicosTomados = () => {
               modules={[FreeMode, Navigation]}
               navigation={true}
             >
-              {etapas?.map((etapa) => (
+              {INTEGRACAO_PESSOA_CENTRAL_OMIE_ETAPAS?.map((etapa) => (
                 <SwiperSlide
                   key={etapa._id}
                   style={{ minWidth: "250px", maxWidth: "250px" }}
                 >
-                  <Etapa
-                    etapa={etapa}
-                    tickets={filteredTickets}
-                    action={EtapaActions}
-                    card={TicketCard}
-                  />
+                  <Etapa etapa={etapa} tickets={filteredTickets} card={Card} />
                 </SwiperSlide>
               ))}
             </Swiper>

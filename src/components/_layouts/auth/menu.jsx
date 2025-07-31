@@ -8,6 +8,7 @@ import {
   NotepadText,
   NotepadTextDashed,
   Notebook,
+  Rotate3D,
 } from "lucide-react";
 import { Chart } from "../../svg/chart";
 import { invertedChart } from "../../svg/invertedChart";
@@ -43,6 +44,17 @@ export const menuItems = [
     title: "Clientes e prestadores",
     icon: Users,
     href: "/pessoas",
+  },
+  {
+    title: "Integrações",
+    icon: Rotate3D,
+    rules: ["admin"],
+    subLinks: [
+      {
+        title: "Cliente/prestador central -> Omie",
+        href: "/integracao/pessoa/central-omie",
+      },
+    ],
   },
   {
     title: "Configurações",
