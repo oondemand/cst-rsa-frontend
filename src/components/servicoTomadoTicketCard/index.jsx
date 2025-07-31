@@ -73,12 +73,6 @@ const _TicketCard = ({ ticket }) => {
                 positioning={{ placement: "top" }}
                 openDelay={700}
                 closeDelay={50}
-                contentProps={{
-                  css: {
-                    "--tooltip-bg": "white",
-                    color: "gray.600",
-                  },
-                }}
               >
                 <Box w="90%">
                   <Text
@@ -144,12 +138,6 @@ const _TicketCard = ({ ticket }) => {
                   positioning={{ placement: "bottom" }}
                   openDelay={500}
                   closeDelay={50}
-                  contentProps={{
-                    css: {
-                      "--tooltip-bg": "white",
-                      color: "gray.600",
-                    },
-                  }}
                 >
                   <Flex color="gray.400" alignItems="center" gap="1px">
                     <LucideListCheck size={14} />
@@ -169,12 +157,6 @@ const _TicketCard = ({ ticket }) => {
                   positioning={{ placement: "bottom" }}
                   openDelay={500}
                   closeDelay={50}
-                  contentProps={{
-                    css: {
-                      "--tooltip-bg": "white",
-                      color: "gray.600",
-                    },
-                  }}
                 >
                   <Flex color="gray.400" alignItems="center" gap="1px">
                     <Paperclip size={14} />
@@ -198,12 +180,6 @@ const _TicketCard = ({ ticket }) => {
                   positioning={{ placement: "bottom" }}
                   openDelay={500}
                   closeDelay={50}
-                  contentProps={{
-                    css: {
-                      "--tooltip-bg": "white",
-                      color: "gray.600",
-                    },
-                  }}
                 >
                   <Flex color="gray.400" alignItems="center" gap="1px">
                     <File size={14} />

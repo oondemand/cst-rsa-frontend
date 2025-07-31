@@ -68,15 +68,8 @@ export const ArquivoDetailsDialog = ({ documentoCadastral }) => {
       <Box onClick={() => setOpen(true)}>
         <Tooltip
           content="Analisar documento cadastral"
-          positioning={{ placement: "top" }}
           openDelay={1000}
           closeDelay={50}
-          contentProps={{
-            css: {
-              "--tooltip-bg": "white",
-              color: "gray.600",
-            },
-          }}
         >
           <IconButton variant="surface" colorPalette="gray" size="2xs">
             <FilePenLine />

@@ -1,9 +1,9 @@
-import React from "react";
 import { CpfCnpjCell } from "../../components/dataGrid/cells/cpfCnpjCell";
 import { SelectAutoCompleteCell } from "../../components/dataGrid/cells/selectAutoComplete";
 import { DefaultEditableCell } from "../../components/dataGrid/cells/defaultEditable";
 import { SelectListaCell } from "../../components/dataGrid/cells/selectLista";
 import { DateCell } from "../../components/dataGrid/cells/dateCell";
+import { DefaultCell } from "../../components/dataGrid/cells/default";
 import { TableActionsCell } from "../../components/dataGrid/cells/tableActionsCell";
 import { PessoasDialog } from "./dialog";
 
@@ -15,6 +15,7 @@ import {
 
 import { LISTA_PAISES_OMIE } from "../../constants/omie";
 import { DeletePessoaAction } from "../../components/dataGrid/actions/deletePessoaButton";
+import { SyncOmieStatusCell } from "./components/syncOmieStatusCell";
 
 export const makeDynamicColumns = () => {
   return [
@@ -22,12 +23,30 @@ export const makeDynamicColumns = () => {
       accessorKey: "acoes",
       header: "Ações",
       enableSorting: false,
+      enableColumnFilter: true,
+      meta: {
+        filterKey: "status_sincronizacao_omie",
+        filterVariant: "select",
+        filterOptions: [
+          { label: "Pendente", value: "pendente" },
+          { label: "Sucesso", value: "sucesso" },
+          { label: "Error", value: "erro" },
+        ],
+      },
       cell: (props) => (
         <TableActionsCell>
           <DeletePessoaAction id={props.row.original?._id} />
           <PessoasDialog label="Pessoa" defaultValues={props.row.original} />
+          <SyncOmieStatusCell {...props} />
         </TableActionsCell>
       ),
+    },
+    {
+      accessorKey: "_id",
+      header: "ID",
+      cell: DefaultCell,
+      enableColumnFilter: true,
+      meta: { filterKey: "_id" },
     },
     {
       accessorKey: "grupo",
@@ -43,6 +62,13 @@ export const makeDynamicColumns = () => {
       enableColumnFilter: true,
       enableSorting: false,
       meta: { filterKey: "nome" },
+    },
+    {
+      accessorKey: "email",
+      header: "Email",
+      cell: DefaultEditableCell,
+      enableColumnFilter: true,
+      meta: { filterKey: "email" },
     },
     {
       accessorKey: "tipo",

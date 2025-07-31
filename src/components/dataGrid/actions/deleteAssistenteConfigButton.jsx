@@ -30,18 +30,7 @@ export const DeleteAssistenteConfigAction = ({ id }) => {
   };
 
   return (
-    <Tooltip
-      content="Excluir assistente"
-      positioning={{ placement: "top" }}
-      openDelay={700}
-      closeDelay={50}
-      contentProps={{
-        css: {
-          "--tooltip-bg": "white",
-          color: "gray.600",
-        },
-      }}
-    >
+    <Tooltip content="Excluir assistente" openDelay={700} closeDelay={50}>
       <IconButton
         variant="surface"
         colorPalette="red"

@@ -26,18 +26,7 @@ export const DeleteServicoAction = ({ id }) => {
   };
 
   return (
-    <Tooltip
-      content="Excluir servico"
-      positioning={{ placement: "top" }}
-      openDelay={700}
-      closeDelay={50}
-      contentProps={{
-        css: {
-          "--tooltip-bg": "white",
-          color: "gray.600",
-        },
-      }}
-    >
+    <Tooltip content="Excluir servico" openDelay={700} closeDelay={50}>
       <IconButton
         variant="surface"
         colorPalette="red"

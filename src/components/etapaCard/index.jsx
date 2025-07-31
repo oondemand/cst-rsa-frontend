@@ -39,18 +39,7 @@ const _Etapa = ({ etapa, tickets }) => {
             {etapa.nome}
           </Heading>
           {etapa.codigo === "requisicao" && (
-            <Tooltip
-              content="Criar ticket"
-              positioning={{ placement: "top" }}
-              openDelay={700}
-              closeDelay={50}
-              contentProps={{
-                css: {
-                  "--tooltip-bg": "white",
-                  color: "gray.600",
-                },
-              }}
-            >
+            <Tooltip content="Criar ticket" openDelay={700} closeDelay={50}>
               <Text
                 p="1"
                 rounded="full"

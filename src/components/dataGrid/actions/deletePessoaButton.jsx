@@ -26,18 +26,7 @@ export const DeletePessoaAction = ({ id }) => {
   };
 
   return (
-    <Tooltip
-      content="Excluir pessoa"
-      positioning={{ placement: "top" }}
-      openDelay={700}
-      closeDelay={50}
-      contentProps={{
-        css: {
-          "--tooltip-bg": "white",
-          color: "gray.600",
-        },
-      }}
-    >
+    <Tooltip content="Excluir pessoa" openDelay={700} closeDelay={50}>
       <IconButton
         variant="surface"
         colorPalette="red"
