@@ -21,7 +21,7 @@ export const REGIME_TRIBUTARIO_OPTIONS = [
   { label: "Imune/isento", value: "IMUNE_ISENTA" },
 ];
 
-export const INTEGRACAO_PESSOA_CENTRAL_OMIE_ETAPAS = [
+export const INTEGRACAO_OMIE_ETAPAS_PADRAO = [
   { nome: "Requisicao", codigo: "requisicao" },
   { nome: "Reprocessar", codigo: "reprocessar" },
   { nome: "Processando", codigo: "processando" },

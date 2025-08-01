@@ -26,6 +26,7 @@ import { ServicosList } from "./pages/servicos";
 import { ImportServicosPage } from "./pages/servicos/importacao";
 import ChangelogPage from "./pages/changelog";
 import { IntegracaoPessoaCentralOmieEsteira } from "./pages/integracao/pessoa/central-omie";
+import { IntegracaoPessoaCentralOmieDatagrid } from "./pages/integracao/pessoa/central-omie/datagrid";
 
 export const router = createBrowserRouter([
   {
@@ -68,6 +69,10 @@ export const router = createBrowserRouter([
           {
             path: "/integracao/pessoa/central-omie",
             element: <IntegracaoPessoaCentralOmieEsteira />,
+          },
+          {
+            path: "/integracao/pessoa/central-omie/todos",
+            element: <IntegracaoPessoaCentralOmieDatagrid />,
           },
         ],
       },

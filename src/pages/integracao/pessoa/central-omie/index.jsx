@@ -15,7 +15,7 @@ import { useStateWithStorage } from "../../../../hooks/useStateStorage";
 import { SelectTime } from "../../../../components/selectTime";
 import {
   INTEGRACAO_DIRECAO_MAP,
-  INTEGRACAO_PESSOA_CENTRAL_OMIE_ETAPAS,
+  INTEGRACAO_OMIE_ETAPAS_PADRAO,
   INTEGRACAO_TIPO_MAP,
 } from "../../../../constants";
 import { Card } from "../../components/card";
@@ -48,10 +48,7 @@ export const IntegracaoPessoaCentralOmieEsteira = () => {
   };
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: [
-      "integracao-pessoa-central-omie-listar-todos-tickets",
-      { filters },
-    ],
+    queryKey: ["integracao-pessoa-central-omie-listar", { filters }],
     queryFn: async () => await IntegracaoService.listar({ filters }),
     placeholderData: keepPreviousData,
     staleTime: 1000 * 60 * 1, // 1 minuto
@@ -86,7 +83,7 @@ export const IntegracaoPessoaCentralOmieEsteira = () => {
           </Tooltip>
 
           <Tooltip content="Visualizar todos em tabela">
-            <Link to="/integracao/prestador/central-omie/todos">
+            <Link to="/integracao/pessoa/central-omie/todos">
               <Button
                 color="purple.700"
                 bg="purple.200"
@@ -130,41 +127,39 @@ export const IntegracaoPessoaCentralOmieEsteira = () => {
         </Flex>
       </Flex>
       <Flex flex="1" pb="2" itens="center" overflow="hidden">
-        {!isLoading &&
-          filteredTickets &&
-          INTEGRACAO_PESSOA_CENTRAL_OMIE_ETAPAS && (
-            <Swiper
-              style={{
-                height: "100%",
-                width: "100%",
-              }}
-              slidesPerView="auto"
-              spaceBetween={16}
-              freeMode={true}
-              grabCursor={true}
-              modules={[FreeMode, Navigation]}
-              navigation={true}
-            >
-              {INTEGRACAO_PESSOA_CENTRAL_OMIE_ETAPAS?.map((etapa) => (
-                <SwiperSlide
-                  key={etapa._id}
-                  style={{ minWidth: "250px", maxWidth: "250px" }}
-                >
-                  <Etapa
-                    etapa={etapa}
-                    tickets={filteredTickets}
-                    card={(props) => (
-                      <Card ticket={props.ticket}>
-                        <TicketDetailsDialog actions={TicketActions}>
-                          <TicketBody />
-                        </TicketDetailsDialog>
-                      </Card>
-                    )}
-                  />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          )}
+        {!isLoading && filteredTickets && INTEGRACAO_OMIE_ETAPAS_PADRAO && (
+          <Swiper
+            style={{
+              height: "100%",
+              width: "100%",
+            }}
+            slidesPerView="auto"
+            spaceBetween={16}
+            freeMode={true}
+            grabCursor={true}
+            modules={[FreeMode, Navigation]}
+            navigation={true}
+          >
+            {INTEGRACAO_OMIE_ETAPAS_PADRAO?.map((etapa) => (
+              <SwiperSlide
+                key={etapa._id}
+                style={{ minWidth: "250px", maxWidth: "250px" }}
+              >
+                <Etapa
+                  etapa={etapa}
+                  tickets={filteredTickets}
+                  card={(props) => (
+                    <Card ticket={props.ticket}>
+                      <TicketDetailsDialog actions={TicketActions}>
+                        <TicketBody />
+                      </TicketDetailsDialog>
+                    </Card>
+                  )}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        )}
       </Flex>
     </Flex>
   );

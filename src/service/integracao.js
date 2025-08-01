@@ -13,7 +13,16 @@ const processar = async () => {
   return data;
 };
 
+const listarComPaginacao = async ({ filters = { direcao, tipo, ...rest } }) => {
+  const { data } = await api.get("/integracao/todos", {
+    params: filters,
+  });
+
+  return data;
+};
+
 export const IntegracaoService = {
   listar,
   processar,
+  listarComPaginacao,
 };
