@@ -3,9 +3,9 @@ import { Tooltip } from "../../../../components/ui/tooltip";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { CircleAlert, ListRestart } from "lucide-react";
-import { memo, useState } from "react";
+import React, { memo, useState } from "react";
 
-export const _Card = ({ ticket, dialog }) => {
+export const _Card = ({ ticket, children }) => {
   const [open, setOpen] = useState(false);
 
   const STATUS_COLOR_MAP = {
@@ -106,7 +106,9 @@ export const _Card = ({ ticket, dialog }) => {
         </Flex>
       </Box>
 
-      {dialog && open && React.createElement(modal, { open, ticket }, null)}
+      {children &&
+        open &&
+        React.cloneElement(children, { open, ticket, setOpen })}
     </Box>
   );
 };

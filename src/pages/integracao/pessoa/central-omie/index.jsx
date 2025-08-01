@@ -5,17 +5,11 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "../../../../styles/swiper.css";
 
-import {
-  Flex,
-  Spinner,
-  Heading,
-  createListCollection,
-  Button,
-} from "@chakra-ui/react";
+import { Flex, Spinner, Heading, Button } from "@chakra-ui/react";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { Etapa } from "../../../../components/etapaCard";
 import { IntegracaoService } from "../../../../service/integracao";
-import { Filter } from "lucide-react";
+import { Box, Filter, RefreshCcw, Table } from "lucide-react";
 import { DebouncedInput } from "../../../../components/DebouncedInput";
 import { useStateWithStorage } from "../../../../hooks/useStateStorage";
 import { SelectTime } from "../../../../components/selectTime";
@@ -25,6 +19,17 @@ import {
   INTEGRACAO_TIPO_MAP,
 } from "../../../../constants";
 import { Card } from "../../components/card";
+import { TimeOutButton } from "../../components/timeOutButton";
+import { Tooltip } from "../../../../components/ui/tooltip";
+import { Link } from "react-router-dom";
+import { TicketDetailsDialog } from "../../components/dialog";
+import { TicketActions } from "../../components/dialog/actions";
+import { queryClient } from "../../../../config/react-query";
+import { RequisicaoDetails } from "../../components/requisicaoDetails";
+import { Form } from "../../components/form";
+import { createDynamicFormFields } from "../../../pessoa/formFields";
+import { makeDynamicColumns } from "../../../pessoa/columns";
+import { TicketBody } from "./dialogBody";
 
 export const IntegracaoPessoaCentralOmieEsteira = () => {
   const [searchTerm, setSearchTerm] = useStateWithStorage(
@@ -73,9 +78,28 @@ export const IntegracaoPessoaCentralOmieEsteira = () => {
           <Heading color="gray.700" fontSize="2xl">
             Integração cliente/prestador central {"->"} omie
           </Heading>
-          <Button onClick={() => IntegracaoService.processar()}>
-            Processar
-          </Button>
+
+          <Tooltip content="Sincronizar com omie">
+            <TimeOutButton onClick={() => IntegracaoService.processar()}>
+              <RefreshCcw />
+            </TimeOutButton>
+          </Tooltip>
+
+          <Tooltip content="Visualizar todos em tabela">
+            <Link to="/integracao/prestador/central-omie/todos">
+              <Button
+                color="purple.700"
+                bg="purple.200"
+                p="1.5"
+                rounded="2xl"
+                cursor="pointer"
+                size="sm"
+              >
+                <Table />
+              </Button>
+            </Link>
+          </Tooltip>
+
           {(isLoading || isFetching) && <Spinner size="md" />}
         </Flex>
         <Flex alignItems="center" color="gray.400" gap="3">
@@ -83,7 +107,12 @@ export const IntegracaoPessoaCentralOmieEsteira = () => {
 
           <SelectTime
             value={[time]}
-            onValueChange={(value) => setTime(Number(value[0]))}
+            onValueChange={(value) => {
+              queryClient.invalidateQueries([
+                "integracao-pessoa-central-omie-listar-todos-tickets",
+              ]);
+              setTime(Number(value[0]));
+            }}
           />
 
           <DebouncedInput
@@ -121,7 +150,17 @@ export const IntegracaoPessoaCentralOmieEsteira = () => {
                   key={etapa._id}
                   style={{ minWidth: "250px", maxWidth: "250px" }}
                 >
-                  <Etapa etapa={etapa} tickets={filteredTickets} card={Card} />
+                  <Etapa
+                    etapa={etapa}
+                    tickets={filteredTickets}
+                    card={(props) => (
+                      <Card ticket={props.ticket}>
+                        <TicketDetailsDialog actions={TicketActions}>
+                          <TicketBody />
+                        </TicketDetailsDialog>
+                      </Card>
+                    )}
+                  />
                 </SwiperSlide>
               ))}
             </Swiper>

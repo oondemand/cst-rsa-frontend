@@ -25,7 +25,7 @@ export const INTEGRACAO_PESSOA_CENTRAL_OMIE_ETAPAS = [
   { nome: "Requisicao", codigo: "requisicao" },
   { nome: "Reprocessar", codigo: "reprocessar" },
   { nome: "Processando", codigo: "processando" },
-  { nome: "Erro", codigo: "Erro" },
+  { nome: "Erro", codigo: "erro" },
   { nome: "Sucesso", codigo: "sucesso" },
 ];
 
