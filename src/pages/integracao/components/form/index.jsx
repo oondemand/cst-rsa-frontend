@@ -1,6 +1,8 @@
 import { BuildForm } from "../../../../components/buildForm";
 import { useVisibleInputForm } from "../../../../hooks/useVisibleInputForms";
-import { Grid, GridItem, Text, Box } from "@chakra-ui/react";
+import { Grid, GridItem, Text, Box, Flex } from "@chakra-ui/react";
+import { VisibilityControlDialog } from "../../../../components/vibilityControlDialog";
+import { flatFormFields } from "../../../../utils/form";
 
 export const Form = ({ data, stateKey, fields, titulo }) => {
   const { inputsVisibility, setInputsVisibility } = useVisibleInputForm({
@@ -19,9 +21,23 @@ export const Form = ({ data, stateKey, fields, titulo }) => {
             </Box>
           </GridItem>
           <GridItem colSpan={3} mt="6">
+            <Flex alignItems="center" gap="4" mb="6">
+              <Box
+                w="full"
+                h="1"
+                borderBottom="2px solid"
+                borderColor="gray.100"
+              />
+              <VisibilityControlDialog
+                fields={flatFormFields({ fields })}
+                setVisibilityState={setInputsVisibility}
+                visibilityState={inputsVisibility}
+                title="Ocultar inputs"
+              />
+            </Flex>
             <BuildForm
               fields={fields}
-              gap={2}
+              gap="4"
               data={data}
               disabled={true}
               gridColumns={2}

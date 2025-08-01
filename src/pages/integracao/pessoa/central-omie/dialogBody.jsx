@@ -6,7 +6,7 @@ export const TicketBody = ({ ticket }) => {
   return (
     <>
       <Form
-        titulo="Prestador"
+        titulo="Cliente / prestador"
         data={ticket.payload}
         fields={createDynamicFormFields()}
         stateKey="pessoa_central_omie"
