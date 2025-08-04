@@ -5,6 +5,7 @@ import { toaster } from "../../../../components/ui/toaster";
 import { useMutation } from "@tanstack/react-query";
 import { useConfirmation } from "../../../../hooks/useConfirmation";
 import { IntegracaoService } from "../../../../service/integracao";
+import { queryClient } from "../../../../config/react-query";
 
 export const TicketActions = ({ id, etapa }) => {
   const { setOpen } = useDialogContext();
@@ -14,6 +15,7 @@ export const TicketActions = ({ id, etapa }) => {
     useMutation({
       mutationFn: async () => await IntegracaoService.arquivar({ id }),
       onSuccess: () => {
+        queryClient.invalidateQueries();
         toaster.create({
           title: "Ticket arquivado com sucesso!",
           type: "success",
@@ -33,6 +35,7 @@ export const TicketActions = ({ id, etapa }) => {
   } = useMutation({
     mutationFn: async () => await IntegracaoService.reprocessar({ id }),
     onSuccess: () => {
+      queryClient.invalidateQueries();
       toaster.create({
         title: "Ticket movido para etapa de reprocessamento!",
         type: "success",

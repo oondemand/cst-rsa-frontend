@@ -13,6 +13,16 @@ const processar = async () => {
   return data;
 };
 
+const reprocessar = async ({ id }) => {
+  const { data } = await api.post(`/integracao/reprocessar/${id}`);
+  return data;
+};
+
+const arquivar = async ({ id }) => {
+  const { data } = await api.post(`/integracao/arquivar/${id}`);
+  return data;
+};
+
 const listarComPaginacao = async ({ filters = { direcao, tipo, ...rest } }) => {
   const { data } = await api.get("/integracao/todos", {
     params: filters,
@@ -23,6 +33,8 @@ const listarComPaginacao = async ({ filters = { direcao, tipo, ...rest } }) => {
 
 export const IntegracaoService = {
   listar,
+  arquivar,
   processar,
+  reprocessar,
   listarComPaginacao,
 };

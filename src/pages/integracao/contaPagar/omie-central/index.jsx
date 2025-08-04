@@ -48,7 +48,7 @@ export const IntegracaoContaPagarOmieCentralEsteira = () => {
     queryFn: async () => await IntegracaoService.listar({ filters }),
     placeholderData: keepPreviousData,
     staleTime: 1000 * 60 * 1, // 1 minuto
-    refetchInterval: 1000 * 10, // 10 sec
+    // refetchInterval: 1000 * 10, // 10 sec
   });
 
   const filteredTickets =

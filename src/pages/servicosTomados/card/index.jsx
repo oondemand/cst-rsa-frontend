@@ -12,10 +12,11 @@ import { currency } from "../../../utils/currency";
 import { TicketModal } from "../../../components/servicoTomadoTicketModal";
 import { format } from "date-fns";
 import { useListEtapas } from "../../../hooks/api/etapas/useListEtapas";
+import { formatDateToDDMMYYYY } from "../../../utils/formatting";
 
 const BADGE_MAP = {
   pago: { color: "green", title: "Pago em" },
-  atrasado: { color: "red", title: "Pago em" },
+  atrasado: { color: "red", title: "Venc." },
   "a vencer": { color: "yellow", title: "Venc." },
 };
 
@@ -102,7 +103,9 @@ const _TicketCard = ({ ticket }) => {
                   {BADGE_MAP[
                     ticket?.contaPagarOmie?.status_titulo?.toLowerCase()
                   ]?.title ?? "Concluido"}{" "}
-                  {ticket?.contaPagarOmie?.data_vencimento}
+                  {formatDateToDDMMYYYY(
+                    ticket?.contaPagarOmie?.data_vencimento
+                  )}
                 </Text>
                 <Badge
                   variant="surface"
