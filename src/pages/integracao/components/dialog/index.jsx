@@ -61,7 +61,7 @@ export const TicketDetailsDialog = ({
             <Flex gap="4" alignItems="baseline">
               <Heading fontSize="sm">Detalhes</Heading>
               <Text fontSize="xs" fontWeight="normal" fontStyle="italic">
-                {ticket?.parentId}
+                {ticket?._id}
               </Text>
             </Flex>
           </Flex>

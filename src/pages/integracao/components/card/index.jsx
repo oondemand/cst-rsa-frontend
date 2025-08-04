@@ -11,7 +11,7 @@ export const _Card = ({ ticket, children }) => {
   const STATUS_COLOR_MAP = {
     sucesso: "green.400",
     processando: "yellow.400",
-    error: "red.500",
+    erro: "red.500",
   };
 
   return (

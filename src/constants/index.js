@@ -29,6 +29,15 @@ export const INTEGRACAO_OMIE_ETAPAS_PADRAO = [
   { nome: "Sucesso", codigo: "sucesso" },
 ];
 
+export const INTEGRACAO_OMIE_ETAPAS_CONTA_PAGAR = [
+  { nome: "Requisicao", codigo: "requisicao" },
+  { nome: "Reprocessar", codigo: "reprocessar" },
+  { nome: "Processando", codigo: "processando" },
+  { nome: "Erro", codigo: "erro" },
+  { nome: "Anexos -> Omie", codigo: "anexos" },
+  { nome: "Sucesso", codigo: "sucesso" },
+];
+
 export const INTEGRACAO_DIRECAO_MAP = {
   CENTRAL_OMIE: "central_omie",
   OMIE_CENTRAL: "omie_central",

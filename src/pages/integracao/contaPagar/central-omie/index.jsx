@@ -15,7 +15,7 @@ import { useStateWithStorage } from "../../../../hooks/useStateStorage";
 import { SelectTime } from "../../../../components/selectTime";
 import {
   INTEGRACAO_DIRECAO_MAP,
-  INTEGRACAO_OMIE_ETAPAS_PADRAO,
+  INTEGRACAO_OMIE_ETAPAS_CONTA_PAGAR,
   INTEGRACAO_TIPO_MAP,
 } from "../../../../constants";
 import { Card } from "../../components/card";
@@ -27,24 +27,24 @@ import { TicketActions } from "../../components/dialog/actions";
 import { queryClient } from "../../../../config/react-query";
 import { TicketBody } from "./dialogBody";
 
-export const IntegracaoPessoaCentralOmieEsteira = () => {
+export const IntegracaoContaPagarCentralOmieEsteira = () => {
   const [searchTerm, setSearchTerm] = useStateWithStorage(
-    "esteira_integracao_pessoa_central_omie_search_term"
+    "esteira_integracao_conta_pagar_central_omie_search_term"
   );
 
   const [time, setTime] = useStateWithStorage(
-    "esteira_integracao_pessoa_central_omie_time",
+    "esteira_integracao_conta_pagar_central_omie_time",
     1
   );
 
   const filters = {
     direcao: INTEGRACAO_DIRECAO_MAP.CENTRAL_OMIE,
-    tipo: INTEGRACAO_TIPO_MAP.PESSOA,
+    tipo: INTEGRACAO_TIPO_MAP.CONTA_PAGAR,
     time: time,
   };
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ["integracao-pessoa-central-omie-listar", { filters }],
+    queryKey: ["integracao-conta-pagar-central-omie-listar", { filters }],
     queryFn: async () => await IntegracaoService.listar({ filters }),
     placeholderData: keepPreviousData,
     staleTime: 1000 * 60 * 1, // 1 minuto
@@ -56,7 +56,7 @@ export const IntegracaoPessoaCentralOmieEsteira = () => {
           const term = searchTerm?.toLowerCase()?.trim();
           return (
             ticket?.titulo?.toLowerCase()?.includes(term) ||
-            ticket?.payload?.pessoa?.documento
+            ticket?.payload?.conta_pagar?.documento
               ?.toLowerCase()
               ?.includes(term.replace(/[^a-zA-Z0-9]/g, "")) ||
             ticket?.parentId === term
@@ -69,7 +69,7 @@ export const IntegracaoPessoaCentralOmieEsteira = () => {
       <Flex pb="4" justifyContent="space-between">
         <Flex alignItems="center" gap="2">
           <Heading color="gray.700" fontSize="2xl">
-            Integração cliente/prestador central {"->"} omie
+            Integração conta pagar central {"->"} omie
           </Heading>
 
           <Tooltip content="Sincronizar com omie">
@@ -79,7 +79,7 @@ export const IntegracaoPessoaCentralOmieEsteira = () => {
           </Tooltip>
 
           <Tooltip content="Visualizar todos em tabela">
-            <Link to="/integracao/pessoa/central-omie/todos">
+            <Link to="/integracao/conta-pagar/central-omie/todos">
               <Button
                 color="purple.700"
                 bg="purple.200"
@@ -102,7 +102,7 @@ export const IntegracaoPessoaCentralOmieEsteira = () => {
             value={[time]}
             onValueChange={(value) => {
               queryClient.invalidateQueries([
-                "integracao-pessoa-central-omie-listar",
+                "integracao-conta-pagar-central-omie-listar",
               ]);
               setTime(Number(value[0]));
             }}
@@ -123,39 +123,41 @@ export const IntegracaoPessoaCentralOmieEsteira = () => {
         </Flex>
       </Flex>
       <Flex flex="1" pb="2" itens="center" overflow="hidden">
-        {!isLoading && filteredTickets && INTEGRACAO_OMIE_ETAPAS_PADRAO && (
-          <Swiper
-            style={{
-              height: "100%",
-              width: "100%",
-            }}
-            slidesPerView="auto"
-            spaceBetween={16}
-            freeMode={true}
-            grabCursor={true}
-            modules={[FreeMode, Navigation]}
-            navigation={true}
-          >
-            {INTEGRACAO_OMIE_ETAPAS_PADRAO?.map((etapa) => (
-              <SwiperSlide
-                key={etapa._id}
-                style={{ minWidth: "250px", maxWidth: "250px" }}
-              >
-                <Etapa
-                  etapa={etapa}
-                  tickets={filteredTickets}
-                  card={(props) => (
-                    <Card ticket={props.ticket}>
-                      <TicketDetailsDialog actions={TicketActions}>
-                        <TicketBody />
-                      </TicketDetailsDialog>
-                    </Card>
-                  )}
-                />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        )}
+        {!isLoading &&
+          filteredTickets &&
+          INTEGRACAO_OMIE_ETAPAS_CONTA_PAGAR && (
+            <Swiper
+              style={{
+                height: "100%",
+                width: "100%",
+              }}
+              slidesPerView="auto"
+              spaceBetween={16}
+              freeMode={true}
+              grabCursor={true}
+              modules={[FreeMode, Navigation]}
+              navigation={true}
+            >
+              {INTEGRACAO_OMIE_ETAPAS_CONTA_PAGAR?.map((etapa) => (
+                <SwiperSlide
+                  key={etapa._id}
+                  style={{ minWidth: "250px", maxWidth: "250px" }}
+                >
+                  <Etapa
+                    etapa={etapa}
+                    tickets={filteredTickets}
+                    card={(props) => (
+                      <Card ticket={props.ticket}>
+                        <TicketDetailsDialog actions={TicketActions}>
+                          <TicketBody />
+                        </TicketDetailsDialog>
+                      </Card>
+                    )}
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          )}
       </Flex>
     </Flex>
   );

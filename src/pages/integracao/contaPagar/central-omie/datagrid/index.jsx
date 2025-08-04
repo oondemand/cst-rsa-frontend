@@ -10,21 +10,21 @@ import {
   INTEGRACAO_TIPO_MAP,
 } from "../../../../../constants";
 
-export const IntegracaoPessoaCentralOmieDatagrid = () => {
+export const IntegracaoContaPagarCentralOmieDatagrid = () => {
   const columns = useMemo(() => makeDynamicIntegrationColumns(), []);
   const { filters, table } = useDataGrid({
     columns,
-    key: "INTEGRACAO_PESSOA_CENTRAL_OMIE",
+    key: "INTEGRACAO_CONTA_PAGAR_CENTRAL_OMIE",
   });
 
   const esteiraFilters = {
     direcao: INTEGRACAO_DIRECAO_MAP.CENTRAL_OMIE,
-    tipo: INTEGRACAO_TIPO_MAP.PESSOA,
+    tipo: INTEGRACAO_TIPO_MAP.CONTA_PAGAR,
   };
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: [
-      "integracao-pessoa-central-omie-todos",
+      "integracao-contaPagar-central-omie-todos",
       { filters: { ...filters, ...esteiraFilters } },
     ],
 
