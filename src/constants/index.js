@@ -46,4 +46,5 @@ export const INTEGRACAO_DIRECAO_MAP = {
 export const INTEGRACAO_TIPO_MAP = {
   PESSOA: "pessoa",
   CONTA_PAGAR: "conta_pagar",
+  ANEXOS: "anexos",
 };
