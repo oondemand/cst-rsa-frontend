@@ -10,21 +10,21 @@ import {
   INTEGRACAO_TIPO_MAP,
 } from "../../../../../constants";
 
-export const IntegracaoContaPagarCentralOmieDatagrid = () => {
+export const IntegracaoContaPagarOmieCentralDatagrid = () => {
   const columns = useMemo(() => makeDynamicIntegrationColumns(), []);
   const { filters, table } = useDataGrid({
     columns,
-    key: "INTEGRACAO_CONTA_PAGAR_CENTRAL_OMIE",
+    key: "INTEGRACAO_CONTA_PAGAR_OMIE_CENTRAL",
   });
 
   const esteiraFilters = {
-    direcao: INTEGRACAO_DIRECAO_MAP.CENTRAL_OMIE,
+    direcao: INTEGRACAO_DIRECAO_MAP.OMIE_CENTRAL,
     tipo: INTEGRACAO_TIPO_MAP.CONTA_PAGAR,
   };
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: [
-      "integracao-conta-pagar-central-omie-todos",
+      "integracao-conta-pagar-omie-central-todos",
       { filters: { ...filters, ...esteiraFilters } },
     ],
 
@@ -49,7 +49,7 @@ export const IntegracaoContaPagarCentralOmieDatagrid = () => {
       >
         <Box>
           <Text fontSize="lg" color="gray.700" fontWeight="semibold">
-            Integração conta pagar {"->"} omie
+            Integração conta pagar central {"<-"} omie
           </Text>
           <Box mt="4" bg="white" py="6" px="4" rounded="lg" shadow="xs">
             <DataGrid

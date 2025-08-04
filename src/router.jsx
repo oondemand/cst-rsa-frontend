@@ -31,6 +31,8 @@ import { IntegracaoContaPagarCentralOmieEsteira } from "./pages/integracao/conta
 import { IntegracaoContaPagarCentralOmieDatagrid } from "./pages/integracao/contaPagar/central-omie/datagrid";
 import { IntegracaoPessoaOmieCentralEsteira } from "./pages/integracao/pessoa/omie-central";
 import { IntegracaoPessoaOmieCentralDatagrid } from "./pages/integracao/pessoa/omie-central/datagrid";
+import { IntegracaoContaPagarOmieCentralEsteira } from "./pages/integracao/contaPagar/omie-central";
+import { IntegracaoContaPagarOmieCentralDatagrid } from "./pages/integracao/contaPagar/omie-central/datagrid";
 
 export const router = createBrowserRouter([
   {
@@ -93,6 +95,14 @@ export const router = createBrowserRouter([
           {
             path: "/integracao/conta-pagar/central-omie/todos",
             element: <IntegracaoContaPagarCentralOmieDatagrid />,
+          },
+          {
+            path: "/integracao/conta-pagar/omie-central",
+            element: <IntegracaoContaPagarOmieCentralEsteira />,
+          },
+          {
+            path: "/integracao/conta-pagar/omie-central/todos",
+            element: <IntegracaoContaPagarOmieCentralDatagrid />,
           },
         ],
       },

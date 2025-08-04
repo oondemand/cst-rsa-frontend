@@ -62,6 +62,10 @@ export const menuItems = [
         title: "Conta pagar central -> Omie",
         href: "/integracao/conta-pagar/central-omie",
       },
+      {
+        title: "Conta pagar central <- Omie",
+        href: "/integracao/conta-pagar/omie-central",
+      },
     ],
   },
   {
