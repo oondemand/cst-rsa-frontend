@@ -29,6 +29,8 @@ import { IntegracaoPessoaCentralOmieEsteira } from "./pages/integracao/pessoa/ce
 import { IntegracaoPessoaCentralOmieDatagrid } from "./pages/integracao/pessoa/central-omie/datagrid";
 import { IntegracaoContaPagarCentralOmieEsteira } from "./pages/integracao/contaPagar/central-omie";
 import { IntegracaoContaPagarCentralOmieDatagrid } from "./pages/integracao/contaPagar/central-omie/datagrid";
+import { IntegracaoPessoaOmieCentralEsteira } from "./pages/integracao/pessoa/omie-central";
+import { IntegracaoPessoaOmieCentralDatagrid } from "./pages/integracao/pessoa/omie-central/datagrid";
 
 export const router = createBrowserRouter([
   {
@@ -75,6 +77,14 @@ export const router = createBrowserRouter([
           {
             path: "/integracao/pessoa/central-omie/todos",
             element: <IntegracaoPessoaCentralOmieDatagrid />,
+          },
+          {
+            path: "/integracao/pessoa/omie-central",
+            element: <IntegracaoPessoaOmieCentralEsteira />,
+          },
+          {
+            path: "/integracao/pessoa/omie-central/todos",
+            element: <IntegracaoPessoaOmieCentralDatagrid />,
           },
           {
             path: "/integracao/conta-pagar/central-omie",
