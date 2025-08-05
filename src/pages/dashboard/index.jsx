@@ -65,8 +65,6 @@ export const Dashboard = () => {
     requisicao: "Requisicao",
   };
 
-  console.log(data);
-
   return (
     <Flex flex="1" flexDir="column" py="8" px="6" bg="#F8F9FA">
       <Text color="gray.400" fontSize="xs">
