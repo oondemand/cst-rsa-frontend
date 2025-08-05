@@ -111,7 +111,7 @@ export const IaChat = ({ visible, onClose, data, assistantConfigId }) => {
         reset();
         setIaChat([]);
       }}
-      size="sm"
+      size="md"
     >
       <Portal>
         <Drawer.Backdrop />

@@ -8,6 +8,7 @@ import {
   NotepadText,
   NotepadTextDashed,
   Notebook,
+  Rotate3D,
 } from "lucide-react";
 import { Chart } from "../../svg/chart";
 import { invertedChart } from "../../svg/invertedChart";
@@ -45,13 +46,40 @@ export const menuItems = [
     href: "/pessoas",
   },
   {
+    title: "Integrações",
+    icon: Rotate3D,
+    rules: ["admin"],
+    subLinks: [
+      {
+        title: "Cliente/prestador central -> Omie",
+        href: "/integracao/pessoa/central-omie",
+      },
+      {
+        title: "Cliente/prestador central <- Omie",
+        href: "/integracao/pessoa/omie-central",
+      },
+      {
+        title: "Conta pagar central -> Omie",
+        href: "/integracao/conta-pagar/central-omie",
+      },
+      {
+        title: "Conta pagar central <- Omie",
+        href: "/integracao/conta-pagar/omie-central",
+      },
+      {
+        title: "Anexos central -> Omie",
+        href: "/integracao/anexos/central-omie",
+      },
+    ],
+  },
+  {
     title: "Configurações",
     icon: Settings,
     subLinks: [
-      {
-        title: "Usuários",
-        href: "/usuarios",
-      },
+      // {
+      //   title: "Usuários",
+      //   href: "/usuarios",
+      // },
       {
         title: "Listas",
         href: "/listas",

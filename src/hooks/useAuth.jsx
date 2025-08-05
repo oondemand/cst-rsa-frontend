@@ -11,20 +11,17 @@ export const AuthProvider = ({ children }) => {
     setIsLoading(true);
     const initializeAuth = async () => {
       try {
-        const token = localStorage.getItem("token");
-        const localUser = localStorage.getItem("usuario");
-
-        if (token && localUser) setUser(JSON.parse(localUser));
-
-        await LoginService.validateToken();
+        const response = await LoginService.validateToken();
+        if (response.usuario) setUser(response.usuario);
       } catch (error) {
         console.error("Erro ao inicializar a autenticação:", error);
         logout();
+      } finally {
+        setIsLoading(false);
       }
     };
 
     initializeAuth();
-    setIsLoading(false);
   }, []);
 
   const login = (token, user) => {

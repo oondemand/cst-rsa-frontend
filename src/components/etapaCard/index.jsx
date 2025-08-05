@@ -1,18 +1,11 @@
-import React, { memo, useState } from "react";
-import { Box, Flex, Heading, Text } from "@chakra-ui/react";
-import { TicketCard } from "../servicoTomadoTicketCard";
+import React, { memo } from "react";
+import { Box, Flex, Heading } from "@chakra-ui/react";
 
 import { useRef, useMemo } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import "./custom-scrollbar.css";
 
-import { SquarePlus } from "lucide-react";
-import { TicketModal } from "../servicoTomadoTicketModal";
-import { Tooltip } from "../ui/tooltip";
-
-const _Etapa = ({ etapa, tickets }) => {
-  const [open, setOpen] = useState(false);
-
+const _Etapa = ({ etapa, tickets, action, card, bg = "#E8ECEF" }) => {
   const etapaTickets = useMemo(
     () => tickets.filter((ticket) => ticket.etapa === etapa.codigo),
     [tickets, etapa.codigo]
@@ -28,41 +21,13 @@ const _Etapa = ({ etapa, tickets }) => {
   });
 
   return (
-    <Box
-      bg="#E8ECEF"
-      rounded="lg"
-      boxShadow=" 0px 1px 2px 0px rgba(0, 0, 0, 0.05)"
-    >
+    <Box bg={bg} rounded="lg" boxShadow=" 0px 1px 2px 0px rgba(0, 0, 0, 0.05)">
       <Box borderBottom="1px solid" borderColor="gray.100" py="2" px="3">
         <Flex alignItems="center" justifyContent="space-between">
           <Heading color="gray.700" fontSize="14px">
             {etapa.nome}
           </Heading>
-          {etapa.codigo === "requisicao" && (
-            <Tooltip
-              content="Criar ticket"
-              positioning={{ placement: "top" }}
-              openDelay={700}
-              closeDelay={50}
-              contentProps={{
-                css: {
-                  "--tooltip-bg": "white",
-                  color: "gray.600",
-                },
-              }}
-            >
-              <Text
-                p="1"
-                rounded="full"
-                _hover={{ bg: "gray.200" }}
-                onClick={() => setOpen(true)}
-                color="brand.500"
-                cursor="pointer"
-              >
-                <SquarePlus size={20} />
-              </Text>
-            </Tooltip>
-          )}
+          {action && React.createElement(action, { etapa }, null)}
         </Flex>
       </Box>
 
@@ -99,17 +64,22 @@ const _Etapa = ({ etapa, tickets }) => {
                     textDecoration: "none",
                   }}
                 >
-                  <TicketCard
-                    index={virtualItem.index}
-                    ticket={etapaTickets[virtualItem.index]}
-                  />
+                  {card &&
+                    React.createElement(
+                      card,
+                      {
+                        index: virtualItem.index,
+                        ticket: etapaTickets[virtualItem.index],
+                        etapa,
+                      },
+                      null
+                    )}
                 </Box>
               );
             })}
           </Box>
         </Box>
       )}
-      {open && <TicketModal open={open} setOpen={setOpen} />}
     </Box>
   );
 };

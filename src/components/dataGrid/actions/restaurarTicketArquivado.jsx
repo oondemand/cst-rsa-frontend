@@ -44,18 +44,7 @@ export const RestaurarTicketAction = ({ ticket }) => {
   };
 
   return (
-    <Tooltip
-      content="Restaurar ticket"
-      positioning={{ placement: "top" }}
-      openDelay={700}
-      closeDelay={50}
-      contentProps={{
-        css: {
-          "--tooltip-bg": "white",
-          color: "gray.600",
-        },
-      }}
-    >
+    <Tooltip content="Restaurar ticket" openDelay={700} closeDelay={50}>
       <IconButton
         disabled={isPending}
         variant="surface"

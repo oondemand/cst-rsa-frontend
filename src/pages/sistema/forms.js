@@ -18,6 +18,13 @@ export const FORMS = [
         colSpan: 1,
       },
       {
+        accessorKey: "appKey",
+        label: "App key",
+        render: DefaultField,
+        validation: z.string().nonempty(),
+        colSpan: 1,
+      },
+      {
         accessorKey: "sendgrid_api_key",
         label: "Sendgrid api key",
         render: PasswordField,

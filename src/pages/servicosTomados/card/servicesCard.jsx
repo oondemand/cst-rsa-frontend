@@ -1,6 +1,6 @@
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import { useMemo } from "react";
-import { currency } from "../../utils/currency";
+import { currency } from "../../../utils/currency";
 
 export const ServicesCard = ({ servicos = [] }) => {
   const formattedServices = useMemo(() => {

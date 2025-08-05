@@ -41,18 +41,7 @@ export const AnexarArquivoAoTicketAction = ({ ticket }) => {
           e.preventDefault();
         }}
       >
-        <Tooltip
-          content="Anexar arquivo"
-          positioning={{ placement: "top" }}
-          openDelay={500}
-          closeDelay={50}
-          contentProps={{
-            css: {
-              "--tooltip-bg": "white",
-              color: "gray.600",
-            },
-          }}
-        >
+        <Tooltip content="Anexar arquivo" openDelay={500} closeDelay={50}>
           <IconButton
             disabled={isPending}
             variant="surface"

@@ -53,7 +53,7 @@ export const ArquivoDetailsDialog = ({ documentoCadastral }) => {
   }, [response]);
 
   const { onOpen } = useIaChat();
-  const { assistant } = useLoadAssistant("analisar-documento-cadastral");
+  const { assistant } = useLoadAssistant(["documento-cadastral.analise"]);
 
   const zoomPluginInstance = zoomPlugin();
   const { ZoomInButton, ZoomOutButton, ZoomPopover, zoomTo } =
@@ -68,15 +68,8 @@ export const ArquivoDetailsDialog = ({ documentoCadastral }) => {
       <Box onClick={() => setOpen(true)}>
         <Tooltip
           content="Analisar documento cadastral"
-          positioning={{ placement: "top" }}
           openDelay={1000}
           closeDelay={50}
-          contentProps={{
-            css: {
-              "--tooltip-bg": "white",
-              color: "gray.600",
-            },
-          }}
         >
           <IconButton variant="surface" colorPalette="gray" size="2xs">
             <FilePenLine />

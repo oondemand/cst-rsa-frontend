@@ -47,15 +47,8 @@ export const ListaOmieComponent = () => {
 
             <Tooltip
               content="Sincronizar lista com omie"
-              positioning={{ placement: "top" }}
               openDelay={500}
               closeDelay={50}
-              contentProps={{
-                css: {
-                  "--tooltip-bg": "white",
-                  color: "gray.600",
-                },
-              }}
             >
               <IconButton
                 disabled={isPending}

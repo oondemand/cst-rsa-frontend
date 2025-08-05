@@ -23,9 +23,9 @@ const carregarTicket = async (id) => {
   return response.data;
 };
 
-const listarTickets = async (filtro) => {
+const listarTickets = async ({ filters }) => {
   const { data } = await api.get("/servicos-tomados/tickets", {
-    params: filtro,
+    params: filters,
   });
   return data;
 };

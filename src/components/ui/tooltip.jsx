@@ -8,7 +8,12 @@ export const Tooltip = React.forwardRef(function Tooltip(props, ref) {
     disabled,
     portalled = true,
     content,
-    contentProps,
+    contentProps = {
+      css: {
+        "--tooltip-bg": "white",
+        color: "gray.600",
+      },
+    },
     portalRef,
     ...rest
   } = props;

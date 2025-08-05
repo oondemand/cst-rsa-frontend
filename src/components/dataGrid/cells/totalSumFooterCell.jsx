@@ -7,15 +7,8 @@ export const TotalSumFooterCell = ({ sum }) => {
     <Flex minH="8">
       <Tooltip
         content="Valor referente ao total da coluna"
-        positioning={{ placement: "top" }}
         openDelay={500}
         closeDelay={50}
-        contentProps={{
-          css: {
-            "--tooltip-bg": "white",
-            color: "gray.600",
-          },
-        }}
       >
         <Text alignSelf="center" fontSize="sm" truncate>
           {currency.format(sum)}

@@ -3,20 +3,20 @@ import React, { memo, useState } from "react";
 
 import { ptBR } from "date-fns/locale";
 import { LucideListCheck, Paperclip, File } from "lucide-react";
-import { Tooltip } from "../ui/tooltip";
+import { Tooltip } from "../../../components/ui/tooltip";
 
 import { ServicesCard } from "./servicesCard";
 import { AnexosCard } from "./arquivosCard";
-import { currency } from "../../utils/currency";
+import { currency } from "../../../utils/currency";
 
-import { TicketModal } from "../servicoTomadoTicketModal";
+import { TicketModal } from "../../../components/servicoTomadoTicketModal";
 import { format } from "date-fns";
-import { DocumentosFiscaisCard } from "./documentosFiscaisCard";
-import { useListEtapas } from "../../hooks/api/etapas/useListEtapas";
+import { useListEtapas } from "../../../hooks/api/etapas/useListEtapas";
+import { formatDateToDDMMYYYY } from "../../../utils/formatting";
 
 const BADGE_MAP = {
   pago: { color: "green", title: "Pago em" },
-  atrasado: { color: "red", title: "Pago em" },
+  atrasado: { color: "red", title: "Venc." },
   "a vencer": { color: "yellow", title: "Venc." },
 };
 
@@ -73,12 +73,6 @@ const _TicketCard = ({ ticket }) => {
                 positioning={{ placement: "top" }}
                 openDelay={700}
                 closeDelay={50}
-                contentProps={{
-                  css: {
-                    "--tooltip-bg": "white",
-                    color: "gray.600",
-                  },
-                }}
               >
                 <Box w="90%">
                   <Text
@@ -109,7 +103,9 @@ const _TicketCard = ({ ticket }) => {
                   {BADGE_MAP[
                     ticket?.contaPagarOmie?.status_titulo?.toLowerCase()
                   ]?.title ?? "Concluido"}{" "}
-                  {ticket?.contaPagarOmie?.data_vencimento}
+                  {formatDateToDDMMYYYY(
+                    ticket?.contaPagarOmie?.data_vencimento
+                  )}
                 </Text>
                 <Badge
                   variant="surface"
@@ -144,12 +140,6 @@ const _TicketCard = ({ ticket }) => {
                   positioning={{ placement: "bottom" }}
                   openDelay={500}
                   closeDelay={50}
-                  contentProps={{
-                    css: {
-                      "--tooltip-bg": "white",
-                      color: "gray.600",
-                    },
-                  }}
                 >
                   <Flex color="gray.400" alignItems="center" gap="1px">
                     <LucideListCheck size={14} />
@@ -169,12 +159,6 @@ const _TicketCard = ({ ticket }) => {
                   positioning={{ placement: "bottom" }}
                   openDelay={500}
                   closeDelay={50}
-                  contentProps={{
-                    css: {
-                      "--tooltip-bg": "white",
-                      color: "gray.600",
-                    },
-                  }}
                 >
                   <Flex color="gray.400" alignItems="center" gap="1px">
                     <Paperclip size={14} />
@@ -198,12 +182,6 @@ const _TicketCard = ({ ticket }) => {
                   positioning={{ placement: "bottom" }}
                   openDelay={500}
                   closeDelay={50}
-                  contentProps={{
-                    css: {
-                      "--tooltip-bg": "white",
-                      color: "gray.600",
-                    },
-                  }}
                 >
                   <Flex color="gray.400" alignItems="center" gap="1px">
                     <File size={14} />

@@ -1,5 +1,11 @@
-import { Box, Button, Flex, Text, Icon } from "@chakra-ui/react";
-import { Outlet } from "react-router-dom";
+import { Box, Button, Flex, Text, Icon, Spinner } from "@chakra-ui/react";
+import {
+  Outlet,
+  useLocation,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import { useAuth } from "../../../hooks/useAuth";
 import { Navigate } from "react-router-dom";
 import { LogOut } from "lucide-react";
@@ -15,14 +21,24 @@ import {
   AccordionRoot,
 } from "../../ui/accordion";
 import { menuItems } from "./menu";
+import { useEffect } from "react";
+import { env } from "../../../config/env";
 
 export const AuthLayout = () => {
   const { user, isLoading, logout } = useAuth();
   const { requestConfirmation } = useConfirmation();
 
-  if (!user && isLoading === false) {
-    return <Navigate to="/login" replace />;
-  }
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const token = searchParams.get("code");
+    if (token) {
+      localStorage.setItem("token", token);
+      navigate(location.pathname, { replace: true });
+    }
+  }, [searchParams]);
 
   const handleLogOut = async () => {
     const { action } = await requestConfirmation({
@@ -34,6 +50,11 @@ export const AuthLayout = () => {
       logout();
     }
   };
+
+  if (!user && isLoading === false) {
+    window.location.href = `${env.VITE_MEUS_APPS_URL}/login`;
+    return;
+  }
 
   return (
     <Flex direction="row" minHeight="100vh" minW="100vw">
@@ -142,7 +163,7 @@ export const AuthLayout = () => {
         paddingBottom="0"
         overflow="hidden"
       >
-        <Outlet />
+        {!isLoading ? <Outlet /> : <Spinner m="8" />}
       </Flex>
     </Flex>
   );

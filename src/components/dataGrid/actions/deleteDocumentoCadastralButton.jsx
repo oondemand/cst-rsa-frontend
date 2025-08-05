@@ -32,15 +32,8 @@ export const DeleteDocumentoCadastralAction = ({ id }) => {
   return (
     <Tooltip
       content="Excluir documento cadastral"
-      positioning={{ placement: "top" }}
       openDelay={700}
       closeDelay={50}
-      contentProps={{
-        css: {
-          "--tooltip-bg": "white",
-          color: "gray.600",
-        },
-      }}
     >
       <IconButton
         variant="surface"

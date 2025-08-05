@@ -7,7 +7,7 @@ import "swiper/css/navigation";
 
 import "../../styles/swiper.css";
 
-import { Flex, Spinner, Heading } from "@chakra-ui/react";
+import { Flex, Spinner, Heading, createListCollection } from "@chakra-ui/react";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { Etapa } from "../../components/etapaCard";
 import { ServicoTomadoTicketService } from "../../service/servicoTomadoTicket";
@@ -15,10 +15,21 @@ import { Filter } from "lucide-react";
 import { DebouncedInput } from "../../components/DebouncedInput";
 import { useStateWithStorage } from "../../hooks/useStateStorage";
 import { useListEtapas } from "../../hooks/api/etapas/useListEtapas";
+import { EtapaActions } from "./etapaActions";
+import { TicketCard } from "./card";
+import { SelectTime } from "../../components/selectTime";
 
 export const ServicosTomados = () => {
-  const [searchTerm, setSearchTerm] = useStateWithStorage("searchTerm");
   const { etapas, isLoading: isEtapasLoading } = useListEtapas();
+
+  const [searchTerm, setSearchTerm] = useStateWithStorage(
+    "esteira_servicos_tomados_search_term"
+  );
+
+  const [time, setTime] = useStateWithStorage(
+    "esteira_servicos_tomados_time",
+    1
+  );
 
   const {
     data,
@@ -26,8 +37,9 @@ export const ServicosTomados = () => {
     isLoading: isTicketLoading,
     isFetching: isTicketFetching,
   } = useQuery({
-    queryKey: ["listar-tickets"],
-    queryFn: async () => ServicoTomadoTicketService.listarTickets(),
+    queryKey: ["servicos-tomados-listar-todos-tickets", { filters: { time } }],
+    queryFn: async () =>
+      ServicoTomadoTicketService.listarTickets({ filters: { time } }),
     placeholderData: keepPreviousData,
     staleTime: 1000 * 60 * 1, // 1 minuto
     onSuccess: (data) => setTickets(data),
@@ -59,6 +71,12 @@ export const ServicosTomados = () => {
         </Flex>
         <Flex alignItems="center" color="gray.400" gap="3">
           <Filter size={24} />
+
+          <SelectTime
+            value={[time]}
+            onValueChange={(value) => setTime(Number(value[0]))}
+          />
+
           <DebouncedInput
             size="xs"
             w="sm"
@@ -94,7 +112,12 @@ export const ServicosTomados = () => {
                   key={etapa._id}
                   style={{ minWidth: "250px", maxWidth: "250px" }}
                 >
-                  <Etapa etapa={etapa} tickets={filteredTickets} />
+                  <Etapa
+                    etapa={etapa}
+                    tickets={filteredTickets}
+                    action={EtapaActions}
+                    card={TicketCard}
+                  />
                 </SwiperSlide>
               ))}
             </Swiper>

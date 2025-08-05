@@ -20,7 +20,7 @@ export const PessoasDialog = ({
   const [data, setData] = useState(defaultValues);
   const [open, setOpen] = useState(false);
   const { onOpen } = useIaChat();
-  const { assistant } = useLoadAssistant("pessoa");
+  const { assistant } = useLoadAssistant(["pessoa"]);
   const fields = useMemo(() => createDynamicFormFields(), []);
 
   const updatePessoa = useUpdatePessoa({

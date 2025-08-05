@@ -2,13 +2,11 @@ import { api } from "../config/api";
 
 const validateToken = async () => {
   const response = await api.get("/auth/validar-token");
-
   return response.data;
 };
 
 const logIn = async ({ email, senha }) => {
   const response = await api.post("/auth/login", { email, senha });
-
   return response.data;
 };
 

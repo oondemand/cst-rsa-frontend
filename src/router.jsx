@@ -25,6 +25,16 @@ import { Ativacao } from "./pages/ativacao";
 import { ServicosList } from "./pages/servicos";
 import { ImportServicosPage } from "./pages/servicos/importacao";
 import ChangelogPage from "./pages/changelog";
+import { IntegracaoPessoaCentralOmieEsteira } from "./pages/integracao/pessoa/central-omie";
+import { IntegracaoPessoaCentralOmieDatagrid } from "./pages/integracao/pessoa/central-omie/datagrid";
+import { IntegracaoContaPagarCentralOmieEsteira } from "./pages/integracao/contaPagar/central-omie";
+import { IntegracaoContaPagarCentralOmieDatagrid } from "./pages/integracao/contaPagar/central-omie/datagrid";
+import { IntegracaoPessoaOmieCentralEsteira } from "./pages/integracao/pessoa/omie-central";
+import { IntegracaoPessoaOmieCentralDatagrid } from "./pages/integracao/pessoa/omie-central/datagrid";
+import { IntegracaoContaPagarOmieCentralEsteira } from "./pages/integracao/contaPagar/omie-central";
+import { IntegracaoContaPagarOmieCentralDatagrid } from "./pages/integracao/contaPagar/omie-central/datagrid";
+import { IntegracaoAnexosCentralOmieEsteira } from "./pages/integracao/anexos/central-omie";
+import { IntegracaoAnexosCentralOmieDatagrid } from "./pages/integracao/anexos/central-omie/datagrid";
 
 export const router = createBrowserRouter([
   {
@@ -60,6 +70,52 @@ export const router = createBrowserRouter([
       // { path: "/pagos", element: <TicketsPagosPage /> },
       { path: "/etapas", element: <EtapasPage /> },
       { path: "/assistentes", element: <AssistenteConfigPage /> },
+
+      {
+        path: "/integracao",
+        children: [
+          {
+            path: "/integracao/pessoa/central-omie",
+            element: <IntegracaoPessoaCentralOmieEsteira />,
+          },
+          {
+            path: "/integracao/pessoa/central-omie/todos",
+            element: <IntegracaoPessoaCentralOmieDatagrid />,
+          },
+          {
+            path: "/integracao/pessoa/omie-central",
+            element: <IntegracaoPessoaOmieCentralEsteira />,
+          },
+          {
+            path: "/integracao/pessoa/omie-central/todos",
+            element: <IntegracaoPessoaOmieCentralDatagrid />,
+          },
+          {
+            path: "/integracao/conta-pagar/central-omie",
+            element: <IntegracaoContaPagarCentralOmieEsteira />,
+          },
+          {
+            path: "/integracao/conta-pagar/central-omie/todos",
+            element: <IntegracaoContaPagarCentralOmieDatagrid />,
+          },
+          {
+            path: "/integracao/conta-pagar/omie-central",
+            element: <IntegracaoContaPagarOmieCentralEsteira />,
+          },
+          {
+            path: "/integracao/conta-pagar/omie-central/todos",
+            element: <IntegracaoContaPagarOmieCentralDatagrid />,
+          },
+          {
+            path: "/integracao/anexos/central-omie",
+            element: <IntegracaoAnexosCentralOmieEsteira />,
+          },
+          {
+            path: "/integracao/anexos/central-omie/todos",
+            element: <IntegracaoAnexosCentralOmieDatagrid />,
+          },
+        ],
+      },
     ],
   },
 
@@ -67,7 +123,7 @@ export const router = createBrowserRouter([
     path: "/",
     element: <MainLayout />,
     children: [
-      { path: "/login", element: <LoginPage /> },
+      // { path: "/login", element: <LoginPage /> },
       { path: "/alterar-senha", element: <AlterarSenha /> },
       { path: "/ativacao", element: <Ativacao /> },
     ],

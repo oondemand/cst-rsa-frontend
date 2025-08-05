@@ -29,7 +29,7 @@ export const createDynamicFormFields = () => {
           validation: z.coerce
             .string()
             .min(3, { message: "Nome precisa ter pelo menos 3 caracteres" }),
-          colSpan: 3,
+          colSpan: 2,
         },
         {
           accessorKey: "tipo",

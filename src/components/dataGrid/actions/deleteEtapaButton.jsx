@@ -28,18 +28,7 @@ export const DeleteEtapaAction = ({ id }) => {
   };
 
   return (
-    <Tooltip
-      content="Excluir etapa"
-      positioning={{ placement: "top" }}
-      openDelay={700}
-      closeDelay={50}
-      contentProps={{
-        css: {
-          "--tooltip-bg": "white",
-          color: "gray.600",
-        },
-      }}
-    >
+    <Tooltip content="Excluir etapa" openDelay={700} closeDelay={50}>
       <IconButton
         variant="surface"
         colorPalette="red"

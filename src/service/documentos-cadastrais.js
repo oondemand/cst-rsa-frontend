@@ -12,12 +12,9 @@ const exportarDocumentosCadastrais = async ({ filters }) => {
   return response;
 };
 
-const listarDocumentosCadastraisPorPrestador = async ({
-  prestadorId,
-  dataRegistro,
-}) => {
+const listarPorPessoa = async ({ pessoaId, dataRegistro }) => {
   const { data } = await api.get(
-    `/documentos-cadastrais/prestador/${prestadorId}?dataRegistro=${dataRegistro}`
+    `/documentos-cadastrais/pessoa/${pessoaId}?dataRegistro=${dataRegistro}`
   );
   return data;
 };
@@ -33,9 +30,7 @@ const criarDocumentoCadastral = async ({ body, origem }) => {
 
 const atualizarDocumentoCadastral = async ({ id, body, origem }) => {
   const { data } = await api.patch(`/documentos-cadastrais/${id}`, body, {
-    headers: {
-      "x-origem": origem,
-    },
+    headers: { "x-origem": origem },
   });
   return data;
 };
@@ -123,7 +118,7 @@ export const DocumentosCadastraisService = {
   criarDocumentoCadastral,
   atualizarDocumentoCadastral,
   deletarDocumentoCadastral,
-  listarDocumentosCadastraisPorPrestador,
+  listarPorPessoa,
   atualizarStatus,
   anexarArquivo,
   deleteFile,
