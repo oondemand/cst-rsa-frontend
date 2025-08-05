@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.11 (2025-08-05)
+
+### 🐛 Bug Fixes
+
+* remove unused log ([db39c13](https://github.com/oondemand/central-oondemand-frontend/commit/db39c13e464192a090a8d175a79cb7a9ceccba04))
+
 ## 0.2.10 (2025-08-05)
 
 ## 0.2.9 (2025-08-05)
