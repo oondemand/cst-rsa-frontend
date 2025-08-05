@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.9 (2025-08-05)
+
+### 🐛 Bug Fixes
+
+* fix workflow file ([8b98408](https://github.com/oondemand/central-oondemand-frontend/commit/8b9840869192cf80bc9aa22b8abdf89c99229837))
+
 ## 0.2.8 (2025-08-05)
 
 ## 0.2.7 (2025-08-05)
