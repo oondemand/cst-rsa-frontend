@@ -16,36 +16,29 @@ import { FileCheck2, PiggyBank, RotateCcw, Wallet } from "lucide-react";
 import { DashboardService } from "../../service/dashboard";
 
 import { currency } from "../../utils/currency";
+import { IntegracaoCard } from "./integracaoCard";
 
 export const Dashboard = () => {
-  const { data: valoresPorStatus } = useQuery({
-    queryFn: DashboardService.obterValoresPorStatus,
-    queryKey: ["dashboard-servicos"],
+  const { data } = useQuery({
+    queryFn: DashboardService.estatisticas,
+    queryKey: ["dashboard-estatisticas"],
     staleTime: 1000 * 60, //1m
     placeholderData: keepPreviousData,
   });
 
-  const { data: ticketsPorStatus } = useQuery({
-    queryFn: DashboardService.obterTicketsPorStatus,
-    queryKey: ["dashboard-tickets-status"],
-    staleTime: 1000 * 60, //1m
-    placeholderData: keepPreviousData,
-  });
+  const integracao = data?.estatisticas?.integracao;
 
-  const { data: ticketsPorEtapa } = useQuery({
-    queryFn: DashboardService.obterTicketsPorEtapa,
-    queryKey: ["dashboard-tickets-etapa"],
-    staleTime: 1000 * 60, //1m
-    placeholderData: keepPreviousData,
-  });
+  const valorTotalTodosServicos = data?.estatisticas?.valoresPorStatus?.reduce(
+    (acc, cur) => {
+      return acc + cur.total;
+    },
+    0
+  );
 
-  const valorTotalTodosServicos = valoresPorStatus?.reduce((acc, cur) => {
-    return acc + cur.total;
-  }, 0);
-
-  const quantidadeTotalDeServicos = valoresPorStatus?.reduce((acc, cur) => {
-    return acc + cur.count;
-  }, 0);
+  const quantidadeTotalDeServicos =
+    data?.estatisticas?.valoresPorStatus?.reduce((acc, cur) => {
+      return acc + cur.count;
+    }, 0);
 
   const servicoStatusColorMap = {
     processando: "purple.500",
@@ -71,6 +64,8 @@ export const Dashboard = () => {
     "aprovacao-fiscal": "Aprovacao fiscal",
     requisicao: "Requisicao",
   };
+
+  console.log(data);
 
   return (
     <Flex flex="1" flexDir="column" py="8" px="6" bg="#F8F9FA">
@@ -121,10 +116,12 @@ export const Dashboard = () => {
             </Text>
             <Text color="gray.700" mt="1" fontWeight="bold">
               {currency.format(
-                (valoresPorStatus?.find((e) => e.status === "pago")?.total ??
-                  0) +
-                  (valoresPorStatus?.find((e) => e.status === "pago-externo")
-                    ?.total ?? 0)
+                (data?.estatisticas?.valoresPorStatus?.find(
+                  (e) => e.status === "pago"
+                )?.total ?? 0) +
+                  (data?.estatisticas?.valoresPorStatus?.find(
+                    (e) => e.status === "pago-externo"
+                  )?.total ?? 0)
               )}
             </Text>
           </Box>
@@ -140,15 +137,16 @@ export const Dashboard = () => {
             </Text>
             <Text color="gray.700" mt="1" fontWeight="bold">
               {currency.format(
-                valoresPorStatus?.find((e) => e.status === "processando")
-                  ?.total ?? 0
+                data?.estatisticas?.valoresPorStatus?.find(
+                  (e) => e.status === "processando"
+                )?.total ?? 0
               )}
             </Text>
           </Box>
         </Box>
       </Flex>
       <Flex gap="10" mt="8">
-        {ticketsPorStatus?.length > 0 && (
+        {data?.estatisticas?.ticketPorStatus?.length > 0 && (
           <Box>
             <Box maxW="600px" bg="white" p="4" rounded="2xl">
               <Text fontWeight="semibold">Tickets por status</Text>
@@ -174,7 +172,7 @@ export const Dashboard = () => {
                   </Table.Row>
                 </Table.Header>
                 <Table.Body>
-                  {ticketsPorStatus?.map((item) => (
+                  {data?.estatisticas?.ticketPorStatus?.map((item) => (
                     <Table.Row>
                       <Table.Cell
                         display="flex"
@@ -199,7 +197,7 @@ export const Dashboard = () => {
           </Box>
         )}
 
-        {ticketsPorEtapa?.length > 0 && (
+        {data?.estatisticas?.ticketPorEtapa?.length > 0 && (
           <Box>
             <Box maxW="600px" bg="white" p="4" rounded="2xl">
               <Text fontWeight="semibold">Tickets por etapa</Text>
@@ -225,7 +223,7 @@ export const Dashboard = () => {
                   </Table.Row>
                 </Table.Header>
                 <Table.Body>
-                  {ticketsPorEtapa?.map((item) => {
+                  {data?.estatisticas?.ticketPorEtapa?.map((item) => {
                     if (!ticketEtapaMap[item.etapa]) return;
                     return (
                       <Table.Row>
@@ -247,7 +245,7 @@ export const Dashboard = () => {
           </Box>
         )}
 
-        {valoresPorStatus?.length > 0 && (
+        {data?.estatisticas?.valoresPorStatus?.length > 0 && (
           <Box>
             <Box maxW="600px" bg="white" p="4" rounded="2xl">
               <Flex justifyContent="space-between" alignItems="center">
@@ -283,7 +281,7 @@ export const Dashboard = () => {
                   </Table.Row>
                 </Table.Header>
                 <Table.Body>
-                  {valoresPorStatus?.map((item) => (
+                  {data?.estatisticas?.valoresPorStatus?.map((item) => (
                     <Table.Row>
                       <Table.Cell
                         display="flex"
@@ -313,6 +311,54 @@ export const Dashboard = () => {
           </Box>
         )}
       </Flex>
+
+      <Box mt="8">
+        <Text color="gray.400" fontSize="sm">
+          Integrações com Omie
+        </Text>
+
+        <Flex gap="10" mt="4" alignItems="flex-start">
+          {integracao?.pessoa?.central_omie && (
+            <IntegracaoCard
+              title="Cliente/prestador central -> omie"
+              link="/integracao/pessoa/central-omie"
+              integracao={integracao.pessoa.central_omie}
+            />
+          )}
+
+          {integracao?.pessoa?.omie_central && (
+            <IntegracaoCard
+              title="Cliente/prestador central <- omie"
+              link="/integracao/pessoa/omie-central"
+              integracao={integracao.pessoa.omie_central}
+            />
+          )}
+
+          {integracao?.conta_pagar?.central_omie && (
+            <IntegracaoCard
+              title="Conta pagar central -> omie"
+              link="/integracao/conta-pagar/central-omie"
+              integracao={integracao?.conta_pagar?.central_omie}
+            />
+          )}
+
+          {integracao?.conta_pagar?.omie_central && (
+            <IntegracaoCard
+              title="Conta pagar central <- omie"
+              link="/integracao/conta-pagar/omie-central"
+              integracao={integracao?.conta_pagar?.omie_central}
+            />
+          )}
+
+          {integracao?.anexos?.central_omie && (
+            <IntegracaoCard
+              title="Anexos central -> omie"
+              link="/integracao/anexos/central-omie"
+              integracao={integracao?.anexos?.central_omie}
+            />
+          )}
+        </Flex>
+      </Box>
     </Flex>
   );
 };
