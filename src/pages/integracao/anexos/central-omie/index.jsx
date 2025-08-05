@@ -147,7 +147,10 @@ export const IntegracaoAnexosCentralOmieEsteira = () => {
                   tickets={filteredTickets}
                   card={(props) => (
                     <Card ticket={props.ticket}>
-                      <TicketDetailsDialog actions={TicketActions}>
+                      <TicketDetailsDialog
+                        tipoDeIntegracao="anexos"
+                        actions={TicketActions}
+                      >
                         <TicketBody />
                       </TicketDetailsDialog>
                     </Card>

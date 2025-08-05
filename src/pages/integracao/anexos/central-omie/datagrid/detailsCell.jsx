@@ -24,6 +24,7 @@ export const VisualizarDetailsDialog = (props) => {
         <TicketDetailsDialog
           open={open}
           setOpen={setOpen}
+          tipoDeIntegracao="anexos"
           ticket={props.row.original}
           actions={TicketActions}
         >

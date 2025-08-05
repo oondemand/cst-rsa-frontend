@@ -12,7 +12,7 @@ export const useLoadAssistant = (modulo) => {
   const assistant = useMemo(() => {
     if (!data) return null;
     return data?.assistentes?.find((e) => {
-      return e?.modulo?.includes(modulo) || e?.modulo?.includes("geral");
+      return modulo.includes(e.modulo);
     })?.assistente;
   }, [data, modulo]);
 

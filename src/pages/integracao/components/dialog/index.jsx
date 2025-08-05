@@ -22,12 +22,14 @@ export const TicketDetailsDialog = ({
   setOpen,
   ticket,
   actions,
+  tipoDeIntegracao,
 }) => {
   const { onOpen } = useIaChat();
 
-  const { assistant } = useLoadAssistant(
-    `integracao.${ticket?.direcao}.${ticket?.etapa}`
-  );
+  const { assistant } = useLoadAssistant([
+    `integracao.${tipoDeIntegracao}.${ticket?.direcao}.${ticket?.etapa}`,
+    `integracao.${tipoDeIntegracao}.${ticket?.direcao}.geral`,
+  ]);
 
   return (
     <DialogRoot

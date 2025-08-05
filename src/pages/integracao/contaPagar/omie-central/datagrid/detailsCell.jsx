@@ -22,6 +22,7 @@ export const VisualizarDetailsDialog = (props) => {
       </Tooltip>
       {open && (
         <TicketDetailsDialog
+          tipoDeIntegracao="conta_pagar"
           open={open}
           setOpen={setOpen}
           ticket={props.row.original}

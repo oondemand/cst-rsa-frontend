@@ -26,6 +26,7 @@ export const VisualizarDetailsDialog = (props) => {
           setOpen={setOpen}
           ticket={props.row.original}
           actions={TicketActions}
+          tipoDeIntegracao="pessoa"
         >
           <TicketBody />
         </TicketDetailsDialog>

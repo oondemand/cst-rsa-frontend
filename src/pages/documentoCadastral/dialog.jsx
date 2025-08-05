@@ -30,7 +30,7 @@ export const DocumentoCadastralDialog = ({
   const [open, setOpen] = useState(false);
   const { requestConfirmation } = useConfirmation();
   const { onOpen } = useIaChat();
-  const { assistant } = useLoadAssistant("prestador");
+  const { assistant } = useLoadAssistant(["documento-cadastral"]);
   const fields = useMemo(() => createDynamicFormFields(), []);
 
   const updateDocumentoCadastral = useUpdateDocumentoCadastral({

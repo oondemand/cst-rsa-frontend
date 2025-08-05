@@ -149,7 +149,10 @@ export const IntegracaoContaPagarCentralOmieEsteira = () => {
                     tickets={filteredTickets}
                     card={(props) => (
                       <Card ticket={props.ticket}>
-                        <TicketDetailsDialog actions={TicketActions}>
+                        <TicketDetailsDialog
+                          tipoDeIntegracao="conta_pagar"
+                          actions={TicketActions}
+                        >
                           <TicketBody />
                         </TicketDetailsDialog>
                       </Card>

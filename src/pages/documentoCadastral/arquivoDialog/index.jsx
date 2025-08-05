@@ -53,7 +53,7 @@ export const ArquivoDetailsDialog = ({ documentoCadastral }) => {
   }, [response]);
 
   const { onOpen } = useIaChat();
-  const { assistant } = useLoadAssistant("analisar-documento-cadastral");
+  const { assistant } = useLoadAssistant(["documento-cadastral.analise"]);
 
   const zoomPluginInstance = zoomPlugin();
   const { ZoomInButton, ZoomOutButton, ZoomPopover, zoomTo } =

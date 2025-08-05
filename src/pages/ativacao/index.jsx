@@ -15,6 +15,7 @@ import { api } from "../../config/api";
 import { toaster } from "../../components/ui/toaster";
 import { useNavigate } from "react-router-dom";
 import { useHookFormMask } from "use-mask-input";
+import { env } from "../../config/env";
 
 const schema = z.object({
   baseOmie: z.object({
@@ -25,12 +26,13 @@ const schema = z.object({
       .string()
       .nonempty({ message: "App Secret é um campo obrigatório" }),
   }),
-  usuario: z.object({
-    nome: z.string().nonempty({ message: "Nome é um campo obrigatório" }),
-    email: z.string().email({ message: "Email inválido" }),
-    senha: z.string().nonempty({ message: "Senha é um campo obrigatório" }),
-    tipo: z.string().nonempty({ message: "Tipo é um campo obrigatório" }),
-  }),
+  appKey: z.string().nonempty({ message: "App Secret é um campo obrigatório" }),
+  // usuario: z.object({
+  //   nome: z.string().nonempty({ message: "Nome é um campo obrigatório" }),
+  //   email: z.string().email({ message: "Email inválido" }),
+  //   senha: z.string().nonempty({ message: "Senha é um campo obrigatório" }),
+  //   tipo: z.string().nonempty({ message: "Tipo é um campo obrigatório" }),
+  // }),
 });
 
 export const Ativacao = () => {
@@ -68,11 +70,11 @@ export const Ativacao = () => {
         type: "success",
       });
 
+      window.location.href = `${env.VITE_MEUS_APPS_URL}/login`;
+
       // navigate("/login", { viewTransition: true });
     },
   });
-
-  console.log(errors);
 
   const onSubmit = async (data) => {
     await ativacaoMutation.mutateAsync(data);
@@ -97,7 +99,88 @@ export const Ativacao = () => {
         >
           <Heading>Oondemand</Heading>
           <Text>Formulário de ativação</Text>
-          <Box mt="6">
+
+          {/* <Box mt="6">
+            <Text fontWeight="medium">Sistema</Text>
+            <Flex
+              gap="6"
+              mt="0"
+              color="gray.600"
+              flexWrap="wrap"
+              border="1px solid"
+              borderColor="gray.200"
+              px="6"
+              py="4"
+              pb="6"
+              rounded="md"
+            > */}
+          <Box w="xs" mt="6">
+            <Text fontSize="sm" fontWeight="medium">
+              Chave do aplicativo (appKey)
+            </Text>
+            <Input
+              size="sm"
+              focusRingColor="brand.350"
+              placeholder="Chave do aplicativo..."
+              {...register("appKey")}
+            />
+            {errors.usuario?.nome?.message && (
+              <Text fontSize="xs" mt="0.5" color="red.500">
+                {errors.appKey.message}
+              </Text>
+            )}
+          </Box>
+
+          {/* <Box w="xs">
+                <Text fontSize="sm">Email</Text>
+                <Input
+                  size="sm"
+                  focusRingColor="brand.350"
+                  placeholder="email"
+                  {...register("usuario.email")}
+                />
+                {errors.usuario?.email?.message && (
+                  <Text fontSize="xs" mt="0.5" color="red.500">
+                    {errors.usuario.email.message}
+                  </Text>
+                )}
+              </Box>
+
+              <Box w="xs">
+                <Text fontSize="sm">Senha</Text>
+                <Input
+                  size="sm"
+                  focusRingColor="brand.350"
+                  placeholder="Senha"
+                  type="password"
+                  {...register("usuario.senha")}
+                />
+                {errors.usuario?.senha?.message && (
+                  <Text fontSize="xs" mt="0.5" color="red.500">
+                    {errors.usuario.senha.message}
+                  </Text>
+                )}
+              </Box>
+
+              <Box w="xs">
+                <Text fontSize="sm">Tipo</Text>
+                <Input
+                  disabled
+                  size="sm"
+                  focusRingColor="brand.350"
+                  placeholder="Tipo"
+                  {...register("usuario.tipo")}
+                />
+                {errors.usuario?.tipo?.message && (
+                  <Text fontSize="xs" mt="0.5" color="red.500">
+                    {errors.usuario.tipo.message}
+                  </Text>
+                )}
+              </Box> */}
+          {/* </Flex>
+          </Box> */}
+
+          <Box mt="8">
             <Text fontWeight="medium">Base omie</Text>
             <Flex
               gap="6"
@@ -168,84 +251,6 @@ export const Ativacao = () => {
                 {errors.baseOmie?.appSecret?.message && (
                   <Text fontSize="xs" mt="0.5" color="red.500">
                     {errors.baseOmie.appSecret.message}
-                  </Text>
-                )}
-              </Box>
-            </Flex>
-          </Box>
-
-          <Box mt="6">
-            <Text fontWeight="medium">Usuário</Text>
-            <Flex
-              gap="6"
-              mt="0"
-              color="gray.600"
-              flexWrap="wrap"
-              border="1px solid"
-              borderColor="gray.200"
-              px="6"
-              py="4"
-              pb="6"
-              rounded="md"
-            >
-              <Box w="xs">
-                <Text fontSize="sm">Nome</Text>
-                <Input
-                  size="sm"
-                  focusRingColor="brand.350"
-                  placeholder="Nome"
-                  {...register("usuario.nome")}
-                />
-                {errors.usuario?.nome?.message && (
-                  <Text fontSize="xs" mt="0.5" color="red.500">
-                    {errors.usuario.nome.message}
-                  </Text>
-                )}
-              </Box>
-
-              <Box w="xs">
-                <Text fontSize="sm">Email</Text>
-                <Input
-                  size="sm"
-                  focusRingColor="brand.350"
-                  placeholder="email"
-                  {...register("usuario.email")}
-                />
-                {errors.usuario?.email?.message && (
-                  <Text fontSize="xs" mt="0.5" color="red.500">
-                    {errors.usuario.email.message}
-                  </Text>
-                )}
-              </Box>
-
-              <Box w="xs">
-                <Text fontSize="sm">Senha</Text>
-                <Input
-                  size="sm"
-                  focusRingColor="brand.350"
-                  placeholder="Senha"
-                  type="password"
-                  {...register("usuario.senha")}
-                />
-                {errors.usuario?.senha?.message && (
-                  <Text fontSize="xs" mt="0.5" color="red.500">
-                    {errors.usuario.senha.message}
-                  </Text>
-                )}
-              </Box>
-
-              <Box w="xs">
-                <Text fontSize="sm">Tipo</Text>
-                <Input
-                  disabled
-                  size="sm"
-                  focusRingColor="brand.350"
-                  placeholder="Tipo"
-                  {...register("usuario.tipo")}
-                />
-                {errors.usuario?.tipo?.message && (
-                  <Text fontSize="xs" mt="0.5" color="red.500">
-                    {errors.usuario.tipo.message}
                   </Text>
                 )}
               </Box>

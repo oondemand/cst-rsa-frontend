@@ -76,10 +76,10 @@ export const menuItems = [
     title: "Configurações",
     icon: Settings,
     subLinks: [
-      {
-        title: "Usuários",
-        href: "/usuarios",
-      },
+      // {
+      //   title: "Usuários",
+      //   href: "/usuarios",
+      // },
       {
         title: "Listas",
         href: "/listas",

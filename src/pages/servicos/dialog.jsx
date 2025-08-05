@@ -20,7 +20,7 @@ export const ServicosDialog = ({
   const [data, setData] = useState(defaultValues);
   const [open, setOpen] = useState(false);
   const { onOpen } = useIaChat();
-  const { assistant } = useLoadAssistant("servico");
+  const { assistant } = useLoadAssistant(["servico"]);
   const fields = useMemo(() => createDynamicFormFields(), []);
 
   const updateServico = useUpdateServico({

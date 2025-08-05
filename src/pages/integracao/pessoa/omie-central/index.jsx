@@ -147,7 +147,10 @@ export const IntegracaoPessoaOmieCentralEsteira = () => {
                   tickets={filteredTickets}
                   card={(props) => (
                     <Card ticket={props.ticket}>
-                      <TicketDetailsDialog actions={TicketActions}>
+                      <TicketDetailsDialog
+                        tipoDeIntegracao="pessoa"
+                        actions={TicketActions}
+                      >
                         <TicketBody />
                       </TicketDetailsDialog>
                     </Card>

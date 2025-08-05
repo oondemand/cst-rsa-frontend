@@ -95,24 +95,21 @@ export const TicketModal = ({ open, setOpen, defaultValue, onlyReading }) => {
     enabled: open,
   });
 
-  const { data: documentosCadastrais } = useQuery({
-    queryKey: ["documentos-cadastrais", { pessoaId: ticket?.pessoa?._id }],
-    queryFn: async () =>
-      await DocumentosCadastraisService.listarPorPessoa({
-        pessoaId: ticket?.pessoa?._id,
-        dataRegistro: "",
-      }),
-    staleTime: 1000 * 60 * 1, // 1 minute
-    enabled: open,
-  });
+  // const { data: documentosCadastrais } = useQuery({
+  //   queryKey: ["documentos-cadastrais", { pessoaId: ticket?.pessoa?._id }],
+  //   queryFn: async () =>
+  //     await DocumentosCadastraisService.listarPorPessoa({
+  //       pessoaId: ticket?.pessoa?._id,
+  //       dataRegistro: "",
+  //     }),
+  //   staleTime: 1000 * 60 * 1, // 1 minute
+  //   enabled: open && defaultValue,
+  // });
 
-  const { assistant } = useLoadAssistant(
-    data?.ticket?.etapa
-      ? `servicos-tomados.${data?.ticket?.etapa}`
-      : "geral.servicos-tomados"
-  );
-
-  console.log("Log interessante", documentosCadastrais, ticket);
+  const { assistant } = useLoadAssistant([
+    `servicos-tomados.${data?.ticket?.etapa}`,
+    "servicos-tomados.geral",
+  ]);
 
   return (
     <DialogRoot
@@ -142,9 +139,7 @@ export const TicketModal = ({ open, setOpen, defaultValue, onlyReading }) => {
               aria-label="Abrir IA"
               cursor="pointer"
               variant="unstyled"
-              onClick={() =>
-                onOpen({ ...ticket, ...documentosCadastrais }, assistant)
-              }
+              onClick={() => onOpen({ ...ticket }, assistant)}
             >
               <Oondemand />
             </Box>
