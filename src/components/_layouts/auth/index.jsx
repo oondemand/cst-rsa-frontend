@@ -22,6 +22,7 @@ import {
 } from "../../ui/accordion";
 import { menuItems } from "./menu";
 import { useEffect } from "react";
+import { env } from "../../../config/env";
 
 export const AuthLayout = () => {
   const { user, isLoading, logout } = useAuth();
@@ -51,7 +52,8 @@ export const AuthLayout = () => {
   };
 
   if (!user && isLoading === false) {
-    return <Navigate to="/login" replace />;
+    window.location.href = `${env.VITE_MEUS_APPS_URL}/login`;
+    return;
   }
 
   return (

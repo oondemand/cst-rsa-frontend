@@ -123,7 +123,7 @@ export const router = createBrowserRouter([
     path: "/",
     element: <MainLayout />,
     children: [
-      { path: "/login", element: <LoginPage /> },
+      // { path: "/login", element: <LoginPage /> },
       { path: "/alterar-senha", element: <AlterarSenha /> },
       { path: "/ativacao", element: <Ativacao /> },
     ],

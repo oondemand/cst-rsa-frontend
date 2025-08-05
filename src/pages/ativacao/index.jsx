@@ -68,7 +68,7 @@ export const Ativacao = () => {
         type: "success",
       });
 
-      navigate("/login", { viewTransition: true });
+      // navigate("/login", { viewTransition: true });
     },
   });
 
