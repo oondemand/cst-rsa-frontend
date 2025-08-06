@@ -56,6 +56,20 @@ export const makeDynamicColumns = () => {
       meta: { filterKey: "tipoServicoTomado" },
     },
     {
+      accessorKey: "moeda",
+      header: "Moeda",
+      cell: (props) => <SelectListaCell {...props} cod="moeda" />,
+      enableColumnFilter: true,
+      meta: { filterKey: "moeda" },
+    },
+    {
+      accessorKey: "valorMoeda",
+      header: "Valor da moeda",
+      cell: CurrencyCell,
+      enableColumnFilter: true,
+      meta: { filterKey: "valorMoeda" },
+    },
+    {
       accessorKey: "descricao",
       header: "Descrição",
       cell: DefaultEditableCell,

@@ -32,6 +32,13 @@ export const createDynamicFormFields = () => {
           colSpan: 2,
         },
         {
+          accessorKey: "email",
+          label: "Email",
+          render: DefaultField,
+          validation: z.coerce.string().email({ message: "Email inválido" }),
+          colSpan: 2,
+        },
+        {
           accessorKey: "tipo",
           label: "Tipo de Pessoa",
           render: SelectField,
