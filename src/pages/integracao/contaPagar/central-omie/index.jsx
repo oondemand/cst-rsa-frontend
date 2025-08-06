@@ -26,6 +26,7 @@ import { TicketDetailsDialog } from "../../components/dialog";
 import { TicketActions } from "../../components/dialog/actions";
 import { queryClient } from "../../../../config/react-query";
 import { TicketBody } from "./dialogBody";
+import { Actions } from "./actions";
 
 export const IntegracaoContaPagarCentralOmieEsteira = () => {
   const [searchTerm, setSearchTerm] = useStateWithStorage(
@@ -147,6 +148,12 @@ export const IntegracaoContaPagarCentralOmieEsteira = () => {
                   <Etapa
                     etapa={etapa}
                     tickets={filteredTickets}
+                    action={Actions}
+                    {...(["anexos"].includes(etapa.codigo) && {
+                      containerStyles: {
+                        bg: "#dcdfe2",
+                      },
+                    })}
                     card={(props) => (
                       <Card ticket={props.ticket}>
                         <TicketDetailsDialog

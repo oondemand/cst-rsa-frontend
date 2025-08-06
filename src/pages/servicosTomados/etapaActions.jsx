@@ -6,6 +6,7 @@ import { TicketModal } from "../../components/servicoTomadoTicketModal";
 import { Tooltip } from "../../components/ui/tooltip";
 import { Link } from "react-router-dom";
 import { ArrowUpDown } from "lucide-react";
+import { InvertedChart } from "../../components/svg/invertedChart";
 
 export const EtapaActions = ({ etapa }) => {
   const [createModalOpen, setCreateModalOpen] = useState();
@@ -49,4 +50,28 @@ export const EtapaActions = ({ etapa }) => {
   //     </Tooltip>
   //   );
   // }
+
+  if (etapa.codigo === "conta-pagar-central-omie") {
+    return (
+      <Tooltip content="Conta pagar central -> omie">
+        <Link to="/integracao/conta-pagar/central-omie" viewTransition>
+          <Text p="1" rounded="full" color="brand.500" cursor="pointer">
+            <InvertedChart />
+          </Text>
+        </Link>
+      </Tooltip>
+    );
+  }
+
+  if (etapa.codigo === "conta-pagar-omie-central") {
+    return (
+      <Tooltip content="Conta pagar central <- omie">
+        <Link to="/integracao/conta-pagar/omie-central" viewTransition>
+          <Text p="1" rounded="full" color="brand.500" cursor="pointer">
+            <InvertedChart />
+          </Text>
+        </Link>
+      </Tooltip>
+    );
+  }
 };
