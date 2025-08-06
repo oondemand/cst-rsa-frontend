@@ -30,7 +30,16 @@ export const createDynamicFormFields = () => {
           colSpan: 1,
         },
         {
-          accessorKey: "valor",
+          accessorKey: "moeda",
+          label: "Moeda",
+          render: SelectListaField,
+          cod: "moeda",
+          defaultValue: "BRL",
+          validation: z.string({ message: "Obrigatório" }),
+          colSpan: 1,
+        },
+        {
+          accessorKey: "valorMoeda",
           label: "Valor",
           render: CurrencyField,
           validation: currencyValidation,

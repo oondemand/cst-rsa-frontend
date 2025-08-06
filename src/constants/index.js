@@ -1,3 +1,9 @@
+export const MOEDA_PREFIX_MAP = {
+  BRL: "R$",
+  USD: "$",
+  EUR: "€",
+};
+
 export const TIPO_PESSOA_OPTIONS = [
   { label: "Pessoa física", value: "pf" },
   { label: "Pessoa jurídica", value: "pj" },

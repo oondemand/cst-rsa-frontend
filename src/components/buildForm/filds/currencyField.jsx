@@ -2,6 +2,7 @@ import { Box, Text } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { NumericFormat } from "react-number-format";
 import { useConfirmation } from "../../../hooks/useConfirmation";
+import { MOEDA_PREFIX_MAP } from "../../../constants";
 
 export const CurrencyField = ({ ...props }) => {
   useEffect(() => {}, [props?.initialValue]);
@@ -51,8 +52,16 @@ export const CurrencyField = ({ ...props }) => {
           decimalScale={2}
           fixedDecimalScale
           allowNegative
-          prefix="R$ "
-          placeholder="R$ 0,00"
+          prefix={`${
+            props.prefix
+              ? props.prefix
+              : MOEDA_PREFIX_MAP[props?.watch("moeda")] ?? ""
+          } `}
+          placeholder={`${
+            props.prefix
+              ? props.prefix
+              : MOEDA_PREFIX_MAP[props?.watch("moeda")] ?? ""
+          } 0,00`}
           style={{
             outline: "none",
             padding: "7px",

@@ -1,4 +1,3 @@
-import React from "react";
 import { DefaultEditableCell } from "../../components/dataGrid/cells/defaultEditable";
 import { SelectListaCell } from "../../components/dataGrid/cells/selectLista";
 import { TableActionsCell } from "../../components/dataGrid/cells/tableActionsCell";
@@ -64,7 +63,7 @@ export const makeDynamicColumns = () => {
     },
     {
       accessorKey: "valorMoeda",
-      header: "Valor da moeda",
+      header: "Valor",
       cell: CurrencyCell,
       enableColumnFilter: true,
       meta: { filterKey: "valorMoeda" },
@@ -75,13 +74,6 @@ export const makeDynamicColumns = () => {
       cell: DefaultEditableCell,
       enableColumnFilter: true,
       meta: { filterKey: "descricao" },
-    },
-    {
-      accessorKey: "valor",
-      header: "Valor",
-      cell: CurrencyCell,
-      enableColumnFilter: true,
-      meta: { filterKey: "valor" },
     },
     {
       accessorKey: "dataContratacao",
@@ -118,6 +110,12 @@ export const makeDynamicColumns = () => {
           { value: "inativo", label: "Inativo" },
         ],
       },
+    },
+    {
+      accessorKey: "valor",
+      header: "Valor Corrigido",
+      cell: (props) => <CurrencyCell {...props} prefix="R$" />,
+      enableColumnFilter: false,
     },
   ];
 };
