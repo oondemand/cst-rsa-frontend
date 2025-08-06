@@ -11,7 +11,7 @@ import {
   Rotate3D,
 } from "lucide-react";
 import { Chart } from "../../svg/chart";
-import { invertedChart } from "../../svg/invertedChart";
+import { InvertedChart } from "../../svg/invertedChart";
 
 export const menuItems = [
   {
@@ -21,7 +21,7 @@ export const menuItems = [
   },
   {
     title: "Central Serviços Tomados",
-    icon: invertedChart,
+    icon: InvertedChart,
     href: "/servicos-tomados",
   },
   {

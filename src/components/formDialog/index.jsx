@@ -1,4 +1,4 @@
-import { Flex } from "@chakra-ui/react";
+import { Flex, Heading, Text } from "@chakra-ui/react";
 import { CloseButton } from "../ui/close-button";
 
 import { BuildForm } from "../buildForm/index";
@@ -49,7 +49,18 @@ export const FormDialog = ({
                   {onOpenAssistantDialog && (
                     <AssistantButton onClick={onOpenAssistantDialog} />
                   )}
-                  {label}
+                  <Flex gap="4" alignItems="baseline">
+                    {label}
+                    {data && (
+                      <Text
+                        fontSize="xs"
+                        fontWeight="normal"
+                        fontStyle="italic"
+                      >
+                        {data._id}
+                      </Text>
+                    )}
+                  </Flex>
                   <VisibilityControlDialog
                     fields={fields.flatMap((field) => {
                       if ("group" in field && Array.isArray(field.group)) {

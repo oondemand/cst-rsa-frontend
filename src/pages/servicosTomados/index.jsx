@@ -113,6 +113,14 @@ export const ServicosTomados = () => {
                   style={{ minWidth: "250px", maxWidth: "250px" }}
                 >
                   <Etapa
+                    {...([
+                      "conta-pagar-central-omie",
+                      "conta-pagar-omie-central",
+                    ].includes(etapa.codigo) && {
+                      containerStyles: {
+                        bg: "#dcdfe2",
+                      },
+                    })}
                     etapa={etapa}
                     tickets={filteredTickets}
                     action={EtapaActions}
