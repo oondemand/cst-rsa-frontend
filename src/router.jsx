@@ -35,6 +35,7 @@ import { IntegracaoContaPagarOmieCentralEsteira } from "./pages/integracao/conta
 import { IntegracaoContaPagarOmieCentralDatagrid } from "./pages/integracao/contaPagar/omie-central/datagrid";
 import { IntegracaoAnexosCentralOmieEsteira } from "./pages/integracao/anexos/central-omie";
 import { IntegracaoAnexosCentralOmieDatagrid } from "./pages/integracao/anexos/central-omie/datagrid";
+import { MoedaPage } from "./pages/moeda";
 
 export const router = createBrowserRouter([
   {
@@ -70,7 +71,7 @@ export const router = createBrowserRouter([
       // { path: "/pagos", element: <TicketsPagosPage /> },
       { path: "/etapas", element: <EtapasPage /> },
       { path: "/assistentes", element: <AssistenteConfigPage /> },
-
+      { path: "/moedas", element: <MoedaPage /> },
       {
         path: "/integracao",
         children: [

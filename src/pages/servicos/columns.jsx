@@ -8,6 +8,7 @@ import { DeleteServicoAction } from "../../components/dataGrid/actions/deleteSer
 import { formatDateToDDMMYYYY } from "../../utils/formatting";
 import { SelectPrestadorCell } from "../../components/dataGrid/cells/selectPrestador";
 import { SelectAutoCompleteCell } from "../../components/dataGrid/cells/selectAutoComplete";
+import { SelectMoedaCell } from "../../components/dataGrid/cells/selectMoeda";
 
 export const makeDynamicColumns = () => {
   return [
@@ -57,16 +58,22 @@ export const makeDynamicColumns = () => {
     {
       accessorKey: "moeda",
       header: "Moeda",
-      cell: (props) => <SelectListaCell {...props} cod="moeda" />,
+      cell: SelectMoedaCell,
       enableColumnFilter: true,
       meta: { filterKey: "moeda" },
     },
     {
       accessorKey: "valorMoeda",
-      header: "Valor",
+      header: "Valor (na moeda)",
       cell: CurrencyCell,
       enableColumnFilter: true,
       meta: { filterKey: "valorMoeda" },
+    },
+    {
+      accessorKey: "valor",
+      header: "Valor",
+      cell: (props) => <CurrencyCell {...props} prefix="R$" />,
+      enableColumnFilter: false,
     },
     {
       accessorKey: "descricao",
@@ -110,12 +117,6 @@ export const makeDynamicColumns = () => {
           { value: "inativo", label: "Inativo" },
         ],
       },
-    },
-    {
-      accessorKey: "valor",
-      header: "Valor Corrigido",
-      cell: (props) => <CurrencyCell {...props} prefix="R$" />,
-      enableColumnFilter: false,
     },
   ];
 };

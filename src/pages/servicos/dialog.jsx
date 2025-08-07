@@ -57,7 +57,7 @@ export const ServicosDialog = ({
         {defaultValues ? <IconTrigger /> : <DefaultTrigger />}
       </Box>
       <FormDialog
-        data={data}
+        data={{ ...data, moeda: data?.moeda?._id }}
         fields={fields}
         label={label}
         onOpenAssistantDialog={() => onOpen(data, assistant)}

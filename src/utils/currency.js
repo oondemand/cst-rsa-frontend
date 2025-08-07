@@ -7,7 +7,7 @@ export function parseBRLCurrencyToNumber(valorStr) {
   const isNegative = valorStr.includes("-");
 
   const valorLimpo = valorStr
-    .replace("R$", "")
+    .replace(/^(R\$|\$|€)/, "")
     .replace("-", "")
     .replaceAll(/\./g, "")
     .replace(",", ".")

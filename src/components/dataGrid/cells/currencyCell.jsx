@@ -64,10 +64,10 @@ export const CurrencyCell = ({
       fixedDecimalScale
       allowNegative
       prefix={`${
-        prefix ? prefix : MOEDA_PREFIX_MAP[row.original?.moeda] ?? ""
+        prefix ? prefix : MOEDA_PREFIX_MAP[row.original?.moeda?.sigla] ?? ""
       } `}
       placeholder={`${
-        prefix ? prefix : MOEDA_PREFIX_MAP[row.original?.moeda] ?? ""
+        prefix ? prefix : MOEDA_PREFIX_MAP[row.original?.moeda?.sigla] ?? ""
       } 0,00`}
       style={{
         backgroundColor: "transparent",

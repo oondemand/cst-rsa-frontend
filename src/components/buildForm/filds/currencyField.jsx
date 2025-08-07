@@ -52,16 +52,8 @@ export const CurrencyField = ({ ...props }) => {
           decimalScale={2}
           fixedDecimalScale
           allowNegative
-          prefix={`${
-            props.prefix
-              ? props.prefix
-              : MOEDA_PREFIX_MAP[props?.watch("moeda")] ?? ""
-          } `}
-          placeholder={`${
-            props.prefix
-              ? props.prefix
-              : MOEDA_PREFIX_MAP[props?.watch("moeda")] ?? ""
-          } 0,00`}
+          prefix={`R$ `}
+          placeholder={`R$ 0,00`}
           style={{
             outline: "none",
             padding: "7px",

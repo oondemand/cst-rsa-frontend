@@ -19,7 +19,7 @@ import {
   INTEGRACAO_TIPO_MAP,
 } from "../../../../constants";
 import { Card } from "../../components/card";
-import { TimeOutButton } from "../../components/timeOutButton";
+import { TimeOutButton } from "../../../../components/timeOutButton";
 import { Tooltip } from "../../../../components/ui/tooltip";
 import { Link } from "react-router-dom";
 import { TicketDetailsDialog } from "../../components/dialog";

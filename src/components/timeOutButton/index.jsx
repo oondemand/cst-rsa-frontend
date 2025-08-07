@@ -42,6 +42,9 @@ export const TimeOutButton = ({ onClick, children, ...rest }) => {
       p="1.5"
       rounded="2xl"
       size="sm"
+      maxW="36px"
+      maxH="36px"
+      fontSize="xs"
       {...rest}
     >
       {!isClicked && children}

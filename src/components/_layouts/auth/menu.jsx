@@ -85,6 +85,10 @@ export const menuItems = [
         href: "/listas",
       },
       {
+        title: "Moedas",
+        href: "/moedas",
+      },
+      {
         title: "Registros",
         href: "/registros",
       },
