@@ -74,7 +74,7 @@ export const IntegracaoContaPagarOmieCentralEsteira = () => {
           </Heading>
 
           <Tooltip content="Sincronizar com omie">
-            <TimeOutButton onClick={() => IntegracaoService.processar()}>
+            <TimeOutButton onClick={() => IntegracaoService.processar(filters)}>
               <RefreshCcw />
             </TimeOutButton>
           </Tooltip>

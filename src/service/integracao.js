@@ -8,8 +8,8 @@ const listar = async ({ filters = { time, direcao, tipo } }) => {
   return data;
 };
 
-const processar = async () => {
-  const { data } = await api.post("/integracao/processar");
+const processar = async ({ tipo, direcao }) => {
+  const { data } = await api.post("/integracao/processar", { tipo, direcao });
   return data;
 };
 
