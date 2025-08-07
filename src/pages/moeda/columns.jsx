@@ -9,6 +9,7 @@ import { TableActionsCell } from "../../components/dataGrid/cells/tableActionsCe
 import { DeleteAssistenteConfigAction } from "../../components/dataGrid/actions/deleteAssistenteConfigButton";
 
 import { SelectAssistantCell } from "../../components/dataGrid/cells/selectAssistantCell";
+import { format } from "date-fns";
 
 export const makeMoedaDynamicColumns = () => {
   return [
@@ -31,7 +32,7 @@ export const makeMoedaDynamicColumns = () => {
     {
       accessorKey: "sigla",
       header: "Moeda",
-      cell: DefaultEditableCell,
+      cell: DefaultCell,
       enableColumnFilter: true,
       enableSorting: false,
       meta: { filterKey: "sigla" },
@@ -47,7 +48,16 @@ export const makeMoedaDynamicColumns = () => {
     {
       accessorKey: "updatedAt",
       header: "Atualizado em",
-      cell: DefaultCell,
+      cell: (props) => (
+        <DefaultCell
+          {...{
+            ...props,
+            getValue: () => {
+              return format(props.getValue(), "dd/MM/yyyy HH:MM");
+            },
+          }}
+        />
+      ),
       enableColumnFilter: true,
       enableSorting: false,
       meta: { filterKey: "updatedAt" },

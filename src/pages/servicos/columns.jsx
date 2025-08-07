@@ -11,6 +11,19 @@ import { SelectAutoCompleteCell } from "../../components/dataGrid/cells/selectAu
 import { SelectMoedaCell } from "../../components/dataGrid/cells/selectMoeda";
 
 export const makeDynamicColumns = () => {
+  const statusOptions = [
+    { value: "ativo", label: "Ativo" },
+    { value: "inativo", label: "Inativo" },
+  ];
+
+  const statusProcessamentoOptions = [
+    { label: "Aberto", value: "aberto" },
+    { label: "Pendente", value: "pendente" },
+    { label: "Processando", value: "processando" },
+    { label: "Pago", value: "pago" },
+    { label: "Pago externo", value: "pago-externo" },
+  ];
+
   return [
     {
       accessorKey: "acoes",
@@ -100,22 +113,29 @@ export const makeDynamicColumns = () => {
       accessorKey: "status",
       header: "Status",
       cell: (props) => (
+        <SelectAutoCompleteCell {...props} options={statusOptions} />
+      ),
+      enableColumnFilter: true,
+      meta: {
+        filterKey: "status",
+        filterVariant: "select",
+        filterOptions: statusOptions,
+      },
+    },
+    {
+      accessorKey: "statusProcessamento",
+      header: "Processamento",
+      cell: (props) => (
         <SelectAutoCompleteCell
           {...props}
-          options={[
-            { value: "ativo", label: "Ativo" },
-            { value: "inativo", label: "Inativo" },
-          ]}
+          options={statusProcessamentoOptions}
         />
       ),
       enableColumnFilter: true,
       meta: {
         filterKey: "status",
         filterVariant: "select",
-        filterOptions: [
-          { value: "ativo", label: "Ativo" },
-          { value: "inativo", label: "Inativo" },
-        ],
+        filterOptions: statusProcessamentoOptions,
       },
     },
   ];
