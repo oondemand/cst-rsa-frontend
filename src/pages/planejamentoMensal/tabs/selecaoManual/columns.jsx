@@ -111,6 +111,26 @@ export const makeServicoDynamicColumns = () => {
       meta: { filterKey: "dataConclusao" },
     },
     {
+      accessorKey: "moeda.sigla",
+      header: "Moeda",
+      cell: DefaultCell,
+      enableColumnFilter: false,
+      meta: { filterKey: "moeda.sigla" },
+    },
+    {
+      accessorKey: "valorMoeda",
+      header: "Valor (na moeda)",
+      cell: (props) => (
+        <Flex minH="8">
+          <Text alignSelf="center" fontSize="sm" truncate>
+            {currency.format(props.getValue() ?? 0)}
+          </Text>
+        </Flex>
+      ),
+      enableColumnFilter: false,
+      meta: { filterKey: "valorMoeda" },
+    },
+    {
       accessorKey: "valor",
       header: "Valor total",
       enableSorting: false,

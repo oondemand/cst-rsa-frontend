@@ -50,6 +50,13 @@ export const createDynamicFormFields = () => {
       label: "Informações adicionais",
       group: [
         {
+          accessorKey: "descricao",
+          label: "Descrição",
+          render: DefaultField,
+          validation: z.string().optional(),
+          colSpan: 2,
+        },
+        {
           accessorKey: "dataContratacao",
           label: "Data contratação",
           render: DateField,
@@ -62,13 +69,6 @@ export const createDynamicFormFields = () => {
           render: DateField,
           validation: dateValidation,
           colSpan: 1,
-        },
-        {
-          accessorKey: "descricao",
-          label: "Descrição",
-          render: DefaultField,
-          validation: z.string().optional(),
-          colSpan: 2,
         },
       ],
     },
