@@ -100,9 +100,10 @@ export function Listas() {
         type: "success",
       });
     },
-    onError: () => {
+    onError: (error) => {
       toaster.create({
         title: "Ouve um erro inesperado ao atualizar item.",
+        description: error?.response?.data?.message ?? error?.message,
         type: "error",
       });
     },

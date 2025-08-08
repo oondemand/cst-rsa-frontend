@@ -159,7 +159,7 @@ export const makeDynamicColumns = () => {
         />
       ),
       enableColumnFilter: true,
-      meta: { filterKey: "pessoaFisica.dataNascimento" },
+      meta: { filterKey: "pessoaFisica.apelido" },
     },
     {
       accessorKey: "pessoaJuridica.nomeFantasia",

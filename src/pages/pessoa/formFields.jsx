@@ -65,7 +65,7 @@ export const createDynamicFormFields = () => {
           colSpan: 1,
         },
         {
-          accessorKey: "endereco.pais.cod",
+          accessorKey: "endereco.pais.codigo",
           label: "País",
           render: SelectField,
           validation: z.coerce.string().optional(),

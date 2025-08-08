@@ -12,6 +12,7 @@ import {
   IconTrigger,
 } from "../../components/formDialog/form-trigger";
 import { ORIGENS } from "../../constants/origens";
+import { formatDateToDDMMYYYY } from "../../utils/formatting";
 
 export const PessoasDialog = ({
   defaultValues = null,
@@ -52,7 +53,15 @@ export const PessoasDialog = ({
         {defaultValues ? <IconTrigger /> : <DefaultTrigger />}
       </Box>
       <FormDialog
-        data={data}
+        data={{
+          ...data,
+          pessoaFisica: {
+            ...data?.pessoaFisica,
+            dataNascimento: formatDateToDDMMYYYY(
+              data?.pessoaFisica?.dataNascimento
+            ),
+          },
+        }}
         fields={fields}
         label={label}
         onOpenAssistantDialog={() => onOpen(data, assistant)}
