@@ -11,7 +11,7 @@ import { useConfirmation } from "../../../hooks/useConfirmation";
 import { saveAs } from "file-saver";
 
 export const FilesForm = ({ onlyReading, defaultValues, ticketId }) => {
-  const [files, setFiles] = useState(defaultValues);
+  const [files, setFiles] = useState(defaultValues ?? []);
   const { requestConfirmation } = useConfirmation();
 
   const { mutateAsync: uploadFileMutation } = useMutation({

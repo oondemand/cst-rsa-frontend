@@ -5,7 +5,9 @@ import { ptBR } from "date-fns/locale";
 import { CircleAlert, ListRestart } from "lucide-react";
 import React, { memo, useState } from "react";
 
-export const _Card = ({ ticket, children }) => {
+const _Card = ({ ticket, children }) => {
+  console.log("RENDERED");
+
   const [open, setOpen] = useState(false);
 
   const STATUS_COLOR_MAP = {
@@ -113,4 +115,8 @@ export const _Card = ({ ticket, children }) => {
   );
 };
 
-export const Card = memo(_Card);
+export const Card = memo(_Card, (prev, next) => {
+  console.log("PREV", prev);
+  console.log("NEXT", next);
+  return true;
+});

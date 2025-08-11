@@ -96,32 +96,44 @@ export const TicketActions = ({ ticketId, etapa }) => {
   return (
     <Flex alignItems="center" w="full" justifyContent="space-between">
       <Flex gap="2">
-        <Button
-          onClick={async (e) => {
-            await aproveTicketMutation();
-            setOpen(false);
-          }}
-          disabled={isAprovePending}
-          variant="surface"
-          shadow="xs"
-          colorPalette="green"
-          size="xs"
-        >
-          <Check /> Aprovar
-        </Button>
-        <Button
-          disabled={etapa === primeiraEtapa || isReprovePending}
-          onClick={async (e) => {
-            await reproveTicketMutation();
-            setOpen(false);
-          }}
-          colorPalette="red"
-          variant="surface"
-          shadow="xs"
-          size="xs"
-        >
-          <X /> Reprovar
-        </Button>
+        {![
+          "conta-pagar-central-omie",
+          "conta-pagar-omie-central",
+          "concluido",
+        ].includes(etapa) && (
+          <Button
+            onClick={async (e) => {
+              await aproveTicketMutation();
+              setOpen(false);
+            }}
+            disabled={isAprovePending}
+            variant="surface"
+            shadow="xs"
+            colorPalette="green"
+            size="xs"
+          >
+            <Check /> Aprovar
+          </Button>
+        )}
+        {![
+          "conta-pagar-central-omie",
+          "conta-pagar-omie-central",
+          "concluido",
+        ].includes(etapa) && (
+          <Button
+            disabled={etapa === primeiraEtapa || isReprovePending}
+            onClick={async (e) => {
+              await reproveTicketMutation();
+              setOpen(false);
+            }}
+            colorPalette="red"
+            variant="surface"
+            shadow="xs"
+            size="xs"
+          >
+            <X /> Reprovar
+          </Button>
+        )}
         <Button
           disabled={isArquivePending}
           onClick={async (e) => {

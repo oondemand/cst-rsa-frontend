@@ -10,6 +10,7 @@ import { DeleteDocumentoCadastralAction } from "../../components/dataGrid/action
 import { SelectAutoCompleteCell } from "../../components/dataGrid/cells/selectAutoComplete";
 import { DefaultEditableCell } from "../../components/dataGrid/cells/defaultEditable";
 import { ArquivoDetailsDialog } from "./arquivoDialog";
+import { DefaultCell } from "../../components/dataGrid/cells/default";
 
 export const makeDocumentoCadastralDynamicColumns = () => {
   return [
@@ -36,6 +37,13 @@ export const makeDocumentoCadastralDynamicColumns = () => {
             )}
         </TableActionsCell>
       ),
+    },
+    {
+      accessorKey: "_id",
+      header: "ID",
+      cell: DefaultCell,
+      enableColumnFilter: true,
+      meta: { filterKey: "_id" },
     },
     {
       accessorKey: "pessoa",

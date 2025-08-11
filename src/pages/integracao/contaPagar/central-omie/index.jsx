@@ -27,6 +27,7 @@ import { TicketActions } from "../../components/dialog/actions";
 import { queryClient } from "../../../../config/react-query";
 import { TicketBody } from "./dialogBody";
 import { Actions } from "./actions";
+import { useCallback } from "react";
 
 export const IntegracaoContaPagarCentralOmieEsteira = () => {
   const [searchTerm, setSearchTerm] = useStateWithStorage(
@@ -65,6 +66,20 @@ export const IntegracaoContaPagarCentralOmieEsteira = () => {
           );
         })
       : data?.results;
+
+  const card = useCallback(
+    (props) => (
+      <Card ticket={props.ticket}>
+        <TicketDetailsDialog
+          tipoDeIntegracao="conta_pagar"
+          actions={TicketActions}
+        >
+          <TicketBody />
+        </TicketDetailsDialog>
+      </Card>
+    ),
+    []
+  );
 
   return (
     <Flex flex="1" flexDir="column" py="8" px="6" bg="#F8F9FA">
@@ -154,16 +169,7 @@ export const IntegracaoContaPagarCentralOmieEsteira = () => {
                         bg: "#dcdfe2",
                       },
                     })}
-                    card={(props) => (
-                      <Card ticket={props.ticket}>
-                        <TicketDetailsDialog
-                          tipoDeIntegracao="conta_pagar"
-                          actions={TicketActions}
-                        >
-                          <TicketBody />
-                        </TicketDetailsDialog>
-                      </Card>
-                    )}
+                    card={card}
                   />
                 </SwiperSlide>
               ))}

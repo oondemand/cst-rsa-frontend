@@ -36,6 +36,12 @@ export const menuItems = [
     rules: ["admin", "tomador"],
   },
   {
+    title: "Documentos Fiscais",
+    href: "/documentos-fiscais",
+    icon: NotepadText,
+    rules: ["admin", "tomador"],
+  },
+  {
     title: "Planejamento",
     href: "/planejamento",
     icon: CalendarSync,

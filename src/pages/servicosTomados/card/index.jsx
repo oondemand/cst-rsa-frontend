@@ -215,7 +215,11 @@ const _TicketCard = ({ ticket }) => {
           defaultValue={ticket}
           open={open}
           setOpen={setOpen}
-          onlyReading={ticket?.etapa === ultimaEtapa}
+          onlyReading={[
+            "conta-pagar-central-omie",
+            "conta-pagar-omie-central",
+            "concluido",
+          ].includes(ticket?.etapa)}
         />
       )}
     </Box>

@@ -9,6 +9,7 @@ import { formatDateToDDMMYYYY } from "../../utils/formatting";
 import { SelectPrestadorCell } from "../../components/dataGrid/cells/selectPrestador";
 import { SelectAutoCompleteCell } from "../../components/dataGrid/cells/selectAutoComplete";
 import { SelectMoedaCell } from "../../components/dataGrid/cells/selectMoeda";
+import { DefaultCell } from "../../components/dataGrid/cells/default";
 
 export const makeDynamicColumns = () => {
   const statusOptions = [
@@ -49,6 +50,13 @@ export const makeDynamicColumns = () => {
           />
         </TableActionsCell>
       ),
+    },
+    {
+      accessorKey: "_id",
+      header: "ID",
+      cell: DefaultCell,
+      enableColumnFilter: true,
+      meta: { filterKey: "_id" },
     },
     {
       accessorKey: "pessoa",
@@ -125,15 +133,10 @@ export const makeDynamicColumns = () => {
     {
       accessorKey: "statusProcessamento",
       header: "Processamento",
-      cell: (props) => (
-        <SelectAutoCompleteCell
-          {...props}
-          options={statusProcessamentoOptions}
-        />
-      ),
+      cell: DefaultCell,
       enableColumnFilter: true,
       meta: {
-        filterKey: "status",
+        filterKey: "statusProcessamento",
         filterVariant: "select",
         filterOptions: statusProcessamentoOptions,
       },

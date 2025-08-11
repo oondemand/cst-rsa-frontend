@@ -118,7 +118,7 @@ export const ArquivoDetailsDialog = ({ documentoCadastral }) => {
             <DialogBody>
               <Flex w="full" mt="-2" position="relative">
                 <Box
-                  w="50%"
+                  w="58%"
                   ml="-4"
                   position="relative"
                   shadow="none"

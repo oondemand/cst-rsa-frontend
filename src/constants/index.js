@@ -31,7 +31,7 @@ export const INTEGRACAO_OMIE_ETAPAS_PADRAO = [
   { nome: "Requisicao", codigo: "requisicao" },
   { nome: "Reprocessar", codigo: "reprocessar" },
   { nome: "Processando", codigo: "processando" },
-  { nome: "Erro", codigo: "erro" },
+  { nome: "falha", codigo: "falha" },
   { nome: "Sucesso", codigo: "sucesso" },
 ];
 
@@ -39,7 +39,7 @@ export const INTEGRACAO_OMIE_ETAPAS_CONTA_PAGAR = [
   { nome: "Requisicao", codigo: "requisicao" },
   { nome: "Reprocessar", codigo: "reprocessar" },
   { nome: "Processando", codigo: "processando" },
-  { nome: "Erro", codigo: "erro" },
+  { nome: "falha", codigo: "falha" },
   { nome: "Anexos -> Omie", codigo: "anexos" },
   { nome: "Sucesso", codigo: "sucesso" },
 ];
