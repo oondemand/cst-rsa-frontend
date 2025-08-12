@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.0 (2025-08-12)
+
+### ✨ Features
+
+* get documentos cadastrais por pessoa ([488ec92](https://github.com/oondemand/central-oondemand-frontend/commit/488ec92102c27600590896e773ae392de957c7fe))
+
 ## 0.2.12 (2025-08-06)
 
 ## 0.2.11 (2025-08-05)
