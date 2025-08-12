@@ -29,12 +29,12 @@ export const DocumentoFiscalForm = ({ ticket, onlyReading }) => {
 
   const { data, refetch } = useQuery({
     queryKey: [
-      "listar-documento-fiscal-prestador",
-      { prestadorId: ticket?.prestador?._id },
+      "listar-documento-fiscal-pessoa",
+      { pessoaId: ticket?.pessoa?._id },
     ],
     queryFn: async () =>
-      await DocumentosFiscaisService.listarDocumentosFiscaisPorPrestador({
-        prestadorId: ticket?.prestador?._id,
+      await DocumentosFiscaisService.listarPorPessoa({
+        pessoaId: ticket?.pessoa?._id,
       }),
   });
 

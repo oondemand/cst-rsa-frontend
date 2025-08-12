@@ -13,6 +13,7 @@ import { TicketModal } from "../../../components/servicoTomadoTicketModal";
 import { format } from "date-fns";
 import { useListEtapas } from "../../../hooks/api/etapas/useListEtapas";
 import { formatDateToDDMMYYYY } from "../../../utils/formatting";
+import { DocumentosFiscaisCard } from "./documentosFiscaisCard";
 
 const BADGE_MAP = {
   pago: { color: "green", title: "Pago em" },
@@ -172,7 +173,7 @@ const _TicketCard = ({ ticket }) => {
                     </Text>
                   </Flex>
                 </Tooltip>
-                {/* <Tooltip
+                <Tooltip
                   showArrow
                   content={
                     <DocumentosFiscaisCard
@@ -194,7 +195,7 @@ const _TicketCard = ({ ticket }) => {
                       {ticket?.documentosFiscais?.length ?? 0}
                     </Text>
                   </Flex>
-                </Tooltip> */}
+                </Tooltip>
               </Flex>
               <Text
                 h="15px"

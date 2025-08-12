@@ -207,17 +207,17 @@ export const TicketModal = ({ open, setOpen, defaultValue, onlyReading }) => {
             updateTicketMutation={updateTicketMutation}
           />
 
-          {/* <DocumentoFiscalForm
+          <DocumentoFiscalForm
             onlyReading={onlyReading}
             ticket={ticket}
             updateTicketMutation={updateTicketMutation}
-          /> */}
-          {/* 
+          />
+
           <InformacoesAdicionaisForm
             ticket={ticket}
             updateTicketMutation={updateTicketMutation}
             onlyReading={onlyReading}
-          /> */}
+          />
 
           <FilesForm
             onlyReading={onlyReading}
