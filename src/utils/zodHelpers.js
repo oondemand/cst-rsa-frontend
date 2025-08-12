@@ -30,18 +30,20 @@ export const currencyValidation = preprocessEmptyToUndefined(
     .string()
     .transform((value) => {
       const isNegative = value.includes("-");
-      const isCurrencyString = value.includes("R$");
+      const isCurrencyString = !/^\d+(\.\d+)?$/.test(value);
 
       const numericString = isCurrencyString
         ? value
             .replaceAll(".", "-")
-            .replaceAll("R$", "")
+            .replace(/(R\$|\$|€)/g, "")
             .replaceAll(",", ".")
             .replaceAll("-", "")
             .trim()
         : value.replaceAll("-", "");
 
       const numero = Number(numericString);
+
+      console.log(value, numero, numericString);
 
       return isNegative ? -numero : numero;
     })

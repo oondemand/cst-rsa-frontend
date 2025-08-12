@@ -5,6 +5,7 @@ import { Tooltip } from "../../components/ui/tooltip";
 import { toaster } from "../../components/ui/toaster";
 import { ListaOmieService } from "../../service/lista-omie";
 import { ORIGENS } from "../../constants/origens";
+import { formatDate } from "../../utils/formatting";
 
 export const ListaOmieComponent = () => {
   const { data } = useQuery({
@@ -33,6 +34,8 @@ export const ListaOmieComponent = () => {
   return (
     <Box p="4">
       {data?.listas?.map((item) => {
+        console.log("DATA", item);
+
         return (
           <Flex
             key={item._id}
@@ -42,7 +45,9 @@ export const ListaOmieComponent = () => {
             gap="6"
           >
             <Text fontSize="sm" color="gray.600">
-              {item?.call} - {item?.url}
+              {item?.call} - {item?.url} -{" "}
+              {formatDate(item?.updatedAt, "dd/MM/yyyy HH:MM")} -{" "}
+              {item?.data?.length} items
             </Text>
 
             <Tooltip

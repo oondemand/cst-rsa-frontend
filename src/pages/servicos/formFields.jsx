@@ -5,6 +5,7 @@ import { CurrencyField } from "../../components/buildForm/filds/currencyField";
 import { currencyValidation, dateValidation } from "../../utils/zodHelpers";
 import { DateField } from "../../components/buildForm/filds/dateField";
 import { SelectPrestadorField } from "../../components/buildForm/filds/selectPrestadorField";
+import { SelectMoedaField } from "../../components/buildForm/filds/selectMoedaField";
 
 export const createDynamicFormFields = () => {
   return [
@@ -30,8 +31,15 @@ export const createDynamicFormFields = () => {
           colSpan: 1,
         },
         {
-          accessorKey: "valor",
-          label: "Valor",
+          accessorKey: "moeda",
+          label: "Moeda",
+          render: SelectMoedaField,
+          validation: z.string({ message: "Obrigatório" }),
+          colSpan: 1,
+        },
+        {
+          accessorKey: "valorMoeda",
+          label: "Valor (na moeda)",
           render: CurrencyField,
           validation: currencyValidation,
           colSpan: 1,
@@ -41,6 +49,13 @@ export const createDynamicFormFields = () => {
     {
       label: "Informações adicionais",
       group: [
+        {
+          accessorKey: "descricao",
+          label: "Descrição",
+          render: DefaultField,
+          validation: z.string().optional(),
+          colSpan: 2,
+        },
         {
           accessorKey: "dataContratacao",
           label: "Data contratação",
@@ -54,13 +69,6 @@ export const createDynamicFormFields = () => {
           render: DateField,
           validation: dateValidation,
           colSpan: 1,
-        },
-        {
-          accessorKey: "descricao",
-          label: "Descrição",
-          render: DefaultField,
-          validation: z.string().optional(),
-          colSpan: 2,
         },
       ],
     },

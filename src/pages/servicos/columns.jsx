@@ -1,4 +1,3 @@
-import React from "react";
 import { DefaultEditableCell } from "../../components/dataGrid/cells/defaultEditable";
 import { SelectListaCell } from "../../components/dataGrid/cells/selectLista";
 import { TableActionsCell } from "../../components/dataGrid/cells/tableActionsCell";
@@ -9,8 +8,23 @@ import { DeleteServicoAction } from "../../components/dataGrid/actions/deleteSer
 import { formatDateToDDMMYYYY } from "../../utils/formatting";
 import { SelectPrestadorCell } from "../../components/dataGrid/cells/selectPrestador";
 import { SelectAutoCompleteCell } from "../../components/dataGrid/cells/selectAutoComplete";
+import { SelectMoedaCell } from "../../components/dataGrid/cells/selectMoeda";
+import { DefaultCell } from "../../components/dataGrid/cells/default";
 
 export const makeDynamicColumns = () => {
+  const statusOptions = [
+    { value: "ativo", label: "Ativo" },
+    { value: "inativo", label: "Inativo" },
+  ];
+
+  const statusProcessamentoOptions = [
+    { label: "Aberto", value: "aberto" },
+    { label: "Pendente", value: "pendente" },
+    { label: "Processando", value: "processando" },
+    { label: "Pago", value: "pago" },
+    { label: "Pago externo", value: "pago-externo" },
+  ];
+
   return [
     {
       accessorKey: "acoes",
@@ -38,6 +52,13 @@ export const makeDynamicColumns = () => {
       ),
     },
     {
+      accessorKey: "_id",
+      header: "ID",
+      cell: DefaultCell,
+      enableColumnFilter: true,
+      meta: { filterKey: "_id" },
+    },
+    {
       accessorKey: "pessoa",
       header: "Cliente ou prestador",
       enableSorting: false,
@@ -56,18 +77,31 @@ export const makeDynamicColumns = () => {
       meta: { filterKey: "tipoServicoTomado" },
     },
     {
+      accessorKey: "moeda",
+      header: "Moeda",
+      cell: SelectMoedaCell,
+      enableColumnFilter: true,
+      meta: { filterKey: "moeda" },
+    },
+    {
+      accessorKey: "valorMoeda",
+      header: "Valor (na moeda)",
+      cell: CurrencyCell,
+      enableColumnFilter: true,
+      meta: { filterKey: "valorMoeda" },
+    },
+    {
+      accessorKey: "valor",
+      header: "Valor",
+      cell: (props) => <CurrencyCell {...props} prefix="R$" />,
+      enableColumnFilter: false,
+    },
+    {
       accessorKey: "descricao",
       header: "Descrição",
       cell: DefaultEditableCell,
       enableColumnFilter: true,
       meta: { filterKey: "descricao" },
-    },
-    {
-      accessorKey: "valor",
-      header: "Valor",
-      cell: CurrencyCell,
-      enableColumnFilter: true,
-      meta: { filterKey: "valor" },
     },
     {
       accessorKey: "dataContratacao",
@@ -87,22 +121,24 @@ export const makeDynamicColumns = () => {
       accessorKey: "status",
       header: "Status",
       cell: (props) => (
-        <SelectAutoCompleteCell
-          {...props}
-          options={[
-            { value: "ativo", label: "Ativo" },
-            { value: "inativo", label: "Inativo" },
-          ]}
-        />
+        <SelectAutoCompleteCell {...props} options={statusOptions} />
       ),
       enableColumnFilter: true,
       meta: {
         filterKey: "status",
         filterVariant: "select",
-        filterOptions: [
-          { value: "ativo", label: "Ativo" },
-          { value: "inativo", label: "Inativo" },
-        ],
+        filterOptions: statusOptions,
+      },
+    },
+    {
+      accessorKey: "statusProcessamento",
+      header: "Processamento",
+      cell: DefaultCell,
+      enableColumnFilter: true,
+      meta: {
+        filterKey: "statusProcessamento",
+        filterVariant: "select",
+        filterOptions: statusProcessamentoOptions,
       },
     },
   ];

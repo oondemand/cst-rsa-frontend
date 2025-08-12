@@ -17,6 +17,21 @@ import { DashboardService } from "../../service/dashboard";
 
 import { currency } from "../../utils/currency";
 import { IntegracaoCard } from "./integracaoCard";
+import { MoedaService } from "../../service/moeda";
+import { differenceInMinutes, differenceInHours } from "date-fns";
+
+const getMoedaStatusByUpdatedTime = ({ moeda }) => {
+  const now = new Date();
+  const minDiff = differenceInMinutes(now, moeda.updatedAt);
+  const hoursDiff = differenceInHours(now, moeda.updatedAt);
+
+  if (moeda.sigla === "BRL") return "green.400";
+
+  if (minDiff < 10) return "green.400";
+  if (hoursDiff < 24) return "orange.400";
+
+  return "red.500";
+};
 
 export const Dashboard = () => {
   const { data } = useQuery({
@@ -25,6 +40,14 @@ export const Dashboard = () => {
     staleTime: 1000 * 60, //1m
     placeholderData: keepPreviousData,
   });
+
+  const moedasQuery = useQuery({
+    queryKey: ["listar-moedas-ativas"],
+    queryFn: MoedaService.listarAtivas,
+    staleTime: 1000 * 60, // 1m
+  });
+
+  console.log(moedasQuery?.data?.moedas);
 
   const integracao = data?.estatisticas?.integracao;
 
@@ -143,6 +166,7 @@ export const Dashboard = () => {
           </Box>
         </Box>
       </Flex>
+
       <Flex gap="10" mt="8">
         {data?.estatisticas?.ticketPorStatus?.length > 0 && (
           <Box>
@@ -300,6 +324,64 @@ export const Dashboard = () => {
                         <Text truncate>
                           {currency.format(item?.total ?? 0)}
                         </Text>
+                      </Table.Cell>
+                    </Table.Row>
+                  ))}
+                </Table.Body>
+              </Table.Root>
+            </Box>
+          </Box>
+        )}
+
+        {moedasQuery?.data?.moedas && (
+          <Box>
+            <Text color="gray.400" fontSize="sm" mb="2">
+              Sincronização de moedas
+            </Text>
+            <Box maxW="600px" bg="white" p="4" rounded="2xl">
+              <Flex justifyContent="space-between" alignItems="center">
+                <Text fontWeight="semibold">Moedas</Text>
+              </Flex>
+              <Table.Root mt="4">
+                <Table.Header>
+                  <Table.Row>
+                    <Table.ColumnHeader
+                      fontSize="xs"
+                      color="gray.500"
+                      fontWeight="light"
+                      py="1"
+                    >
+                      SIGLA
+                    </Table.ColumnHeader>
+                    <Table.ColumnHeader
+                      fontSize="xs"
+                      color="gray.500"
+                      fontWeight="light"
+                      py="1"
+                    >
+                      COTAÇÃO
+                    </Table.ColumnHeader>
+                  </Table.Row>
+                </Table.Header>
+                <Table.Body>
+                  {moedasQuery?.data?.moedas?.map((item) => (
+                    <Table.Row>
+                      <Table.Cell
+                        display="flex"
+                        gap="2"
+                        alignItems="center"
+                        border="none"
+                      >
+                        <Box
+                          h="3"
+                          w="3"
+                          rounded="full"
+                          bg={getMoedaStatusByUpdatedTime({ moeda: item })}
+                        />
+                        {item.sigla}
+                      </Table.Cell>
+                      <Table.Cell border="none">
+                        {currency.format(item?.cotacao)}
                       </Table.Cell>
                     </Table.Row>
                   ))}

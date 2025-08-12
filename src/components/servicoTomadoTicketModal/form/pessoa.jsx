@@ -114,7 +114,7 @@ export const PessoaForm = ({ ticket, updateTicketMutation, onlyReading }) => {
         <GridItem colSpan={1} mt="6">
           <Box w="100px">
             <Text color="gray.600" fontSize="sm">
-              Dados pessoa
+              Dados Cliente/prestador
             </Text>
           </Box>
         </GridItem>
@@ -132,7 +132,7 @@ export const PessoaForm = ({ ticket, updateTicketMutation, onlyReading }) => {
           {!onlyReading && (
             <Box w="full" mt="6">
               <Text color="gray.600" fontSize="sm">
-                Selecionar pessoa
+                Selecionar cliente/prestador
               </Text>
               <Flex gap="4">
                 <AsyncSelectAutocomplete

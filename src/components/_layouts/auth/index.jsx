@@ -61,12 +61,16 @@ export const AuthLayout = () => {
       <Flex
         pt="4"
         flexDir="column"
-        maxW="160px"
-        minW="160px"
-        w="160px"
+        maxW="165px"
+        minW="165px"
+        w="165px"
         borderRight="1px solid"
         borderColor="gray.100"
         gap="2"
+        maxH="vh"
+        overflowY="auto"
+        className="custom-scrollbar"
+        pb="8"
       >
         <Flex
           pb="2"

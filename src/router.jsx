@@ -35,6 +35,10 @@ import { IntegracaoContaPagarOmieCentralEsteira } from "./pages/integracao/conta
 import { IntegracaoContaPagarOmieCentralDatagrid } from "./pages/integracao/contaPagar/omie-central/datagrid";
 import { IntegracaoAnexosCentralOmieEsteira } from "./pages/integracao/anexos/central-omie";
 import { IntegracaoAnexosCentralOmieDatagrid } from "./pages/integracao/anexos/central-omie/datagrid";
+import { MoedaPage } from "./pages/moeda";
+import { DocumentosFiscais } from "./pages/documentosFiscais/list";
+import { ImportDocumentosFiscaisPage } from "./pages/documentosFiscais/importacao";
+import RoteiroDeTestes from "./pages/roteiroDeTestes";
 
 export const router = createBrowserRouter([
   {
@@ -51,11 +55,11 @@ export const router = createBrowserRouter([
       { path: "/pessoas/importacao", element: <ImportPessoasPage /> },
       { path: "/servicos", element: <ServicosList /> },
       { path: "/servicos/importacao", element: <ImportServicosPage /> },
-      // { path: "/documentos-fiscais", element: <DocumentosFiscaisList /> },
-      // {
-      //   path: "/documentos-fiscais/importacao",
-      //   element: <ImportDocumentosFiscaisPage />,
-      // },
+      { path: "/documentos-fiscais", element: <DocumentosFiscais /> },
+      {
+        path: "/documentos-fiscais/importacao",
+        element: <ImportDocumentosFiscaisPage />,
+      },
       { path: "/documentos-cadastrais", element: <DocumentosCadastraisList /> },
       {
         path: "/documentos-cadastrais/importacao",
@@ -67,10 +71,11 @@ export const router = createBrowserRouter([
       { path: "/sistema", element: <SistemaPage /> },
       { path: "/doc", element: <Doc /> },
       { path: "/changelog", element: <ChangelogPage /> },
+      { path: "/roteiro-de-testes", element: <RoteiroDeTestes /> },
       // { path: "/pagos", element: <TicketsPagosPage /> },
       { path: "/etapas", element: <EtapasPage /> },
       { path: "/assistentes", element: <AssistenteConfigPage /> },
-
+      { path: "/moedas", element: <MoedaPage /> },
       {
         path: "/integracao",
         children: [

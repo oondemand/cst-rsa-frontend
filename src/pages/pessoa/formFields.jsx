@@ -8,14 +8,10 @@ import {
   REGIME_TRIBUTARIO_OPTIONS,
   TIPO_PESSOA_OPTIONS,
 } from "../../constants";
-import { Box } from "@chakra-ui/react";
-import { Accordion } from "../../components/buildForm/components/accordion";
-import { Separator } from "../../components/buildForm/components/separator";
-import { Break } from "../../components/buildForm/components/break";
+import { LISTA_PAISES_OMIE } from "../../constants/omie";
 import { DefaultContainer } from "../../components/buildForm/components/default";
-import { useFormContext } from "react-hook-form";
 import { ConditionalRendering } from "../../components/buildForm/components/conditionalReendering";
-import { currencyValidation, dateValidation } from "../../utils/zodHelpers";
+import { dateValidation } from "../../utils/zodHelpers";
 
 export const createDynamicFormFields = () => {
   return [
@@ -29,6 +25,13 @@ export const createDynamicFormFields = () => {
           validation: z.coerce
             .string()
             .min(3, { message: "Nome precisa ter pelo menos 3 caracteres" }),
+          colSpan: 2,
+        },
+        {
+          accessorKey: "email",
+          label: "Email",
+          render: DefaultField,
+          validation: z.coerce.string().email({ message: "Email inválido" }),
           colSpan: 2,
         },
         {
@@ -60,6 +63,18 @@ export const createDynamicFormFields = () => {
           cod: "grupo",
           validation: z.string().optional(),
           colSpan: 1,
+        },
+        {
+          accessorKey: "endereco.pais.codigo",
+          label: "País",
+          render: SelectField,
+          validation: z.coerce.string().optional(),
+          colSpan: 1,
+          options: LISTA_PAISES_OMIE.map((e) => ({
+            value: e.cCodigo,
+            label: e.cDescricao,
+          })),
+          defaultValue: "1058",
         },
       ],
     },

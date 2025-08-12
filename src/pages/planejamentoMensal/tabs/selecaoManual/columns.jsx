@@ -2,11 +2,20 @@ import { Text, Flex } from "@chakra-ui/react";
 import { currency } from "../../../../utils/currency";
 import { CheckActionCell } from "../../../../components/dataGrid/actions/checkbox-cell";
 import { DefaultCell } from "../../../../components/dataGrid/cells/default";
+import { CurrencyCell } from "../../../../components/dataGrid/cells/currencyCell";
 import { formatDateToDDMMYYYY } from "../../../../utils/formatting";
 import { HeaderCheckActionCell } from "../../../../components/dataGrid/actions/header-checkbox-cell";
 import { TotalSumFooterCell } from "../../../../components/dataGrid/cells/totalSumFooterCell";
 
 export const makeServicoDynamicColumns = () => {
+  const statusProcessamentoOptions = [
+    { label: "Aberto", value: "aberto" },
+    { label: "Pendente", value: "pendente" },
+    { label: "Processando", value: "processando" },
+    { label: "Pago", value: "pago" },
+    { label: "Pago externo", value: "pago-externo" },
+  ];
+
   return [
     {
       accessorKey: "acoes",
@@ -14,6 +23,13 @@ export const makeServicoDynamicColumns = () => {
       enableSorting: false,
       size: 50,
       cell: (props) => <CheckActionCell {...props} />,
+    },
+    {
+      accessorKey: "_id",
+      header: "ID",
+      cell: DefaultCell,
+      enableColumnFilter: true,
+      meta: { filterKey: "_id" },
     },
     {
       accessorKey: "pessoa",
@@ -85,6 +101,13 @@ export const makeServicoDynamicColumns = () => {
     //   },
     // },
     {
+      accessorKey: "descricao",
+      header: "Descrição",
+      cell: DefaultCell,
+      enableColumnFilter: true,
+      meta: { filterKey: "descricao" },
+    },
+    {
       accessorKey: "dataContratacao",
       header: "Data contratação",
       cell: (props) => (
@@ -111,6 +134,20 @@ export const makeServicoDynamicColumns = () => {
       meta: { filterKey: "dataConclusao" },
     },
     {
+      accessorKey: "moeda.sigla",
+      header: "Moeda",
+      cell: DefaultCell,
+      enableColumnFilter: false,
+      meta: { filterKey: "moeda.sigla" },
+    },
+    {
+      accessorKey: "valorMoeda",
+      header: "Valor (na moeda)",
+      cell: CurrencyCell,
+      enableColumnFilter: false,
+      meta: { filterKey: "valorMoeda" },
+    },
+    {
       accessorKey: "valor",
       header: "Valor total",
       enableSorting: false,
@@ -130,6 +167,18 @@ export const makeServicoDynamicColumns = () => {
           </Text>
         </Flex>
       ),
+    },
+
+    {
+      accessorKey: "statusProcessamento",
+      header: "Processamento",
+      cell: DefaultCell,
+      enableColumnFilter: true,
+      meta: {
+        filterKey: "statusProcessamento",
+        filterVariant: "select",
+        filterOptions: statusProcessamentoOptions,
+      },
     },
   ];
 };

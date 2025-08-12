@@ -19,13 +19,14 @@ import {
   INTEGRACAO_TIPO_MAP,
 } from "../../../../constants";
 import { Card } from "../../components/card";
-import { TimeOutButton } from "../../components/timeOutButton";
+import { TimeOutButton } from "../../../../components/timeOutButton";
 import { Tooltip } from "../../../../components/ui/tooltip";
 import { Link } from "react-router-dom";
 import { TicketDetailsDialog } from "../../components/dialog";
 import { TicketActions } from "../../components/dialog/actions";
 import { queryClient } from "../../../../config/react-query";
 import { TicketBody } from "./dialogBody";
+import { useCallback } from "react";
 
 export const IntegracaoContaPagarOmieCentralEsteira = () => {
   const [searchTerm, setSearchTerm] = useStateWithStorage(
@@ -48,7 +49,7 @@ export const IntegracaoContaPagarOmieCentralEsteira = () => {
     queryFn: async () => await IntegracaoService.listar({ filters }),
     placeholderData: keepPreviousData,
     staleTime: 1000 * 60 * 1, // 1 minuto
-    // refetchInterval: 1000 * 10, // 10 sec
+    refetchInterval: 1000 * 10, // 10 sec
   });
 
   const filteredTickets =
@@ -65,6 +66,20 @@ export const IntegracaoContaPagarOmieCentralEsteira = () => {
         })
       : data?.results;
 
+  const card = useCallback(
+    (props) => (
+      <Card ticket={props.ticket}>
+        <TicketDetailsDialog
+          tipoDeIntegracao="conta_pagar"
+          actions={TicketActions}
+        >
+          <TicketBody />
+        </TicketDetailsDialog>
+      </Card>
+    ),
+    []
+  );
+
   return (
     <Flex flex="1" flexDir="column" py="8" px="6" bg="#F8F9FA">
       <Flex pb="4" justifyContent="space-between">
@@ -74,7 +89,7 @@ export const IntegracaoContaPagarOmieCentralEsteira = () => {
           </Heading>
 
           <Tooltip content="Sincronizar com omie">
-            <TimeOutButton onClick={() => IntegracaoService.processar()}>
+            <TimeOutButton onClick={() => IntegracaoService.processar(filters)}>
               <RefreshCcw />
             </TimeOutButton>
           </Tooltip>
@@ -142,20 +157,7 @@ export const IntegracaoContaPagarOmieCentralEsteira = () => {
                 key={etapa._id}
                 style={{ minWidth: "250px", maxWidth: "250px" }}
               >
-                <Etapa
-                  etapa={etapa}
-                  tickets={filteredTickets}
-                  card={(props) => (
-                    <Card ticket={props.ticket}>
-                      <TicketDetailsDialog
-                        tipoDeIntegracao="conta_pagar"
-                        actions={TicketActions}
-                      >
-                        <TicketBody />
-                      </TicketDetailsDialog>
-                    </Card>
-                  )}
-                />
+                <Etapa etapa={etapa} tickets={filteredTickets} card={card} />
               </SwiperSlide>
             ))}
           </Swiper>

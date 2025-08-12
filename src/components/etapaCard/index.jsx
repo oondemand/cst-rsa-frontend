@@ -16,7 +16,14 @@ const _Etapa = ({ etapa, tickets, action, card, containerStyles }) => {
   const virtualizer = useVirtualizer({
     count: etapaTickets.length,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => (etapa.codigo == "integracao-omie" ? 110 : 85),
+    estimateSize: () =>
+      [
+        "concluido",
+        "conta-pagar-central-omie",
+        "conta-pagar-omie-central",
+      ].includes(etapa.codigo)
+        ? 110
+        : 85,
     overscan: 1,
   });
 

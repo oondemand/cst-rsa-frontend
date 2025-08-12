@@ -97,6 +97,8 @@ export const BuildForm = ({
     handleSubmit,
   } = methods;
 
+  console.log("📍 [FORM ERROR]", errors);
+
   const renderField = (field) => {
     const { render, ...rest } = field;
 

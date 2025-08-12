@@ -3,8 +3,16 @@ import { NumericFormat } from "react-number-format";
 import { parseBRLCurrencyToNumber } from "../../../utils/currency";
 import { Input } from "@chakra-ui/react";
 import { useConfirmation } from "../../../hooks/useConfirmation";
+import { MOEDA_PREFIX_MAP } from "../../../constants";
 
-export const CurrencyCell = ({ getValue, row, column, table, ...props }) => {
+export const CurrencyCell = ({
+  getValue,
+  row,
+  column,
+  table,
+  prefix,
+  ...props
+}) => {
   const initialValue = getValue();
   const [value, setValue] = useState("");
   const { requestConfirmation } = useConfirmation();
@@ -55,8 +63,12 @@ export const CurrencyCell = ({ getValue, row, column, table, ...props }) => {
       decimalScale={2}
       fixedDecimalScale
       allowNegative
-      prefix="R$ "
-      placeholder="R$ 0,00"
+      prefix={`${
+        prefix ? prefix : MOEDA_PREFIX_MAP[row.original?.moeda?.sigla] ?? ""
+      } `}
+      placeholder={`${
+        prefix ? prefix : MOEDA_PREFIX_MAP[row.original?.moeda?.sigla] ?? ""
+      } 0,00`}
       style={{
         backgroundColor: "transparent",
         height: "32px",
