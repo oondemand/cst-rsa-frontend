@@ -3,6 +3,8 @@ import { z } from "zod";
 import { SelectListaField } from "../../components/buildForm/filds/selectListaField";
 import { DefaultField } from "../../components/buildForm/filds/default";
 import { CurrencyField } from "../../components/buildForm/filds/currencyField";
+import { CompetenciaField } from "../../components/buildForm/filds/competenciaField";
+
 import {
   currencyValidation,
   requiredCurrencyValidation,
@@ -34,6 +36,13 @@ export const createDynamicFormFields = () => {
           colSpan: 1,
         },
         {
+          accessorKey: "competencia",
+          label: "Competência",
+          render: CompetenciaField,
+          validation: z.string().optional(),
+          colSpan: 1,
+        },
+        {
           accessorKey: "numero",
           label: "Numero",
           render: DefaultField,
@@ -54,6 +63,7 @@ export const createDynamicFormFields = () => {
           validation: currencyValidation,
           colSpan: 1,
         },
+
         {
           accessorKey: "classificacaoFiscal",
           label: "Classificação Fiscal",

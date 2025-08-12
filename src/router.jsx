@@ -38,6 +38,7 @@ import { IntegracaoAnexosCentralOmieDatagrid } from "./pages/integracao/anexos/c
 import { MoedaPage } from "./pages/moeda";
 import { DocumentosFiscais } from "./pages/documentosFiscais/list";
 import { ImportDocumentosFiscaisPage } from "./pages/documentosFiscais/importacao";
+import RoteiroDeTestes from "./pages/roteiroDeTestes";
 
 export const router = createBrowserRouter([
   {
@@ -70,6 +71,7 @@ export const router = createBrowserRouter([
       { path: "/sistema", element: <SistemaPage /> },
       { path: "/doc", element: <Doc /> },
       { path: "/changelog", element: <ChangelogPage /> },
+      { path: "/roteiro-de-testes", element: <RoteiroDeTestes /> },
       // { path: "/pagos", element: <TicketsPagosPage /> },
       { path: "/etapas", element: <EtapasPage /> },
       { path: "/assistentes", element: <AssistenteConfigPage /> },

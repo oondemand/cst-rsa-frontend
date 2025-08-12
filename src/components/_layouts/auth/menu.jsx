@@ -9,6 +9,9 @@ import {
   NotepadTextDashed,
   Notebook,
   Rotate3D,
+  HelpCircle,
+  MessageCircle,
+  LifeBuoy,
 } from "lucide-react";
 import { Chart } from "../../svg/chart";
 import { InvertedChart } from "../../svg/invertedChart";
@@ -110,9 +113,19 @@ export const menuItems = [
         title: "Assistentes",
         href: "/assistentes",
       },
+    ],
+  },
+  {
+    title: "Suporte",
+    icon: LifeBuoy,
+    subLinks: [
       {
         title: "Doc",
         href: "/doc",
+      },
+      {
+        title: "Roteiro de testes",
+        href: "/roteiro-de-testes",
       },
       {
         title: "Log de mudanças",

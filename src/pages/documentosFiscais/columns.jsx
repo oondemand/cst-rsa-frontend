@@ -7,6 +7,7 @@ import { DefaultCell } from "../../components/dataGrid/cells/default";
 import { TableActionsCell } from "../../components/dataGrid/cells/tableActionsCell";
 import { CurrencyCell } from "../../components/dataGrid/cells/currencyCell";
 import { DisabledDefaultCell } from "../../components/dataGrid/cells/disabledDefaultCell";
+import { CompetenciaCell } from "../../components/dataGrid/cells/competenciaCell";
 
 import { DocumentosFiscaisDialog } from "./dialog";
 
@@ -106,6 +107,14 @@ export const makeDynamicColumns = () => {
       meta: {
         filterKey: "numero",
       },
+    },
+    {
+      accessorKey: "competencia",
+      header: "Competência",
+      enableSorting: false,
+      cell: CompetenciaCell,
+      enableColumnFilter: true,
+      meta: { filterKey: "competencia", filterVariant: "competencia" },
     },
     {
       accessorKey: "valor",
