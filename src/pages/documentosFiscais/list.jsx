@@ -1,15 +1,15 @@
 import React, { useMemo } from "react";
 import { Flex, Box, Text } from "@chakra-ui/react";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
-// import { PessoaService } from "../../service/pessoa";
+import { DocumentosFiscaisService } from "../../service/documentos-fiscais";
 import { DataGrid } from "../../components/dataGrid";
 import { makeDynamicColumns } from "./columns";
-// import { queryClient } from "../../config/react-query";
-// import { PessoasDialog } from "./dialog";
+import { queryClient } from "../../config/react-query";
+import { DocumentosFiscaisDialog } from "./dialog";
 import { useNavigate } from "react-router-dom";
 import { useDataGrid } from "../../hooks/useDataGrid";
-// import { useUpdatePessoa } from "../../hooks/api/pessoa/useUpdatePessoa";
-// import { ORIGENS } from "../../constants/origens";
+import { useUpdateDocumentoFiscal } from "../../hooks/api/documento-fiscal/useUpdateDocumentoFiscal";
+import { ORIGENS } from "../../constants/origens";
 
 export const DocumentosFiscais = () => {
   const navigate = useNavigate();
@@ -21,28 +21,29 @@ export const DocumentosFiscais = () => {
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ["listar-pessoas", { filters }],
-    queryFn: async () => {},
+    queryFn: async () =>
+      await DocumentosFiscaisService.listarDocumentosFiscais({ filters }),
     placeholderData: keepPreviousData,
   });
 
-  // const updatePessoa = useUpdatePessoa({
-  //   origem: ORIGENS.DATAGRID,
-  //   onSuccess: () => {
-  //     queryClient.refetchQueries(["listar-pessoas", { filters }]);
-  //   },
-  // });
+  const updateDocumentoFiscal = useUpdateDocumentoFiscal({
+    origem: ORIGENS.DATAGRID,
+    onSuccess: () => {
+      queryClient.refetchQueries(["listar-documentos-fiscais", { filters }]);
+    },
+  });
 
-  // const getAllPessoasWithFilters = async (pageSize) => {
-  //   const response = await PessoaService.exportarPessoas({
-  //     filters: {
-  //       ...filters,
-  //       pageSize: pageSize ? pageSize : data?.pagination?.totalItems,
-  //       pageIndex: 0,
-  //     },
-  //   });
+  const getAllDocumentosFiscaisWithFilters = async (pageSize) => {
+    const response = await DocumentosFiscaisService.exportarDocumentosFiscais({
+      filters: {
+        ...filters,
+        pageSize: pageSize ? pageSize : data?.pagination?.totalItems,
+        pageIndex: 0,
+      },
+    });
 
-  //   return response.data.buffer;
-  // };
+    return response.data.buffer;
+  };
 
   return (
     <>
@@ -62,19 +63,19 @@ export const DocumentosFiscais = () => {
           </Text>
           <Box mt="4" bg="white" py="6" px="4" rounded="lg" shadow="xs">
             <DataGrid
-              // form={PessoasDialog}
-              // exportDataFn={getAllPessoasWithFilters}
-              // importDataFn={() => navigate("/pessoas/importacao")}
+              form={DocumentosFiscaisDialog}
+              exportDataFn={getAllDocumentosFiscaisWithFilters}
+              importDataFn={() => navigate("/documentos-fiscais/importacao")}
               table={table}
               data={data?.results || []}
               rowCount={data?.pagination?.totalItems}
               isDataLoading={isLoading || isFetching}
-              // onUpdateData={async (values) => {
-              //   await updatePessoa.mutateAsync({
-              //     id: values.id,
-              //     body: values.data,
-              //   });
-              // }}
+              onUpdateData={async (values) => {
+                await updateDocumentoFiscal.mutateAsync({
+                  id: values.id,
+                  body: values.data,
+                });
+              }}
             />
           </Box>
         </Box>

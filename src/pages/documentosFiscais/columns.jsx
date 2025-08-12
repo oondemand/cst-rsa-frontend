@@ -8,7 +8,7 @@ import { TableActionsCell } from "../../components/dataGrid/cells/tableActionsCe
 import { CurrencyCell } from "../../components/dataGrid/cells/currencyCell";
 import { DisabledDefaultCell } from "../../components/dataGrid/cells/disabledDefaultCell";
 
-import { PessoasDialog } from "./dialog";
+import { DocumentosFiscaisDialog } from "./dialog";
 
 import {
   REGIME_TRIBUTARIO_OPTIONS,
@@ -19,6 +19,8 @@ import {
 import { LISTA_PAISES_OMIE } from "../../constants/omie";
 import { DeletePessoaAction } from "../../components/dataGrid/actions/deletePessoaButton";
 import { SelectPrestadorCell } from "../../components/dataGrid/cells/selectPrestador";
+import { DeleteDocumentoFiscalAction } from "../../components/dataGrid/actions/deleteDocumentoFiscalButton";
+import { DownloadFileAction } from "../../components/dataGrid/actions/downloadFileAction";
 
 export const makeDynamicColumns = () => {
   const STATUS_PAGAMENTO_MAP = [
@@ -46,9 +48,20 @@ export const makeDynamicColumns = () => {
       enableColumnFilter: true,
       cell: (props) => (
         <TableActionsCell>
-          {/* <DeletePessoaAction id={props.row.original?._id} />
-          <PessoasDialog label="Pessoa" defaultValues={props.row.original} />
-          <SyncOmieStatusCell {...props} /> */}
+          <DeleteDocumentoFiscalAction id={props.row.original?._id} />
+          <DocumentosFiscaisDialog
+            label="Documento fiscal"
+            defaultValues={{
+              ...props.row.original,
+              pessoa: {
+                label: `${props.row.original?.pessoa?.nome}-${props.row.original?.pessoa?.documento}`,
+                value: props.row.original?.pessoa?._id,
+              },
+            }}
+          />
+          {props.row.original?.arquivo && (
+            <DownloadFileAction id={props.row.original?.arquivo?._id} />
+          )}
         </TableActionsCell>
       ),
     },

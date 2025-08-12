@@ -5,12 +5,16 @@ const listarDocumentosFiscais = async ({ filters }) => {
   return data;
 };
 
-const listarDocumentosFiscaisPorPrestador = async ({
-  prestadorId,
-  dataRegistro,
-}) => {
+const exportarDocumentosFiscais = async ({ filters }) => {
+  const response = await api.get("/documentos-fiscais/exportar", {
+    params: filters,
+  });
+  return response;
+};
+
+const listarPorPessoa = async ({ pessoaId, dataRegistro }) => {
   const { data } = await api.get(
-    `/documentos-fiscais/prestador/${prestadorId}?dataRegistro=${dataRegistro}`
+    `/documentos-fiscais/pessoa/${pessoaId}?dataRegistro=${dataRegistro}`
   );
   return data;
 };
@@ -26,23 +30,13 @@ const criarDocumentoFiscal = async ({ body, origem }) => {
 
 const atualizarDocumentoFiscal = async ({ id, body, origem }) => {
   const { data } = await api.patch(`/documentos-fiscais/${id}`, body, {
-    headers: {
-      "x-origem": origem,
-    },
+    headers: { "x-origem": origem },
   });
   return data;
 };
 
-const reprovarDocumentoFiscal = async ({ id, body, origem }) => {
-  const { data } = await api.post(
-    `/documentos-fiscais/reprovar-documento/${id}`,
-    body,
-    {
-      headers: {
-        "x-origem": origem,
-      },
-    }
-  );
+const atualizarStatus = async ({ ids, status }) => {
+  const { data } = await api.patch(`/documentos-fiscais`, { ids, status });
   return data;
 };
 
@@ -93,11 +87,28 @@ const importarDocumentosFiscais = async ({ files }) => {
   return response;
 };
 
-const aprovarDocumentoFiscal = async ({ body, origem }) => {
+const aprovarDocumentoFiscal = async ({ id, origem }) => {
   const { data } = await api.post(
-    `/documentos-fiscais/aprovar-documento`,
+    `/documentos-fiscais/aprovar-documento/${id}`,
+    {},
+    {
+      headers: {
+        "x-origem": origem,
+      },
+    }
+  );
+  return data;
+};
+
+const reprovarDocumentoFiscal = async ({ id, body, origem }) => {
+  const { data } = await api.post(
+    `/documentos-fiscais/reprovar-documento/${id}`,
     body,
-    { headers: { "x-origem": origem } }
+    {
+      headers: {
+        "x-origem": origem,
+      },
+    }
   );
   return data;
 };
@@ -107,10 +118,12 @@ export const DocumentosFiscaisService = {
   criarDocumentoFiscal,
   atualizarDocumentoFiscal,
   deletarDocumentoFiscal,
-  listarDocumentosFiscaisPorPrestador,
+  listarPorPessoa,
+  atualizarStatus,
   anexarArquivo,
   deleteFile,
   importarDocumentosFiscais,
   aprovarDocumentoFiscal,
   reprovarDocumentoFiscal,
+  exportarDocumentosFiscais,
 };

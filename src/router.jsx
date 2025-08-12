@@ -37,6 +37,7 @@ import { IntegracaoAnexosCentralOmieEsteira } from "./pages/integracao/anexos/ce
 import { IntegracaoAnexosCentralOmieDatagrid } from "./pages/integracao/anexos/central-omie/datagrid";
 import { MoedaPage } from "./pages/moeda";
 import { DocumentosFiscais } from "./pages/documentosFiscais/list";
+import { ImportDocumentosFiscaisPage } from "./pages/documentosFiscais/importacao";
 
 export const router = createBrowserRouter([
   {
@@ -54,10 +55,10 @@ export const router = createBrowserRouter([
       { path: "/servicos", element: <ServicosList /> },
       { path: "/servicos/importacao", element: <ImportServicosPage /> },
       { path: "/documentos-fiscais", element: <DocumentosFiscais /> },
-      // {
-      //   path: "/documentos-fiscais/importacao",
-      //   element: <ImportDocumentosFiscaisPage />,
-      // },
+      {
+        path: "/documentos-fiscais/importacao",
+        element: <ImportDocumentosFiscaisPage />,
+      },
       { path: "/documentos-cadastrais", element: <DocumentosCadastraisList /> },
       {
         path: "/documentos-cadastrais/importacao",
