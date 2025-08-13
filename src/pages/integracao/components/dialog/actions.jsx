@@ -1,4 +1,4 @@
-import { Flex, Button, useDialogContext } from "@chakra-ui/react";
+import { Flex, Button, useDialogContext, Text } from "@chakra-ui/react";
 import { ListRestart, Trash } from "lucide-react";
 
 import { toaster } from "../../../../components/ui/toaster";
@@ -6,8 +6,10 @@ import { useMutation } from "@tanstack/react-query";
 import { useConfirmation } from "../../../../hooks/useConfirmation";
 import { IntegracaoService } from "../../../../service/integracao";
 import { queryClient } from "../../../../config/react-query";
+import { Link } from "react-router-dom";
+import { InvertedChart } from "../../../../components/svg/invertedChart";
 
-export const TicketActions = ({ id, etapa }) => {
+export const TicketActions = ({ id, etapa, parentId }) => {
   const { setOpen } = useDialogContext();
   const { requestConfirmation } = useConfirmation();
 
@@ -78,6 +80,19 @@ export const TicketActions = ({ id, etapa }) => {
           >
             <ListRestart /> Reprocessar
           </Button>
+        )}
+        {["anexos"].includes(etapa) && (
+          <Link
+            to={`/integracao/anexos/central-omie?searchTerm=${parentId}`}
+            viewTransition
+          >
+            <Button size="xs" shadow="xs" variant="surface" display="flex">
+              <Text p="1" rounded="full" color="brand.500" cursor="pointer">
+                <InvertedChart />
+              </Text>
+              <Text>Integração</Text>
+            </Button>
+          </Link>
         )}
         {!["processando"].includes(etapa) && (
           <Button

@@ -1,4 +1,4 @@
-import { Flex, Button, useDialogContext } from "@chakra-ui/react";
+import { Flex, Button, useDialogContext, Text } from "@chakra-ui/react";
 import { Check, Trash, X } from "lucide-react";
 
 import { toaster } from "../ui/toaster";
@@ -9,8 +9,11 @@ import { queryClient } from "../../config/react-query";
 import { ORIGENS } from "../../constants/origens";
 import { EtapaService } from "../../service/etapa";
 import { useListEtapas } from "../../hooks/api/etapas/useListEtapas";
+import { Tooltip } from "../../components/ui/tooltip";
+import { Link } from "react-router-dom";
+import { InvertedChart } from "../../components/svg/invertedChart";
 
-export const TicketActions = ({ ticketId, etapa }) => {
+export const TicketActions = ({ ticket, etapa }) => {
   const { setOpen } = useDialogContext();
   const { requestConfirmation } = useConfirmation();
 
@@ -20,7 +23,7 @@ export const TicketActions = ({ ticketId, etapa }) => {
     useMutation({
       mutationFn: async () =>
         await ServicoTomadoTicketService.arquivarTicket({
-          id: ticketId,
+          id: ticket?._id,
           origem: ORIGENS.ESTEIRA,
         }),
       onSuccess: () => {
@@ -41,7 +44,7 @@ export const TicketActions = ({ ticketId, etapa }) => {
     useMutation({
       mutationFn: async () =>
         await ServicoTomadoTicketService.aprovarTicket({
-          id: ticketId,
+          id: ticket?._id,
           origem: ORIGENS.ESTEIRA,
         }),
       onSuccess: () => {
@@ -63,7 +66,7 @@ export const TicketActions = ({ ticketId, etapa }) => {
     useMutation({
       mutationFn: async () =>
         await ServicoTomadoTicketService.reprovarTicket({
-          id: ticketId,
+          id: ticket?._id,
           origem: ORIGENS.ESTEIRA,
         }),
       onSuccess: (error) => {
@@ -92,6 +95,11 @@ export const TicketActions = ({ ticketId, etapa }) => {
   };
 
   const primeiraEtapa = etapas[0]?.codigo;
+
+  const urlMap = {
+    "conta-pagar-central-omie": `/integracao/conta-pagar/central-omie?searchTerm=${ticket?.contaPagarOmie?._id}`,
+    "conta-pagar-omie-central": `/integracao/conta-pagar/omie-central?searchTerm=${ticket?.contaPagarOmie?._id}`,
+  };
 
   return (
     <Flex alignItems="center" w="full" justifyContent="space-between">
@@ -133,6 +141,18 @@ export const TicketActions = ({ ticketId, etapa }) => {
           >
             <X /> Reprovar
           </Button>
+        )}
+        {["conta-pagar-central-omie", "conta-pagar-omie-central"].includes(
+          etapa
+        ) && (
+          <Link to={urlMap[etapa]} viewTransition>
+            <Button size="xs" shadow="xs" variant="surface" display="flex">
+              <Text p="1" rounded="full" color="brand.500" cursor="pointer">
+                <InvertedChart />
+              </Text>
+              <Text>Integração</Text>
+            </Button>
+          </Link>
         )}
         <Button
           disabled={isArquivePending}

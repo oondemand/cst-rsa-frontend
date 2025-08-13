@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Textarea, Input } from "@chakra-ui/react";
+import { Box, Flex, Heading, Textarea, Input, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 
 import {
@@ -30,6 +30,9 @@ import { useQuery } from "@tanstack/react-query";
 import { DocumentosCadastraisService } from "../../service/documentos-cadastrais";
 import { ORIGENS } from "../../constants/origens";
 import { useLoadAssistant } from "../../hooks/api/assistant-config/useLoadAssistant";
+// import { Tooltip } from "../../components/ui/tooltip";
+// import { Link } from "react-router-dom";
+// import { InvertedChart } from "../../components/svg/invertedChart";
 
 export const TicketModal = ({ open, setOpen, defaultValue, onlyReading }) => {
   const [ticket, setTicket] = useState(defaultValue);
@@ -151,9 +154,23 @@ export const TicketModal = ({ open, setOpen, defaultValue, onlyReading }) => {
             >
               <Oondemand />
             </Box>
-            <Heading fontSize="sm">
-              {defaultValue ? "Detalhes do ticket" : "Criar novo ticket"}
-            </Heading>
+            {/* <Tooltip content="Conta pagar central -> omie">
+              <Link to="/integracao/conta-pagar/central-omie" viewTransition>
+                <Text p="1" rounded="full" color="brand.500" cursor="pointer">
+                  <InvertedChart />
+                </Text>
+              </Link>
+            </Tooltip> */}
+            <Flex alignItems="baseline" gap="2">
+              <Heading fontSize="sm">
+                {defaultValue ? "Detalhes do ticket" : "Criar novo ticket"}
+              </Heading>
+              {defaultValue && (
+                <Text fontSize="xs" fontStyle="italic" fontWeight="normal">
+                  {defaultValue?._id}
+                </Text>
+              )}
+            </Flex>
           </Flex>
         </DialogTitle>
         <DialogBody
@@ -237,7 +254,7 @@ export const TicketModal = ({ open, setOpen, defaultValue, onlyReading }) => {
           <DialogFooter justifyContent="start">
             <TicketActions
               updateTicketMutation={updateTicketMutation}
-              ticketId={ticket._id}
+              ticket={ticket}
               etapa={ticket?.etapa}
             />
           </DialogFooter>
