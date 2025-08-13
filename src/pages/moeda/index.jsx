@@ -29,6 +29,8 @@ export const MoedaPage = () => {
   //   onSuccess: () => queryClient.refetchQueries(["listar-moedas", { filters }]),
   // });
 
+  console.log("data", data);
+
   return (
     <Container>
       <Box>

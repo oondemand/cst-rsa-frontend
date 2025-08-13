@@ -10,25 +10,27 @@ import { DeleteAssistenteConfigAction } from "../../components/dataGrid/actions/
 
 import { SelectAssistantCell } from "../../components/dataGrid/cells/selectAssistantCell";
 import { format } from "date-fns";
+import { MoedaRequisicaoDetailsCell } from "../../components/dataGrid/cells/moedaRequisicaoDetailsCell";
 
 export const makeMoedaDynamicColumns = () => {
   return [
-    // {
-    //   accessorKey: "acoes",
-    //   header: "Ações",
-    //   enableSorting: false,
-    //   cell: (props) => (
-    //     <TableActionsCell>
-    //       {/* <DeleteAssistenteConfigAction id={props.row.original?._id} />
-    //       <AssistenteConfigDialog
-    //         label="Assistente"
-    //         defaultValues={{
-    //           ...props.row.original,
-    //         }}
-    //       /> */}
-    //     </TableActionsCell>
-    //   ),
-    // },
+    {
+      accessorKey: "acoes",
+      header: "Ações",
+      enableSorting: false,
+      cell: (props) => (
+        <TableActionsCell>
+          <MoedaRequisicaoDetailsCell moeda={props.row.original} />
+          {/* <DeleteAssistenteConfigAction id={props.row.original?._id} />
+          <AssistenteConfigDialog
+            label="Assistente"
+            defaultValues={{
+              ...props.row.original,
+            }}
+          /> */}
+        </TableActionsCell>
+      ),
+    },
     {
       accessorKey: "sigla",
       header: "Moeda",
@@ -53,7 +55,7 @@ export const makeMoedaDynamicColumns = () => {
           {...{
             ...props,
             getValue: () => {
-              return format(props.getValue(), "dd/MM/yyyy HH:MM");
+              return format(props.getValue(), "dd/MM/yyyy HH:mm");
             },
           }}
         />
