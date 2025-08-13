@@ -114,7 +114,7 @@ export const ReprovarForm = ({ documentoCadastralId }) => {
                       collection={motivoRecusaList}
                     >
                       <SelectLabel mb="-1" fontWeight="normal" color="gray.500">
-                        Mostrar
+                        Motivo da recusa
                       </SelectLabel>
                       <SelectTrigger>
                         <SelectValueText placeholder="Selecionar motivo..." />
