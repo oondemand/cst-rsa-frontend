@@ -2,6 +2,9 @@ import { Box, Flex, Heading, Text, Checkbox } from "@chakra-ui/react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { IntegracaoService } from "../../../service/integracao";
 import { queryClient } from "../../../config/react-query";
+import { Tooltip } from "../../../components/ui/tooltip";
+import { TimeOutButton } from "../../../components/timeOutButton";
+import { RefreshCcw } from "lucide-react";
 
 function formatarTipo(tipo) {
   if (!tipo) return "";
@@ -47,7 +50,14 @@ export const IntegracoesConfigPage = () => {
 
   return (
     <Flex flex="1" flexDir="column" py="8" px="6" bg="#F8F9FA">
-      <Heading>Integrações</Heading>
+      <Flex alignItems="center" gap="4">
+        <Heading>Integrações</Heading>
+        <Tooltip content="Sincronizar com omie">
+          <TimeOutButton onClick={() => IntegracaoService.processarAtivas()}>
+            <RefreshCcw />
+          </TimeOutButton>
+        </Tooltip>
+      </Flex>
       <Flex gap="4" mt="8">
         {configsAgrupadas?.length > 0 &&
           configsAgrupadas?.map((item) => (

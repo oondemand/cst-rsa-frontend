@@ -5,6 +5,7 @@ import { TicketBody } from "../dialogBody";
 import { Tooltip } from "../../../../../components/ui/tooltip";
 import { useState } from "react";
 import { TicketActions } from "../../../components/dialog/actions";
+import { ORIGENS } from "../../../../../constants/origens";
 
 export const VisualizarDetailsDialog = (props) => {
   const [open, setOpen] = useState(false);
@@ -26,7 +27,9 @@ export const VisualizarDetailsDialog = (props) => {
           open={open}
           setOpen={setOpen}
           ticket={props.row.original}
-          actions={TicketActions}
+          actions={(props) => (
+            <TicketActions {...props} origem={ORIGENS.DATAGRID} />
+          )}
         >
           <TicketBody />
         </TicketDetailsDialog>
