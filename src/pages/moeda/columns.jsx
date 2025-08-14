@@ -48,8 +48,25 @@ export const makeMoedaDynamicColumns = () => {
       meta: { filterKey: "cotacao" },
     },
     {
-      accessorKey: "updatedAt",
+      accessorKey: "atualizadoEm",
       header: "Atualizado em",
+      cell: (props) => (
+        <DefaultCell
+          {...{
+            ...props,
+            getValue: () => {
+              return format(props.getValue(), "dd/MM/yyyy HH:mm");
+            },
+          }}
+        />
+      ),
+      enableColumnFilter: true,
+      enableSorting: false,
+      meta: { filterKey: "atualizadoEm" },
+    },
+    {
+      accessorKey: "updatedAt",
+      header: "Ultima execução",
       cell: (props) => (
         <DefaultCell
           {...{
