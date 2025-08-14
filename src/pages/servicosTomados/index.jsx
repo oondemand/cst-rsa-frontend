@@ -18,14 +18,12 @@ import { useListEtapas } from "../../hooks/api/etapas/useListEtapas";
 import { EtapaActions } from "./etapaActions";
 import { TicketCard } from "./card";
 import { SelectTime } from "../../components/selectTime";
+import { useQueryParam } from "../../hooks/useQueryParam";
 
 export const ServicosTomados = () => {
   const { etapas, isLoading: isEtapasLoading } = useListEtapas();
 
-  const [searchTerm, setSearchTerm] = useStateWithStorage(
-    "esteira_servicos_tomados_search_term"
-  );
-
+  const [searchTerm, setSearchTerm] = useQueryParam("searchTerm");
   const [time, setTime] = useStateWithStorage(
     "esteira_servicos_tomados_time",
     1

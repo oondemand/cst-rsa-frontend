@@ -8,6 +8,18 @@ const listar = async ({ filters = { time, direcao, tipo } }) => {
   return data;
 };
 
+const listarConfig = async () => {
+  const { data } = await api.get("/integracao/config");
+
+  return data;
+};
+
+const atualizarConfig = async ({ id, body }) => {
+  const { data } = await api.put(`/integracao/config/${id}`, body);
+
+  return data;
+};
+
 const processar = async ({ tipo, direcao }) => {
   const { data } = await api.post("/integracao/processar", { tipo, direcao });
   return data;
@@ -36,5 +48,7 @@ export const IntegracaoService = {
   arquivar,
   processar,
   reprocessar,
+  listarConfig,
+  atualizarConfig,
   listarComPaginacao,
 };

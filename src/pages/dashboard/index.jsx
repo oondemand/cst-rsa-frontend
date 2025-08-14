@@ -47,8 +47,6 @@ export const Dashboard = () => {
     staleTime: 1000 * 60, // 1m
   });
 
-  console.log(moedasQuery?.data?.moedas);
-
   const integracao = data?.estatisticas?.integracao;
 
   const valorTotalTodosServicos = data?.estatisticas?.valoresPorStatus?.reduce(
@@ -335,9 +333,9 @@ export const Dashboard = () => {
 
         {moedasQuery?.data?.moedas && (
           <Box>
-            <Text color="gray.400" fontSize="sm" mb="2">
+            {/* <Text color="gray.400" fontSize="sm" mb="2">
               Sincronização de moedas
-            </Text>
+            </Text> */}
             <Box maxW="600px" bg="white" p="4" rounded="2xl">
               <Flex justifyContent="space-between" alignItems="center">
                 <Text fontWeight="semibold">Moedas</Text>

@@ -85,10 +85,6 @@ export const menuItems = [
     title: "Configurações",
     icon: Settings,
     subLinks: [
-      // {
-      //   title: "Usuários",
-      //   href: "/usuarios",
-      // },
       {
         title: "Listas",
         href: "/listas",
@@ -112,6 +108,10 @@ export const menuItems = [
       {
         title: "Assistentes",
         href: "/assistentes",
+      },
+      {
+        title: "Integrações",
+        href: "/configuracoes/integracao",
       },
     ],
   },

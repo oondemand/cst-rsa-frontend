@@ -28,11 +28,10 @@ import { queryClient } from "../../../../config/react-query";
 import { TicketBody } from "./dialogBody";
 import { Actions } from "./actions";
 import { useCallback } from "react";
+import { useQueryParam } from "../../../../hooks/useQueryParam";
 
 export const IntegracaoContaPagarCentralOmieEsteira = () => {
-  const [searchTerm, setSearchTerm] = useStateWithStorage(
-    "esteira_integracao_conta_pagar_central_omie_search_term"
-  );
+  const [searchTerm, setSearchTerm] = useQueryParam("searchTerm");
 
   const [time, setTime] = useStateWithStorage(
     "esteira_integracao_conta_pagar_central_omie_time",
@@ -62,7 +61,8 @@ export const IntegracaoContaPagarCentralOmieEsteira = () => {
             ticket?.payload?.conta_pagar?.documento
               ?.toLowerCase()
               ?.includes(term.replace(/[^a-zA-Z0-9]/g, "")) ||
-            ticket?.parentId === term
+            ticket?.parentId === term ||
+            ticket?._id === term
           );
         })
       : data?.results;
@@ -113,7 +113,11 @@ export const IntegracaoContaPagarCentralOmieEsteira = () => {
           {(isLoading || isFetching) && <Spinner size="md" />}
         </Flex>
         <Flex alignItems="center" color="gray.400" gap="3">
-          <Filter size={24} />
+          <Tooltip content="Limpar filtros">
+            <Button cursor="pointer" unstyled onClick={() => setSearchTerm("")}>
+              <Filter size={24} />
+            </Button>
+          </Tooltip>
 
           <SelectTime
             value={[time]}

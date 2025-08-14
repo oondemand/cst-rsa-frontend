@@ -16,6 +16,7 @@ import {
 import { LISTA_PAISES_OMIE } from "../../constants/omie";
 import { DeletePessoaAction } from "../../components/dataGrid/actions/deletePessoaButton";
 import { SyncOmieStatusCell } from "./components/syncOmieStatusCell";
+import { LinkIntegracaoAction } from "../../components/dataGrid/actions/linkIntegracaoAction";
 
 export const makeDynamicColumns = () => {
   return [
@@ -37,6 +38,9 @@ export const makeDynamicColumns = () => {
         <TableActionsCell>
           <DeletePessoaAction id={props.row.original?._id} />
           <PessoasDialog label="Pessoa" defaultValues={props.row.original} />
+          {/* <LinkIntegracaoAction
+            integracaoUrl={`/pessoa/central-omie?searchTerm=${props.row.original?._id}`}
+          /> */}
           <SyncOmieStatusCell {...props} />
         </TableActionsCell>
       ),

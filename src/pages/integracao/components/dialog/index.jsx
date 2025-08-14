@@ -85,6 +85,7 @@ export const TicketDetailsDialog = ({
           {React.createElement(actions, {
             id: ticket?._id,
             etapa: ticket.etapa,
+            parentId: ticket?.parentId,
           })}
         </DialogFooter>
         <DialogCloseTrigger />
