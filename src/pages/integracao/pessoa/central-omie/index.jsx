@@ -28,6 +28,7 @@ import { queryClient } from "../../../../config/react-query";
 import { TicketBody } from "./dialogBody";
 import { useCallback } from "react";
 import { useQueryParam } from "../../../../hooks/useQueryParam";
+import { ORIGENS } from "../../../../constants/origens";
 
 export const IntegracaoPessoaCentralOmieEsteira = () => {
   const [searchTerm, setSearchTerm] = useQueryParam("searchTerm");
@@ -69,7 +70,12 @@ export const IntegracaoPessoaCentralOmieEsteira = () => {
   const card = useCallback(
     (props) => (
       <Card ticket={props.ticket}>
-        <TicketDetailsDialog tipoDeIntegracao="pessoa" actions={TicketActions}>
+        <TicketDetailsDialog
+          tipoDeIntegracao="pessoa"
+          actions={(props) => (
+            <TicketActions {...props} origem={ORIGENS.ESTEIRA} />
+          )}
+        >
           <TicketBody />
         </TicketDetailsDialog>
       </Card>

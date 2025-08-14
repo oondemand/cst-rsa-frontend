@@ -36,14 +36,20 @@ export const DocumentosFiscaisDialog = ({
   const updateDocumentoFiscal = useUpdateDocumentoFiscal({
     origem: ORIGENS.FORM,
     onSuccess: (data) => {
-      if (open) setData((prev) => (data?.pessoa ? data.pessoa : prev));
+      if (open)
+        setData((prev) =>
+          data?.documentoFiscal ? data.documentoFiscal : prev
+        );
     },
   });
 
   const createDocumentoFiscal = useCreateDocumentoCadastral({
     origem: ORIGENS.FORM,
     onSuccess: (data) => {
-      if (open) setData((prev) => (data?.pessoa ? data.pessoa : prev));
+      if (open)
+        setData((prev) =>
+          data?.documentoFiscal ? data.documentoFiscal : prev
+        );
     },
   });
 

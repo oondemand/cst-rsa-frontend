@@ -9,13 +9,13 @@ import { queryClient } from "../../../../config/react-query";
 import { Link } from "react-router-dom";
 import { InvertedChart } from "../../../../components/svg/invertedChart";
 
-export const TicketActions = ({ id, etapa, parentId }) => {
+export const TicketActions = ({ id, etapa, parentId, origem }) => {
   const { setOpen } = useDialogContext();
   const { requestConfirmation } = useConfirmation();
 
   const { mutateAsync: arquiveTicketMutation, isPending: isArquivePending } =
     useMutation({
-      mutationFn: async () => await IntegracaoService.arquivar({ id }),
+      mutationFn: async () => await IntegracaoService.arquivar({ id, origem }),
       onSuccess: () => {
         queryClient.invalidateQueries();
         toaster.create({

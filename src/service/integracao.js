@@ -30,8 +30,16 @@ const reprocessar = async ({ id }) => {
   return data;
 };
 
-const arquivar = async ({ id }) => {
-  const { data } = await api.post(`/integracao/arquivar/${id}`);
+const arquivar = async ({ id, origem }) => {
+  const { data } = await api.post(
+    `/integracao/arquivar/${id}`,
+    {},
+    {
+      headers: {
+        "x-origem": origem,
+      },
+    }
+  );
   return data;
 };
 
@@ -43,12 +51,18 @@ const listarComPaginacao = async ({ filters = { direcao, tipo, ...rest } }) => {
   return data;
 };
 
+const processarAtivas = async () => {
+  const { data } = await api.post("/integracao/processar/ativas");
+  return data;
+};
+
 export const IntegracaoService = {
   listar,
   arquivar,
   processar,
   reprocessar,
   listarConfig,
+  processarAtivas,
   atualizarConfig,
   listarComPaginacao,
 };

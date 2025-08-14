@@ -146,7 +146,9 @@ export const TicketModal = ({ open, setOpen, defaultValue, onlyReading }) => {
                 onOpen(
                   {
                     ...ticketQuery?.data?.ticket,
-                    ...documentosCadastraisQuery?.data?.documentosCadastrais,
+                    documentosCadastrais: {
+                      ...documentosCadastraisQuery?.data?.documentosCadastrais,
+                    },
                   },
                   assistant
                 )
