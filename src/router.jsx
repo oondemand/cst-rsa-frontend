@@ -39,6 +39,7 @@ import { MoedaPage } from "./pages/moeda";
 import { DocumentosFiscais } from "./pages/documentosFiscais/list";
 import { ImportDocumentosFiscaisPage } from "./pages/documentosFiscais/importacao";
 import RoteiroDeTestes from "./pages/roteiroDeTestes";
+import { IntegracoesConfigPage } from "./pages/integracao/configuracao";
 
 export const router = createBrowserRouter([
   {
@@ -76,6 +77,7 @@ export const router = createBrowserRouter([
       { path: "/etapas", element: <EtapasPage /> },
       { path: "/assistentes", element: <AssistenteConfigPage /> },
       { path: "/moedas", element: <MoedaPage /> },
+      { path: "/configuracoes/integracao", element: <IntegracoesConfigPage /> },
       {
         path: "/integracao",
         children: [

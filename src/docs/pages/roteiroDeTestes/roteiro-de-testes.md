@@ -458,3 +458,51 @@ fique atento pois se em algum momento não for listado nenhum item isso signific
 
 - Limpe todos os filtros
 
+**Campos de data**
+
+- Os campos do tipo data aceitam > e < para verificar maior, menor ou igual a. Exemplo: **>01/02/2020** deve listar todos itens com data maior ou igual a **>01/02/2020** e **<01/02/2020** deve listar todas as data menores ou iguais a **<01/02/2020**
+
+**Filtros globais**
+
+- Os filtros globais do datagrid geralmente aceitam qualquer campo do data grid, então para testa-lo, preencha cada valor do datagrid no campo de pesquisa global.
+
+## 🔧 Moedas
+
+**Requisitos**
+
+- Processo de ativação concluído
+
+**Passo a passo**
+
+Se tudo ocorreu bem, sua lista de moedas deve estar pre-preenchida, mas em moedas temo um botão para atualizar a cotação.
+
+- Clique no botão para atualizar cotação de moeda, assim que você clicar o campo atualizado em deve ser alterado.
+- Clique no botão de detalhes (o botão com ?).
+
+Voce poderá ver os resultados de cada requisição que foi feita.
+
+![](moedas.png)
+
+## 🔧 Assistentes
+
+**Requisitos**
+
+- Processo de ativação concluído
+- Doc custom devidamente configurado
+- Api de integração com gpt configurado
+
+**Passo a passo**
+
+Da mesma forma que moedas o processo de ativação já cria por padrão alguns assistentes. Porém esses assistentes não estão com um assistente selecionado.
+
+- Em **/assistentes**
+- Clique na célula, para selecionar um assistente
+
+Se não aparecer nenhuma opção de assistente para selecionar ou a aplicação esta com erro com relação a sincronização com doc custom, ou não há nenhum assistente configurado no doc custom.
+
+O modulo de um assistente é se consiste do padrão esteira.entidade(caso tenha).direcao(caso tenha).etapa(ou geral se quiser configurar um assistente comum para todas etapas) ex:
+![](assistentes.png)
+
+No caso acima temos a esteira.etapa, já que não existe uma entidade na esteira de serviços tomados nem uma direção. O que é diferente das esteiras de integração por exemplo. Uma esteira de integração seria por exemplo: **integracao.pessoa.central_omie.requisicao**.
+
+Mas não se preocupe todas as possibilidades de módulos já estão pre-preenchidas.
