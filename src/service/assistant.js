@@ -1,8 +1,21 @@
 import { apiAssistant } from "../config/api";
 
 const listAssistant = async () => {
-  const { data } = await apiAssistant.get("/cst/assistentes");
-  return data;
+  const response = await apiAssistant.get("/assistentes/ativos");
+
+  console.log(response);
+
+  return response.data;
+};
+
+const askQuestion = ({ body }) => {
+  const formData = new FormData();
+
+  for (const key in body) {
+    formData.append(key, JSON.stringify(body[key]));
+  }
+
+  return apiAssistant.post(`/gpt`, body);
 };
 
 const getAssistant = async ({ id }) => {
@@ -15,4 +28,5 @@ const getAssistant = async ({ id }) => {
 export const AssistantService = {
   listAssistant,
   getAssistant,
+  askQuestion,
 };

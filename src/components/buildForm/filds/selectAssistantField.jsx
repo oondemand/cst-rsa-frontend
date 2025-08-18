@@ -13,7 +13,10 @@ export const SelectAssistantField = ({ ...props }) => {
     staleTime: Infinity,
   });
 
-  const options = data?.map((e) => ({ value: e?._id, label: e?.nome }));
+  const options = data?.assistentes?.map((e) => ({
+    value: e?._id,
+    label: e?.nome,
+  }));
 
   const handleKeyDown = (event) => {
     if (event.key === "Escape") {
