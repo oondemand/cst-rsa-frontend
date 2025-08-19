@@ -37,18 +37,18 @@ export const IaChat = ({ visible, onClose, data, assistantConfigId }) => {
 
   const [iaChat, setIaChat] = useState([]);
 
-  const { data: assistants, error } = useQuery({
+  const { data: assistentesResponseData } = useQuery({
     queryKey: ["list-assistants"],
     queryFn: AssistantService.listAssistant,
     staleTime: 1000 * 60 * 10, // 10 minutes
   });
 
-  const selectedAssistant = assistants?.find(
+  const selectedAssistant = assistentesResponseData?.assistentes?.find(
     (e) => e._id === assistantConfigId
   );
 
   const { mutateAsync: onChatSubmitMutation, isPending } = useMutation({
-    mutationFn: async ({ body }) => IntegrationGptService.askQuestion({ body }),
+    mutationFn: async ({ body }) => AssistantService.askQuestion({ body }),
   });
 
   const updateChatIa = ({ type, text, details = null }) => {
@@ -65,23 +65,21 @@ export const IaChat = ({ visible, onClose, data, assistantConfigId }) => {
 
   const onSubmit = async (values) => {
     try {
-      const prompts = await AssistantService.getAssistant({
-        id: assistantConfigId,
-      });
+      // const prompts = await AssistantService.getAssistant({
+      //   id: assistantConfigId,
+      // });
 
       const response = await onChatSubmitMutation({
         body: {
-          question: values.message,
-          data,
-          prompts,
+          contexto: data,
+          questao: values.message,
           modelo: selectedAssistant?.modelo,
+          assistenteId: selectedAssistant?._id,
         },
       });
 
       if (values?.message) updateChatIa({ type: "user", text: values.message });
-
-      if (response)
-        updateChatIa({ type: "bot", text: response?.data?.data?.response });
+      if (response) updateChatIa({ type: "bot", text: response?.data?.result });
 
       setValue("message", "");
     } catch (error) {
