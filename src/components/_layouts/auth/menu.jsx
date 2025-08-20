@@ -23,9 +23,24 @@ export const menuItems = [
     href: "/",
   },
   {
+    title: "Planejamento",
+    href: "/planejamento",
+    icon: CalendarSync,
+  },
+  {
     title: "Central Serviços Tomados",
     icon: InvertedChart,
     href: "/servicos-tomados",
+  },
+  {
+    title: "Clientes e prestadores",
+    icon: Users,
+    href: "/pessoas",
+  },
+  {
+    title: "Documentos Cadastrais",
+    href: "/documentos-cadastrais",
+    rules: ["admin", "tomador"],
   },
   {
     title: "Serviços",
@@ -33,26 +48,9 @@ export const menuItems = [
     href: "/servicos",
   },
   {
-    title: "Documentos Cadastrais",
-    href: "/documentos-cadastrais",
-    icon: Notebook,
-    rules: ["admin", "tomador"],
-  },
-  {
     title: "Documentos Fiscais",
     href: "/documentos-fiscais",
-    icon: NotepadText,
     rules: ["admin", "tomador"],
-  },
-  {
-    title: "Planejamento",
-    href: "/planejamento",
-    icon: CalendarSync,
-  },
-  {
-    title: "Clientes e prestadores",
-    icon: Users,
-    href: "/pessoas",
   },
   {
     title: "Integrações",

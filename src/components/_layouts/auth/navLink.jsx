@@ -40,7 +40,7 @@ export const NavLink = ({ to, title, icon, i, ...props }) => {
             />
           </Flex>
         )}
-        <Text fontSize="12px" fontWeight="semibold">
+        <Text ml={!icon ? "2.5" : 0} fontSize="12px" fontWeight="semibold">
           {title}
         </Text>
       </Link>
