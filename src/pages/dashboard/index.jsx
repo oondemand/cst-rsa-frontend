@@ -22,8 +22,8 @@ import { differenceInMinutes, differenceInHours } from "date-fns";
 
 const getMoedaStatusByUpdatedTime = ({ moeda }) => {
   const now = new Date();
-  const minDiff = differenceInMinutes(now, moeda.updatedAt);
-  const hoursDiff = differenceInHours(now, moeda.updatedAt);
+  const minDiff = differenceInMinutes(now, moeda.atualizadoEm);
+  const hoursDiff = differenceInHours(now, moeda.atualizadoEm);
 
   if (moeda.sigla === "BRL") return "green.400";
 

@@ -61,9 +61,9 @@ export const AuthLayout = () => {
       <Flex
         pt="4"
         flexDir="column"
-        maxW="165px"
-        minW="165px"
-        w="165px"
+        maxW="170px"
+        minW="170px"
+        w="170px"
         borderRight="1px solid"
         borderColor="gray.100"
         gap="2"
@@ -102,12 +102,6 @@ export const AuthLayout = () => {
                     border="none"
                   >
                     <Flex rounded="40%" gap="3" bg="white" alignItems="center">
-                      <Icon
-                        as={item?.icon}
-                        w="18px"
-                        h="18px"
-                        color="brand.500"
-                      />
                       <Text
                         fontSize="12px"
                         color="gray.500"
