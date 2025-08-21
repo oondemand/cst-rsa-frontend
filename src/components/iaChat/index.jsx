@@ -14,13 +14,12 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { AssistantService } from "../../service/assistant";
-import { useMutation } from "@tanstack/react-query";
-import { IntegrationGptService } from "../../service/gpt";
+import { useMutation, useQueries } from "@tanstack/react-query";
 import { toaster } from "../../components/ui/toaster";
 import { useEffect, useState } from "react";
 import { AutoScroll } from "../autoScroll";
 import { TextCard } from "./card";
-import { useQuery } from "@tanstack/react-query";
+import { SistemaService } from "../../service/sistema";
 
 const schema = z.object({ message: z.string().optional() });
 
@@ -37,13 +36,22 @@ export const IaChat = ({ visible, onClose, data, assistantConfigId }) => {
 
   const [iaChat, setIaChat] = useState([]);
 
-  const { data: assistentesResponseData } = useQuery({
-    queryKey: ["list-assistants"],
-    queryFn: AssistantService.listAssistant,
-    staleTime: 1000 * 60 * 10, // 10 minutes
+  const [assistentesQuery, sistemaQuery] = useQueries({
+    queries: [
+      {
+        queryKey: ["list-assistants"],
+        queryFn: AssistantService.listAssistant,
+        staleTime: 1000 * 60 * 10, // 10 minutes
+      },
+      {
+        queryKey: ["list-sistema"],
+        queryFn: SistemaService.obterConfiguracoesSistema,
+        staleTime: 1000 * 60 * 10, // 10min
+      },
+    ],
   });
 
-  const selectedAssistant = assistentesResponseData?.assistentes?.find(
+  const selectedAssistant = assistentesQuery.data?.assistentes?.find(
     (e) => e._id === assistantConfigId
   );
 
@@ -65,16 +73,13 @@ export const IaChat = ({ visible, onClose, data, assistantConfigId }) => {
 
   const onSubmit = async (values) => {
     try {
-      // const prompts = await AssistantService.getAssistant({
-      //   id: assistantConfigId,
-      // });
-
       const response = await onChatSubmitMutation({
         body: {
           contexto: data,
           questao: values.message,
           modelo: selectedAssistant?.modelo,
           assistenteId: selectedAssistant?._id,
+          openIaKey: sistemaQuery.data?.openIaKey,
         },
       });
 

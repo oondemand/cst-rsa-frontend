@@ -16,6 +16,7 @@ export const SistemaPage = () => {
   const { data } = useQuery({
     queryKey: ["list-sistema"],
     queryFn: SistemaService.obterConfiguracoesSistema,
+    staleTime: 1000 * 60 * 10, // 10min
   });
 
   const { mutateAsync: updateConfigMutation } = useMutation({
@@ -78,7 +79,7 @@ export const SistemaPage = () => {
                     fields={form.fields}
                     gap={6}
                   />
-                  {form.title === "Geral" && <TesteEnvioEmailDialog />}
+                  {form.title === "Email" && <TesteEnvioEmailDialog />}
                 </Box>
               </Box>
             </Box>

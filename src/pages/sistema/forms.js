@@ -11,31 +11,10 @@ export const FORMS = [
     title: "Geral",
     fields: [
       {
-        accessorKey: "remetente.nome",
-        label: "Nome remetente",
-        render: DefaultField,
-        validation: z.string().nonempty(),
-        colSpan: 1,
-      },
-      {
         accessorKey: "appKey",
         label: "App key",
         render: DefaultField,
         validation: z.string().nonempty(),
-        colSpan: 1,
-      },
-      {
-        accessorKey: "sendgrid_api_key",
-        label: "Sendgrid api key",
-        render: PasswordField,
-        validation: z.string().nonempty(),
-        colSpan: 2,
-      },
-      {
-        accessorKey: "remetente.email",
-        label: "Email remetente",
-        render: DefaultField,
-        validation: z.string().email("Email inválido!").nonempty(),
         colSpan: 1,
       },
       {
@@ -44,6 +23,13 @@ export const FORMS = [
         render: DateField,
         validation: dateValidation,
         colSpan: 1,
+      },
+      {
+        accessorKey: "openIaKey",
+        label: "Open ia key",
+        render: PasswordField,
+        validation: z.string(),
+        colSpan: 2,
       },
     ],
   },
@@ -65,6 +51,32 @@ export const FORMS = [
           .string()
           .nonempty("Código categoria é um campo obrigatório"),
         colSpan: 1,
+      },
+    ],
+  },
+  {
+    title: "Email",
+    fields: [
+      {
+        accessorKey: "remetente.nome",
+        label: "Nome remetente",
+        render: DefaultField,
+        validation: z.string().nonempty(),
+        colSpan: 1,
+      },
+      {
+        accessorKey: "remetente.email",
+        label: "Email remetente",
+        render: DefaultField,
+        validation: z.string().email("Email inválido!").nonempty(),
+        colSpan: 1,
+      },
+      {
+        accessorKey: "sendgrid_api_key",
+        label: "Sendgrid api key",
+        render: PasswordField,
+        validation: z.string().nonempty(),
+        colSpan: 2,
       },
     ],
   },
