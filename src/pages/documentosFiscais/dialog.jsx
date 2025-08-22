@@ -54,9 +54,21 @@ export const DocumentosFiscaisDialog = ({
   });
 
   const onSubmit = async (values) => {
+    const competencia = values?.competencia?.split("/");
+    const mes = Number(competencia?.[0]) || null;
+    const ano = Number(competencia?.[1]) || null;
+
     const body = {
       ...values,
       pessoa: values?.pessoa?.value,
+      ...(values?.competencia !== ""
+        ? {
+            competencia: {
+              mes,
+              ano,
+            },
+          }
+        : {}),
     };
 
     if (!data) return await createDocumentoFiscal.mutateAsync({ body });
@@ -68,10 +80,9 @@ export const DocumentosFiscaisDialog = ({
 
   const uploadFile = useUploadFileToDocumentoFiscal({
     onSuccess: ({ data }) => {
-      const { nomeOriginal, mimetype, size, tipo, _id } = data?.arquivo;
       setData((prev) => ({
         ...prev,
-        arquivo: { nomeOriginal, mimetype, size, tipo, _id },
+        arquivo: data?.arquivo,
       }));
     },
   });

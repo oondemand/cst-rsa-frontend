@@ -45,10 +45,9 @@ export const DocumentoCadastralDialog = ({
 
   const uploadFile = useUploadFileToDocumentoCadastral({
     onSuccess: ({ data }) => {
-      const { nomeOriginal, mimetype, size, tipo, _id } = data.arquivo;
       setData((prev) => ({
         ...prev,
-        arquivo: { nomeOriginal, mimetype, size, tipo, _id },
+        arquivo: data.arquivo,
       }));
     },
   });

@@ -27,6 +27,7 @@ const schema = z.object({
       .nonempty({ message: "App Secret é um campo obrigatório" }),
   }),
   appKey: z.string().nonempty({ message: "App Secret é um campo obrigatório" }),
+  openIaKey: z.string().optional(),
   // usuario: z.object({
   //   nome: z.string().nonempty({ message: "Nome é um campo obrigatório" }),
   //   email: z.string().email({ message: "Email inválido" }),
@@ -71,7 +72,6 @@ export const Ativacao = () => {
       });
 
       window.location.href = `${env.VITE_MEUS_APPS_URL}/login`;
-
       // navigate("/login", { viewTransition: true });
     },
   });
@@ -114,22 +114,41 @@ export const Ativacao = () => {
               pb="6"
               rounded="md"
             > */}
-          <Box w="xs" mt="6">
-            <Text fontSize="sm" fontWeight="medium">
-              Chave do aplicativo (appKey)
-            </Text>
-            <Input
-              size="sm"
-              focusRingColor="brand.350"
-              placeholder="Chave do aplicativo..."
-              {...register("appKey")}
-            />
-            {errors.usuario?.nome?.message && (
-              <Text fontSize="xs" mt="0.5" color="red.500">
-                {errors.appKey.message}
+          <Flex gap="6">
+            <Box w="xs" mt="6">
+              <Text fontSize="sm" fontWeight="medium">
+                Chave do aplicativo (appKey)
               </Text>
-            )}
-          </Box>
+              <Input
+                size="sm"
+                focusRingColor="brand.350"
+                placeholder="Chave do aplicativo..."
+                {...register("appKey")}
+              />
+              {errors?.appKey?.message && (
+                <Text fontSize="xs" mt="0.5" color="red.500">
+                  {errors.appKey.message}
+                </Text>
+              )}
+            </Box>
+
+            <Box w="xs" mt="6">
+              <Text fontSize="sm" fontWeight="medium">
+                Open ia AppKey
+              </Text>
+              <Input
+                size="sm"
+                focusRingColor="brand.350"
+                placeholder="Open ia app key..."
+                {...register("openIaKey")}
+              />
+              {errors.openIaKey?.message && (
+                <Text fontSize="xs" mt="0.5" color="red.500">
+                  {errors.openIaKey.message}
+                </Text>
+              )}
+            </Box>
+          </Flex>
 
           {/* <Box w="xs">
                 <Text fontSize="sm">Email</Text>
