@@ -186,9 +186,7 @@ export const makeDynamicColumns = () => {
       accessorKey: "statusPagamento",
       header: "Status pagamento",
       enableSorting: false,
-      cell: (props) => (
-        <SelectAutoCompleteCell {...props} options={STATUS_PAGAMENTO_MAP} />
-      ),
+      cell: DefaultCell,
       enableColumnFilter: true,
       meta: {
         filterKey: "statusPagamento",

@@ -114,16 +114,16 @@ const reprovarDocumentoCadastral = async ({ id, body, origem }) => {
 };
 
 export const DocumentosCadastraisService = {
-  listarDocumentosCadastrais,
-  criarDocumentoCadastral,
-  atualizarDocumentoCadastral,
-  deletarDocumentoCadastral,
-  listarPorPessoa,
-  atualizarStatus,
-  anexarArquivo,
   deleteFile,
-  importarDocumentosCadastrais,
+  anexarArquivo,
+  atualizarStatus,
+  listarPorPessoa,
+  criarDocumentoCadastral,
+  deletarDocumentoCadastral,
   aprovarDocumentoCadastral,
+  listarDocumentosCadastrais,
   reprovarDocumentoCadastral,
+  atualizarDocumentoCadastral,
+  importarDocumentosCadastrais,
   exportarDocumentosCadastrais,
 };
