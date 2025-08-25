@@ -13,6 +13,8 @@
 
 ![](ativacao.png)
 
+**nome**: OonDemand Dev **cnpj**: 11111111111112 **appKey**: 3908593091403 **appSecret**: 16eb447588b57e0e9cb7a9a070d8b61c
+
 - Preencher o campo “Chave do aplicativo (appKey)” com chave cadastrada appKey no aplicativo referente em “meus apps” e preencher os dados da base omie.
 
 ![](aplicativo.png)
@@ -46,6 +48,9 @@ Em listas temos basicamente dois tipos de lista a **lista omie** que é sincroni
 
 - Acessar **/listas**
 - Adicionar **dois** valores diferentes para cada tipo de lista.
+
+**Grupo**: Cliente, prestador **Tipo documento**: CNPJ, CPF **Tipo documento fiscal**: Invoice, nota fiscal **Motivo recusa**: Outro, recusado pelo usuário **Tipo serviço tomado** 3.1 Transporte de mercadoria, venda mercadoria
+
 - Alterar um valor de cada lista.
 - Remover um valor de cada lista.
 
@@ -58,11 +63,15 @@ Se tudo ocorrer como esperado cada lista deverá conter apenas um valor. E todo 
 
 ## 🔧 Cliente/prestadores
 
+OBS: Email e documento são campos obrigatórios do omie, sem eles a integração não funcionará corretamente.
+Campo Pais é obrigatório para clientes/prestador do tipo exterior.
+
 📍 **Criação/edição**
+
+![📥 Download da planilha modelo](/documentos/clientes-prestadores.xlsx)
 
 **Requisitos**
 
-- Processo de ativação concluído
 - Listas com pelo menos um valor preenchido
 
 **Passo a passo**
@@ -93,7 +102,7 @@ Todos os dados devem ter sido atualizados corretamente.
 
 ![](excel-button.png)
 
-- Selecione um local para salvar o arquivo, reserve esse arquivo, pois vamos utiliza-lo na importação posteriormente.
+- Selecione um local para salvar o arquivo
 
 📍 **Exclusão**
 
@@ -111,8 +120,6 @@ Todos os dados devem ter sido atualizados corretamente.
 📍 **Importação**
 
 **Requisitos**
-
-- Planilha exportada
 
 **Passo a passo**
 
@@ -165,7 +172,7 @@ Desta vez deve aparecer um erro na importação, já que estamos importando um c
 
 ![](excel-button.png)
 
-- Selecione um local para salvar o arquivo, reserve esse arquivo, pois vamos utiliza-lo na importação posteriormente.
+- Selecione um local para salvar o arquivo
 
 📍 **Exclusão**
 
@@ -183,8 +190,6 @@ Desta vez deve aparecer um erro na importação, já que estamos importando um c
 📍 **Importação**
 
 **Requisitos**
-
-- Planilha exportada
 
 **Passo a passo**
 
@@ -274,7 +279,7 @@ Deverá ser listado um documento cadastral no datagrid logo após o dialog fecha
 
 ![](excel-button.png)
 
-- Selecione um local para salvar o arquivo, reserve esse arquivo, pois vamos utiliza-lo na importação posteriormente.
+- Selecione um local para salvar o arquivo
 
 📍 **Exclusão**
 
@@ -292,8 +297,6 @@ Deverá ser listado um documento cadastral no datagrid logo após o dialog fecha
 📍 **Importação**
 
 **Requisitos**
-
-- Planilha exportada
 
 **Passo a passo**
 
@@ -370,7 +373,7 @@ Deverá ser listado um documento fiscal no datagrid logo após o dialog fechar.
 
 ![](excel-button.png)
 
-- Selecione um local para salvar o arquivo, reserve esse arquivo, pois vamos utiliza-lo na importação posteriormente.
+- Selecione um local para salvar o arquivo
 
 📍 **Exclusão**
 
@@ -388,8 +391,6 @@ Deverá ser listado um documento fiscal no datagrid logo após o dialog fechar.
 📍 **Importação**
 
 **Requisitos**
-
-- Planilha exportada
 
 **Passo a passo**
 
