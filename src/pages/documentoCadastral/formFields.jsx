@@ -43,7 +43,7 @@ export const createDynamicFormFields = () => {
         {
           accessorKey: "motivoRecusa",
           label: "Motivo Recusa",
-          cod: "motivo-recusa",
+          cod: "motivo-recusa-documento-cadastral",
           render: SelectListaField,
           validation: z.string().optional(),
           colSpan: 2,

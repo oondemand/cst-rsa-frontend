@@ -35,9 +35,9 @@ const reprovacaoSchema = z.object({
 
 export const ReprovarForm = ({ documentoCadastralId }) => {
   const { data } = useQuery({
-    queryKey: ["list-motivo-recusa"],
+    queryKey: ["list-motivo-recusa-documento-cadastral"],
     queryFn: async () =>
-      ListaOmieService.getListByCode({ cod: "motivo-recusa" }),
+      ListaOmieService.getListByCode({ cod: "motivo-recusa-documento-cadastral" }),
   });
 
   const motivoRecusaList = createListCollection({

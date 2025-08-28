@@ -152,12 +152,12 @@ export const makeDynamicColumns = () => {
       accessorKey: "motivoRecusa",
       header: "Motivo recusa",
       enableSorting: false,
-      cell: (props) => <SelectListaCell {...props} cod={"motivo-recusa"} />,
+      cell: (props) => <SelectListaCell {...props} cod={"motivo-recusa-documento-fiscal"} />,
       enableColumnFilter: true,
       meta: {
         filterKey: "motivoRecusa",
         filterVariant: "selectLista",
-        cod: "motivo-recusa",
+        cod: "motivo-recusa-documento-fiscal",
       },
     },
     {

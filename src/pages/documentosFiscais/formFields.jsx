@@ -79,7 +79,7 @@ export const createDynamicFormFields = () => {
         // {
         //   accessorKey: "motivoRecusa",
         //   label: "Motivo Recusa",
-        //   cod: "motivo-recusa",
+        //   cod: "motivo-recusa-documento-fiscal",
         //   render: SelectListaField,
         //   validation: z.string().optional(),
         //   colSpan: 1,
