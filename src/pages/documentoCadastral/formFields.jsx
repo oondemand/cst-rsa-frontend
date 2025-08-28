@@ -21,7 +21,7 @@ export const createDynamicFormFields = () => {
         {
           accessorKey: "tipoDocumento",
           label: "Tipo de documento",
-          cod: "tipo-documento",
+          cod: "tipo-documento-cadastral",
           render: SelectListaField,
           validation: z.string({
             message: "Campo obrigatório",

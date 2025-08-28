@@ -60,12 +60,14 @@ export const makeDocumentoCadastralDynamicColumns = () => {
       accessorKey: "tipoDocumento",
       header: "Tipo de documento",
       enableSorting: false,
-      cell: (props) => <SelectListaCell {...props} cod={"tipo-documento"} />,
+      cell: (props) => (
+        <SelectListaCell {...props} cod={"tipo-documento-cadastral"} />
+      ),
       enableColumnFilter: true,
       meta: {
         filterKey: "tipoDocumento",
         filterVariant: "selectLista",
-        cod: "tipo-documento",
+        cod: "tipo-documento-cadastral",
       },
     },
     {
