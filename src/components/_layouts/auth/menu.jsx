@@ -33,7 +33,7 @@ export const menuItems = [
     href: "/servicos-tomados",
   },
   {
-    title: "Clientes e prestadores",
+    title: "Prestadores",
     icon: Users,
     href: "/pessoas",
   },
@@ -58,11 +58,11 @@ export const menuItems = [
     rules: ["admin"],
     subLinks: [
       {
-        title: "Cliente/prestador central -> Omie",
+        title: "Prestador central -> Omie",
         href: "/integracao/pessoa/central-omie",
       },
       {
-        title: "Cliente/prestador central <- Omie",
+        title: "Prestador central <- Omie",
         href: "/integracao/pessoa/omie-central",
       },
       {

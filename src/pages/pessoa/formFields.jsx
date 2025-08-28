@@ -16,7 +16,7 @@ import { dateValidation } from "../../utils/zodHelpers";
 export const createDynamicFormFields = () => {
   return [
     {
-      label: "Detalhes do cliente/prestador",
+      label: "Detalhes do Prestador",
       group: [
         {
           accessorKey: "nome",

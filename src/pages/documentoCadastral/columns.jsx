@@ -47,7 +47,7 @@ export const makeDocumentoCadastralDynamicColumns = () => {
     },
     {
       accessorKey: "pessoa",
-      header: "Cliente ou prestador",
+      header: "Prestador",
       enableSorting: false,
       cell: SelectPrestadorCell,
       enableColumnFilter: true,

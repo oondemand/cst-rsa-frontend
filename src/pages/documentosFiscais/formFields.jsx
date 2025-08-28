@@ -17,7 +17,7 @@ export const createDynamicFormFields = () => {
       group: [
         {
           accessorKey: "pessoa",
-          label: "Cliente ou prestador",
+          label: "Prestador",
           render: SelectPrestadorField,
           validation: z.object(
             { label: z.string(), value: z.string() },
