@@ -28,6 +28,12 @@ export const menuItems = [
     icon: CalendarSync,
   },
   {
+    title: "Documentos Fiscais",
+    href: "/documentos-fiscais",
+    icon: NotepadText,
+    rules: ["admin", "tomador"],
+  },
+  {
     title: "Central Serviços Tomados",
     icon: InvertedChart,
     href: "/servicos-tomados",
@@ -47,11 +53,7 @@ export const menuItems = [
     icon: ListChecks,
     href: "/servicos",
   },
-  {
-    title: "Documentos Fiscais",
-    href: "/documentos-fiscais",
-    rules: ["admin", "tomador"],
-  },
+
   {
     title: "Integrações",
     icon: Rotate3D,
