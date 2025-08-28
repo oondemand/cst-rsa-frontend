@@ -60,23 +60,23 @@ export const menuItems = [
     rules: ["admin"],
     subLinks: [
       {
-        title: "Prestador central -> Omie",
+        title: "Prestador central -> omie",
         href: "/integracao/pessoa/central-omie",
       },
       {
-        title: "Prestador central <- Omie",
+        title: "Prestador omie -> central",
         href: "/integracao/pessoa/omie-central",
       },
       {
-        title: "Conta pagar central -> Omie",
+        title: "Conta pagar central -> omie",
         href: "/integracao/conta-pagar/central-omie",
       },
       {
-        title: "Conta pagar central <- Omie",
+        title: "Conta pagar omie -> central",
         href: "/integracao/conta-pagar/omie-central",
       },
       {
-        title: "Anexos central -> Omie",
+        title: "Anexos central -> omie",
         href: "/integracao/anexos/central-omie",
       },
     ],
