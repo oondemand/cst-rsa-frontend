@@ -22,6 +22,7 @@ import { DeletePessoaAction } from "../../components/dataGrid/actions/deletePess
 import { SelectPrestadorCell } from "../../components/dataGrid/cells/selectPrestador";
 import { DeleteDocumentoFiscalAction } from "../../components/dataGrid/actions/deleteDocumentoFiscalButton";
 import { DownloadFileAction } from "../../components/dataGrid/actions/downloadFileAction";
+import { ArquivoDetailsDialog } from "./arquivoDialog";
 
 export const makeDynamicColumns = () => {
   const STATUS_PAGAMENTO_MAP = [
@@ -60,9 +61,13 @@ export const makeDynamicColumns = () => {
               },
             }}
           />
-          {props.row.original?.arquivo && (
+          {props.row.original?.arquivo &&
+            props.row.original?.statusValidacao === "pendente" && (
+              <ArquivoDetailsDialog documentoFiscal={props.row.original} />
+            )}
+          {/* {props.row.original?.arquivo && (
             <DownloadFileAction id={props.row.original?.arquivo?._id} />
-          )}
+          )} */}
         </TableActionsCell>
       ),
     },
@@ -152,7 +157,9 @@ export const makeDynamicColumns = () => {
       accessorKey: "motivoRecusa",
       header: "Motivo recusa",
       enableSorting: false,
-      cell: (props) => <SelectListaCell {...props} cod={"motivo-recusa-documento-fiscal"} />,
+      cell: (props) => (
+        <SelectListaCell {...props} cod={"motivo-recusa-documento-fiscal"} />
+      ),
       enableColumnFilter: true,
       meta: {
         filterKey: "motivoRecusa",

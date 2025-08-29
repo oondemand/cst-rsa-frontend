@@ -90,18 +90,18 @@ export const AuthLayout = () => {
           borderColor="gray.50"
         >
           <Link to="/" viewTransition>
-            <Flex alignItems="flex-end">
+            {/* <Flex alignItems="flex-end">
               <Image src="/favicon_azul.png" alt="logo" h="12" />
               <Text fontSize="sm" fontWeight="medium">
                 CST <br /> Multi-moedas
               </Text>
-            </Flex>
-            {/* <Flex flexDir="column" alignItems="center" gap="1">
+            </Flex> */}
+            <Flex flexDir="column" alignItems="center" gap="1">
               <img src="/logo_vertical.png" alt="logo" />
               <Text fontSize="xs" fontWeight="medium" mt="-2">
                 CST Multi-moedas
               </Text>
-            </Flex> */}
+            </Flex>
           </Link>
         </Flex>
         {menuItems.map((item, index) => {
