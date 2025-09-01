@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: cst-multimoedas-frontend-service
+  name: cst-rsa-service
   namespace: cst-multimoedas
 spec:
   type: NodePort
   selector:
-    app: cst-multimoedas-frontend
+    app: cst-rsa
   ports:
     - name: http
       protocol: TCP

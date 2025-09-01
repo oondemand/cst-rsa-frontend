@@ -1,7 +1,7 @@
 {
-  "name": "cst-multimoedas-frontend",
+  "name": "cst-rsa",
   "private": true,
-  "version": "0.0.5",
+  "version": "0.0.0",
   "type": "module",
   "scripts": {
     "release": "release-it",

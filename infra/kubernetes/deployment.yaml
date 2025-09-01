@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cst-multimoedas-frontend
+  name: cst-rsa
   namespace: cst-multimoedas
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: cst-multimoedas-frontend
+      app: cst-rsa
   template:
     metadata:
       labels:
-        app: cst-multimoedas-frontend
+        app: cst-rsa
     spec:
       containers:
-        - name: cst-multimoedas-frontend-container
-          image: ghcr.io/oondemand/cst-multimoedas-frontend:${IMAGE_TAG}-prod
+        - name: cst-rsa-container
+          image: ghcr.io/oondemand/cst-rsa:${IMAGE_TAG}-prod
           ports:
             - containerPort: 3000
           resources:

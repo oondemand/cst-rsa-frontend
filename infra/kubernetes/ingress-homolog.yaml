@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: cst-multimoedas-frontend-homolog-ingress
+  name: cst-rsa-homolog-ingress
   namespace: cst-multimoedas-homolog
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-nginx
@@ -23,6 +23,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: cst-multimoedas-frontend-homolog-service
+                name: cst-rsa-homolog-service
                 port:
                   number: 80
