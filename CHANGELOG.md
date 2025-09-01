@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.1 (2025-09-01)
+
+### 🐛 Bug Fixes
+
+* fix deployment ([e36422c](https://github.com/oondemand/cst-rsa-frontend/commit/e36422c2a3a62c0bbd742bbbaaa029daf306fbbb))
+
 ## 0.2.0 (2025-09-01)
 
 ### ✨ Features
