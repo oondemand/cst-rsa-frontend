@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.0 (2025-09-01)
+
+### ✨ Features
+
+* rename project ([2097470](https://github.com/oondemand/cst-rsa-frontend/commit/20974708bda8dc41abb631af114781f5eb0f9e5e))
+
 ## 0.1.0 (2025-09-01)
 
 ### ✨ Features
