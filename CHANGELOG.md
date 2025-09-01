@@ -18,4 +18,4 @@
 
 ### 🐛 Bug Fixes
 
-* github deploy ([51e15d5](https://github.com/oondemand/cst-rsa/commit/51e15d50fa2b99f89b3e19057a1282313f3ef656))
+* github deploy ([51e15d5](https://github.com/oondemand/cst-rsa-frontend/commit/51e15d50fa2b99f89b3e19057a1282313f3ef656))
