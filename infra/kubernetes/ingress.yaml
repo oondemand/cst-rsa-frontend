@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: cst-rsa-frontend-ingress
-  namespace: cst-multimoedas
+  namespace: cst-rsa
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-nginx
     kubernetes.io/ingress.class: nginx
@@ -13,10 +13,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - cst-multimoedas.oondemand.online
+        - cst-rsa.oondemand.online
       secretName: app-tls
   rules:
-    - host: cst-multimoedas.oondemand.online
+    - host: cst-rsa.oondemand.online
       http:
         paths:
           - path: /

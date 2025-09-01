@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cst-rsa-frontend
-  namespace: cst-multimoedas
+  namespace: cst-rsa
 spec:
   replicas: 1
   selector:

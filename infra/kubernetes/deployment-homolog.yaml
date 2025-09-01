@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cst-rsa-frontend-homolog
-  namespace: cst-multimoedas-homolog
+  namespace: cst-rsa-homolog
 spec:
   replicas: 1
   selector:
